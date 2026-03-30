@@ -48,7 +48,8 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid rgba(21,195,147,0.15);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
     }
 
     .nav-inner {
@@ -1045,6 +1046,11 @@
       const unread = document.querySelectorAll('.notif-item.unread').length;
       badge.style.display = unread > 0 ? 'block' : 'none';
     }
+
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.borderColor = window.scrollY > 0 ? 'rgba(21,195,147,0.15)' : 'transparent';
+    });
 
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.profile-wrapper')) {

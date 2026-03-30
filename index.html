@@ -1006,7 +1006,7 @@
     function readNotif(el) {
       el.classList.remove('unread');
       const dot = el.querySelector('.notif-dot');
-      if (dot) dot.remove();
+      if (dot) dot.style.visibility = 'hidden';
       updateBadge();
     }
 
@@ -1014,7 +1014,7 @@
       document.querySelectorAll('.notif-item.unread').forEach(item => {
         item.classList.remove('unread');
         const dot = item.querySelector('.notif-dot');
-        if (dot) dot.remove();
+        if (dot) dot.style.visibility = 'hidden';
       });
       updateBadge();
     }

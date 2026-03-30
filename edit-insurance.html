@@ -319,8 +319,8 @@
     const uploadedFiles = [];
 
     const preloaded = [
-      { name: 'Insurance_Card_Front.jpg', size: 1243648 },
-      { name: 'Insurance_Card_Back.jpg',  size: 987136  }
+      { name: 'Insurance_Card_Front.png', src: 'Insurance_Card_Front.png' },
+      { name: 'Insurance_Card_Back.png',  src: null }
     ];
 
     function formatSize(bytes) {
@@ -389,7 +389,19 @@
 
     function addFile(file) { renderFileRow(file.name, file.size, file); }
 
-    preloaded.forEach(f => renderFileRow(f.name, f.size));
+    preloaded.forEach(f => {
+      if (f.src) {
+        fetch(f.src)
+          .then(r => r.blob())
+          .then(blob => {
+            const file = new File([blob], f.name, { type: blob.type });
+            renderFileRow(file.name, file.size, file);
+          })
+          .catch(() => renderFileRow(f.name, 0));
+      } else {
+        renderFileRow(f.name, 0);
+      }
+    });
 
     function handleSave() {
       document.querySelector('.card-body').style.display = 'none';

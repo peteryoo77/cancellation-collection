@@ -803,10 +803,8 @@
       const remaining = MAX_FILES - current;
       if (remaining <= 0 || files.length > remaining) {
         uploadError.style.display = 'flex';
-        setTimeout(() => { uploadError.style.display = 'none'; }, 4000);
         return;
       }
-      uploadError.style.display = 'none';
       Array.from(files).slice(0, remaining).forEach(file => {
         const reader = new FileReader();
         reader.onload = e => addInsuranceImage(e.target.result, file.name);
@@ -829,7 +827,12 @@
       const del = document.createElement('button');
       del.className = 'ins-delete';
       del.innerHTML = '<i class="ti ti-trash"></i>';
-      del.onclick = e => { e.stopPropagation(); item.remove(); if (!insGrid.children.length) insGrid.style.display = 'none'; };
+      del.onclick = e => {
+        e.stopPropagation();
+        item.remove();
+        if (!insGrid.children.length) insGrid.style.display = 'none';
+        if (insGrid.children.length < MAX_FILES) uploadError.style.display = 'none';
+      };
 
       item.appendChild(img); item.appendChild(label); item.appendChild(del);
       insGrid.appendChild(item);

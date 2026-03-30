@@ -378,9 +378,17 @@
     .section-heading h2 { font-size: 34px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.3px; line-height: 1.25; margin-top: 4px; }
     .section-heading p  { font-size: var(--text-base); font-weight: 400; color: var(--text-muted); line-height: 1.7; margin-top: -4px; }
 
-    .card-accent {
-      border-left: 5px solid var(--green);
+    /* ══ ACTION BANNER ══ */
+    .ins-action-banner {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 32px;
+      background: #FFFBEB;
+      border-bottom: 1.5px solid #FCD34D;
+      color: #92400E;
+      font-size: var(--text-sm); font-weight: 500; line-height: 1.5;
+      border-radius: var(--radius-card) var(--radius-card) 0 0;
     }
+    .ins-action-banner strong { font-weight: 700; }
 
     /* ══ INSURANCE CARD ══ */
     .insurance {
@@ -871,7 +879,11 @@
   <main class="sections">
 
     <!-- Insurance Information -->
-    <div class="card card-accent">
+    <div class="card">
+      <div class="ins-action-banner">
+        <i class="ti ti-alert-triangle" style="font-size:22px;flex-shrink:0;"></i>
+        <span><strong>Action Required</strong> — Please upload your insurance information so your care team can prepare for your visit.</span>
+      </div>
       <div class="insurance">
 
         <!-- Upload state -->

@@ -376,6 +376,38 @@
 
     .empty-state p { font-size: 17px; font-weight: 400; color: #9CA3AF; }
 
+    /* ══ INSURANCE IMAGE PREVIEWS ══ */
+    .ins-image-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+      aspect-ratio: 4/3;
+      background: #F9FAFB;
+    }
+
+    .ins-image-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .ins-image-item .ins-delete {
+      position: absolute; top: 6px; right: 6px;
+      width: 28px; height: 28px;
+      background: rgba(0,0,0,0.5); border: none; border-radius: 6px;
+      color: #fff; font-size: 14px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.15s, background 0.15s;
+    }
+
+    .ins-image-item:hover .ins-delete { opacity: 1; }
+    .ins-image-item .ins-delete:hover { background: #EF4444; }
+
+    .ins-image-item .ins-name {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 6px 8px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.5));
+      color: #fff; font-size: 11px; font-weight: 500;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
     /* ══ MESSAGE CARD ══ */
     .message-card {
       padding: 72px 64px;
@@ -635,14 +667,16 @@
           <h2>Insurance Information</h2>
           <p>Please share your insurance information with the care team. Adding it only takes a moment.</p>
         </div>
-        <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+        <div id="insuranceImagesGrid" style="display:none;width:100%;max-width:880px;display:none;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;"></div>
+
+        <div class="upload-area" id="insuranceUploadArea" onclick="document.getElementById('fileInput').click()">
           <i class="ti ti-cloud-upload" style="font-size:52px;color:var(--green);"></i>
           <div class="upload-text">
             <p>Drag &amp; drop or select a file</p>
             <span>PDF, JPG, or PNG — up to 10MB</span>
           </div>
-          <button class="btn-select">Select Files</button>
-          <input id="fileInput" type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none" />
+          <button class="btn-select" type="button">Select Files</button>
+          <input id="fileInput" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="handleInsuranceFiles(this.files)" />
         </div>
         <button class="btn-disabled" disabled>Complete Upload</button>
       </div>
@@ -747,6 +781,43 @@
   </main>
 
   <script>
+    // ── Insurance upload ──
+    const insGrid = document.getElementById('insuranceImagesGrid');
+    const insUpload = document.getElementById('insuranceUploadArea');
+
+    insUpload.addEventListener('dragover', e => { e.preventDefault(); insUpload.style.borderColor = 'var(--green)'; });
+    insUpload.addEventListener('dragleave', () => { insUpload.style.borderColor = ''; });
+    insUpload.addEventListener('drop', e => { e.preventDefault(); insUpload.style.borderColor = ''; handleInsuranceFiles(e.dataTransfer.files); });
+
+    function handleInsuranceFiles(files) {
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => addInsuranceImage(e.target.result, file.name);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function addInsuranceImage(src, name) {
+      insGrid.style.display = 'grid';
+
+      const item = document.createElement('div');
+      item.className = 'ins-image-item';
+
+      const img = document.createElement('img');
+      img.src = src; img.alt = name;
+
+      const label = document.createElement('div');
+      label.className = 'ins-name'; label.textContent = name;
+
+      const del = document.createElement('button');
+      del.className = 'ins-delete';
+      del.innerHTML = '<i class="ti ti-trash"></i>';
+      del.onclick = e => { e.stopPropagation(); item.remove(); if (!insGrid.children.length) insGrid.style.display = 'none'; };
+
+      item.appendChild(img); item.appendChild(label); item.appendChild(del);
+      insGrid.appendChild(item);
+    }
+
     function selectRating(el) {
       document.querySelectorAll('.rating-option').forEach(o => o.classList.remove('selected'));
       el.classList.add('selected');

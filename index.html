@@ -229,10 +229,10 @@
     .upload-area {
       width: 100%;
       max-width: 960px;
-      padding: 80px 32px;
+      padding: 60px 32px;
       background: #F9FAFB;
       border-radius: 16px;
-      border: 3px dashed rgba(173,178,187,0.4);
+      border: 3px solid rgba(173,178,187,0.4);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -270,15 +270,6 @@
     }
 
     .btn-select:hover { border-color: var(--green); box-shadow: 0 0 0 3px rgba(21,195,147,0.1); background: rgba(21,195,147,0.03); }
-
-    .upload-footer {
-      width: 100%;
-      max-width: 960px;
-      padding-top: 56px;
-      border-top: 1.46px solid rgba(173,178,187,0.1);
-      display: flex;
-      justify-content: center;
-    }
 
     .btn-disabled {
       padding: 22px 70px;
@@ -533,7 +524,7 @@
           </div>
         </div>
         <div class="upload-area" onclick="document.getElementById('fileInput').click()">
-          <div class="upload-icon"></div>
+          <div style="width:67px;height:48px;background:var(--green);border-radius:2px;flex-shrink:0;"></div>
           <div class="upload-text">
             <p>Drag &amp; drop or select a file</p>
             <span>PDF, JPG, or PNG up to 10MB</span>
@@ -541,9 +532,7 @@
           <button class="btn-select">Select Files</button>
           <input id="fileInput" type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none" />
         </div>
-        <div class="upload-footer">
-          <button class="btn-disabled" disabled>Complete Upload</button>
-        </div>
+        <button class="btn-disabled" disabled>Complete Upload</button>
       </div>
     </div>
 

@@ -135,6 +135,14 @@
     }
     .ins-doc-del:hover { background: #FEF2F2; color: #EF4444; }
 
+    .ins-doc-dl {
+      width: 44px; height: 44px; border-radius: 8px;
+      background: transparent; color: #9CA3AF;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, color 0.15s; flex-shrink: 0; text-decoration: none;
+    }
+    .ins-doc-dl:hover { background: var(--green-light); color: var(--green); }
+
     /* ══ UPLOAD AREA ══ */
     .upload-section { display: flex; flex-direction: column; gap: 12px; }
 
@@ -344,9 +352,14 @@
       fileArr.slice(0, remaining).forEach(file => addFile(file));
     }
 
-    function renderFileRow(name, size) {
+    function renderFileRow(name, size, fileObj = null) {
       uploadedFiles.push({ name, size });
       imagesSection.style.display = 'flex';
+
+      const downloadBtn = fileObj ? `
+        <a class="ins-doc-dl" title="Download" href="${URL.createObjectURL(fileObj)}" download="${name}">
+          <i class="ti ti-download" style="font-size:20px;"></i>
+        </a>` : '';
 
       const item = document.createElement('div');
       item.className = 'ins-doc-item';
@@ -358,7 +371,10 @@
             <div class="ins-doc-size">${formatSize(size)}</div>
           </div>
         </div>
-        <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:20px;"></i></button>`;
+        <div style="display:flex;align-items:center;gap:4px;">
+          ${downloadBtn}
+          <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:20px;"></i></button>
+        </div>`;
 
       item.querySelector('.ins-doc-del').onclick = () => {
         const idx = uploadedFiles.findIndex(f => f.name === name && f.size === size);
@@ -371,7 +387,7 @@
       grid.appendChild(item);
     }
 
-    function addFile(file) { renderFileRow(file.name, file.size); }
+    function addFile(file) { renderFileRow(file.name, file.size, file); }
 
     preloaded.forEach(f => renderFileRow(f.name, f.size));
 

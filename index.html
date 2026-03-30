@@ -669,6 +669,11 @@
         </div>
         <div id="insuranceImagesGrid" style="display:none;width:100%;max-width:880px;display:none;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;"></div>
 
+        <div id="uploadError" style="display:none;width:100%;max-width:880px;padding:24px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);display:none;align-items:center;gap:12px;">
+          <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
+          <span style="color:#A83836;font-size:16px;font-weight:500;font-family:'Poppins',sans-serif;">You can only upload up to 10 files.</span>
+        </div>
+
         <div class="upload-area" id="insuranceUploadArea" onclick="document.getElementById('fileInput').click()">
           <i class="ti ti-cloud-upload" style="font-size:52px;color:var(--green);"></i>
           <div class="upload-text">
@@ -789,8 +794,19 @@
     insUpload.addEventListener('dragleave', () => { insUpload.style.borderColor = ''; });
     insUpload.addEventListener('drop', e => { e.preventDefault(); insUpload.style.borderColor = ''; handleInsuranceFiles(e.dataTransfer.files); });
 
+    const uploadError = document.getElementById('uploadError');
+    const MAX_FILES = 10;
+
     function handleInsuranceFiles(files) {
-      Array.from(files).forEach(file => {
+      const current = insGrid.children.length;
+      const remaining = MAX_FILES - current;
+      if (remaining <= 0 || files.length > remaining) {
+        uploadError.style.display = 'flex';
+        setTimeout(() => { uploadError.style.display = 'none'; }, 4000);
+        return;
+      }
+      uploadError.style.display = 'none';
+      Array.from(files).slice(0, remaining).forEach(file => {
         const reader = new FileReader();
         reader.onload = e => addInsuranceImage(e.target.result, file.name);
         reader.readAsDataURL(file);

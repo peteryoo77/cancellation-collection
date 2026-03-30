@@ -6,36 +6,8 @@
   <title>IGSchedule</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="design-system.css" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --green: #15C393;
-      --green-hover: #11a87e;
-      --green-light: #E8F9F4;
-      --green-muted: #A5D9CC;
-      --green-dark: #096249;
-      --text-dark: #2D333A;
-      --text-mid: #333333;
-      --text-sub: #4B5563;
-      --text-muted: #5A5F67;
-      --text-placeholder: #62758C;
-      --border: #E6E7EA;
-      --bg: #F8F9FA;
-      --white: #ffffff;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-      --shadow-md: 0 4px 12px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04);
-      --radius-card: 14px;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg);
-      color: var(--text-mid);
-      min-width: 320px;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
 
     /* ══ NAV ══ */
     nav {
@@ -74,7 +46,7 @@
       align-items: center;
       gap: 6px;
       color: var(--text-sub);
-      font-size: 15px;
+      font-size: var(--text-sm);
       font-weight: 500;
       cursor: pointer;
       padding: 8px 12px;
@@ -117,7 +89,7 @@
     .nav-profile:hover { border-color: var(--green); box-shadow: 0 0 0 3px rgba(21,195,147,0.12); }
 
     .nav-profile img { width: 32px; height: 32px; border-radius: 9999px; object-fit: cover; opacity: 0.7; }
-    .nav-profile span { font-size: 14px; font-weight: 600; color: #334155; }
+    .nav-profile span { font-size: var(--text-sm); font-weight: 600; color: #334155; }
 
     .profile-wrapper { position: relative; }
 
@@ -142,7 +114,7 @@
       align-items: center;
       gap: 10px;
       padding: 13px 18px;
-      font-size: 14px;
+      font-size: var(--text-sm);
       font-weight: 500;
       color: var(--text-sub);
       text-decoration: none;
@@ -187,7 +159,7 @@
     .notif-header h3 { font-size: 16px; font-weight: 700; color: #0a0a0a; }
 
     .notif-mark-all {
-      font-size: 13px; font-weight: 500; color: var(--green);
+      font-size: var(--text-sm); font-weight: 500; color: var(--green);
       background: none; border: none; cursor: pointer;
       font-family: 'Poppins', sans-serif;
       transition: color 0.15s;
@@ -219,9 +191,9 @@
     }
 
     .notif-content { flex: 1; display: flex; flex-direction: column; gap: 3px; }
-    .notif-content p { font-size: 13px; font-weight: 500; color: var(--text-dark); line-height: 1.5; }
+    .notif-content p { font-size: var(--text-sm); font-weight: 500; color: var(--text-dark); line-height: 1.5; }
     .notif-content p strong { white-space: nowrap; }
-    .notif-content span { font-size: 12px; color: #9CA3AF; font-weight: 400; }
+    .notif-content span { font-size: var(--text-sm); color: #9CA3AF; font-weight: 400; }
 
     .notif-dot {
       width: 8px; height: 8px; border-radius: 9999px;
@@ -232,7 +204,7 @@
       padding: 40px 20px;
       text-align: center;
       color: #9CA3AF;
-      font-size: 14px;
+      font-size: var(--text-sm);
     }
 
     .bell-wrapper { position: relative; }
@@ -388,7 +360,7 @@
       background: rgba(21,195,147,0.1);
       border-radius: 9999px;
       color: var(--green);
-      font-size: 13px;
+      font-size: var(--text-sm);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.2px;
@@ -433,7 +405,7 @@
       padding: 20px 16px; background: var(--green-light);
       border-radius: 8px; outline: 1px solid rgba(21,195,147,0.2);
       display: flex; align-items: center; gap: 12px;
-      font-size: 15px; font-weight: 500; color: var(--text-muted); line-height: 1.5;
+      font-size: var(--text-sm); font-weight: 500; color: var(--text-muted); line-height: 1.5;
     }
     .ins-info-banner a { color: var(--green); text-decoration: underline; }
 
@@ -443,7 +415,7 @@
     }
 
     .ins-doc-label {
-      font-size: 13px; font-weight: 700; color: #9CA3AF;
+      font-size: var(--text-sm); font-weight: 700; color: #9CA3AF;
       text-transform: uppercase; letter-spacing: 1.5px;
       margin-bottom: 4px;
     }
@@ -463,8 +435,8 @@
       flex-shrink: 0;
     }
 
-    .ins-doc-name { font-size: 15px; font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 480px; }
-    .ins-doc-size { font-size: 13px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
+    .ins-doc-name { font-size: var(--text-sm); font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 480px; }
+    .ins-doc-size { font-size: var(--text-sm); font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
 
     .ins-doc-del {
       width: 36px; height: 36px; border-radius: 8px; border: none;
@@ -493,7 +465,7 @@
 
     .upload-text { display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .upload-text p    { font-size: 18px; font-weight: 500; color: var(--text-muted); }
-    .upload-text span { font-size: 14px; font-weight: 400; color: #9CA3AF; }
+    .upload-text span { font-size: var(--text-sm); font-weight: 400; color: #9CA3AF; }
 
     /* ══ ASSESSMENTS CARD ══ */
     .assessments { padding: 64px; display: flex; justify-content: center; }
@@ -555,7 +527,7 @@
       position: absolute; top: 6px; right: 6px;
       width: 28px; height: 28px;
       background: rgba(0,0,0,0.5); border: none; border-radius: 6px;
-      color: #fff; font-size: 14px; cursor: pointer;
+      color: #fff; font-size: var(--text-sm); cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       opacity: 0; transition: opacity 0.15s, background 0.15s;
     }
@@ -567,7 +539,7 @@
       position: absolute; bottom: 0; left: 0; right: 0;
       padding: 6px 8px;
       background: linear-gradient(transparent, rgba(0,0,0,0.5));
-      color: #fff; font-size: 11px; font-weight: 500;
+      color: #fff; font-size: var(--text-sm); font-weight: 500;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
 
@@ -609,7 +581,7 @@
 
     textarea::placeholder { color: #B0BAC7; }
     textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(21,195,147,0.1); background: #fff; }
-    .char-count { text-align: right; font-size: 13px; color: #B0BAC7; }
+    .char-count { text-align: right; font-size: var(--text-sm); color: #B0BAC7; }
 
     .crisis-notice {
       display: flex;
@@ -622,7 +594,7 @@
       border-radius: 10px;
     }
 
-    .crisis-notice p { font-size: 15px; font-weight: 400; color: #92400E; line-height: 1.7; }
+    .crisis-notice p { font-size: var(--text-sm); font-weight: 400; color: #92400E; line-height: 1.7; }
 
     /* ══ CARE TEAM CARD ══ */
     .care-team { padding: 64px; }
@@ -651,7 +623,7 @@
 
     .member-info { display: flex; flex-direction: column; gap: 12px; }
     .member-info h3 { font-size: 20px; font-weight: 600; color: var(--text-mid); }
-    .member-info p  { font-size: 15px; font-weight: 400; color: var(--text-sub); line-height: 1.8; }
+    .member-info p  { font-size: var(--text-sm); font-weight: 400; color: var(--text-sub); line-height: 1.8; }
 
     /* ══ RATING CARD ══ */
     .rating-card { padding: 72px 64px; display: flex; justify-content: center; }
@@ -687,7 +659,7 @@
     }
 
     .rating-option img { width: 56px; height: 56px; border-radius: 50%; }
-    .rating-option span { font-size: 14px; font-weight: 600; color: #9CA3AF; text-align: center; }
+    .rating-option span { font-size: var(--text-sm); font-weight: 600; color: #9CA3AF; text-align: center; }
     .rating-option:hover span { color: var(--green); }
 
     .feedback-wrap { width: 100%; display: flex; flex-direction: column; gap: 10px; }
@@ -725,31 +697,31 @@
       .hero-left { gap: 28px; width: 100%; }
       .hero-text { width: 100%; }
       .hero-text h1 { font-size: 28px; letter-spacing: -0.2px; }
-      .hero-text p  { font-size: 15px; }
+      .hero-text p  { font-size: var(--text-sm); }
       .btn-primary { width: 100%; font-size: 16px; padding: 15px; justify-content: center; }
 
       .insurance { padding: 32px 20px; gap: 28px; }
       .section-heading h2 { font-size: 24px; }
       .section-heading p  { font-size: 16px; }
-      .section-badge { font-size: 11px; }
+      .section-badge { font-size: var(--text-sm); }
 
       .upload-area { padding: 40px 20px; gap: 16px; }
       .ins-image-item .ins-delete { opacity: 1; }
       .upload-text p { font-size: 16px; }
-      .btn-select { font-size: 15px; width: 100%; }
+      .btn-select { font-size: var(--text-sm); width: 100%; }
       .btn-disabled { width: 100%; padding: 15px; font-size: 16px; }
 
       .assessments { padding: 28px 20px; }
       .assessments-inner { gap: 28px; }
       .assessment-banner { min-height: 160px; padding: 24px; }
       .assessment-banner h2 { font-size: 22px; }
-      .assessment-banner p  { font-size: 14px; }
+      .assessment-banner p  { font-size: var(--text-sm); }
 
       .message-card { padding: 32px 20px; }
       .message-inner { gap: 18px; }
       .message-inner h2 { font-size: 22px; }
-      .crisis-notice p { font-size: 13px; }
-      textarea { font-size: 15px; height: 140px; }
+      .crisis-notice p { font-size: var(--text-sm); }
+      textarea { font-size: var(--text-sm); height: 140px; }
       .btn-action { width: 100%; padding: 15px; }
 
       .care-team { padding: 32px 20px; }
@@ -757,7 +729,7 @@
       .team-member { gap: 18px; padding: 24px 0; }
       .member-photo-wrap { width: 64px; height: 64px; border-radius: 12px; }
       .member-info h3 { font-size: 17px; }
-      .member-info p  { font-size: 14px; line-height: 1.65; }
+      .member-info p  { font-size: var(--text-sm); line-height: 1.65; }
 
       .rating-card { padding: 32px 20px; }
       .rating-inner { gap: 28px; }
@@ -765,8 +737,8 @@
       .rating-options { gap: 8px; }
       .rating-option { padding: 14px 4px; gap: 8px; border-radius: 10px; }
       .rating-option img { width: 40px; height: 40px; }
-      .rating-option span { font-size: 11px; }
-      .feedback-wrap label { font-size: 15px; }
+      .rating-option span { font-size: var(--text-sm); }
+      .feedback-wrap label { font-size: var(--text-sm); }
     }
 
     /* ══ RESPONSIVE — SMALL MOBILE (≤400px) ══ */
@@ -789,7 +761,7 @@
         <div class="nav-lang" title="Language">
           <i class="ti ti-world" style="font-size:20px;"></i>
           <span>EN</span>
-          <i class="ti ti-chevron-down" style="font-size:14px;"></i>
+          <i class="ti ti-chevron-down" style="font-size:var(--text-sm);"></i>
         </div>
         <div class="notif-wrapper">
           <div class="bell-wrapper nav-icon" onclick="toggleNotif()" title="Notifications">
@@ -857,7 +829,7 @@
           <div class="nav-profile" onclick="toggleDropdown()" title="Profile">
             <div style="width:32px;height:32px;border-radius:9999px;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ti ti-user" style="font-size:18px;color:#fff;"></i></div>
             <span>Profile</span>
-            <i class="ti ti-chevron-down" style="font-size:13px;color:#94A3B8;margin-left:2px;"></i>
+            <i class="ti ti-chevron-down" style="font-size:var(--text-sm);color:#94A3B8;margin-left:2px;"></i>
           </div>
           <div class="dropdown" id="profileDropdown">
             <a href="edit-insurance.html"><i class="ti ti-shield" style="font-size:16px;"></i> Edit Insurance</a>
@@ -901,11 +873,11 @@
           <div style="width:100%;max-width:880px;display:flex;flex-direction:column;gap:16px;">
             <div id="uploadError" style="display:none;padding:20px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
               <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
-              <span style="color:#A83836;font-size:15px;font-weight:500;">You can only upload up to 10 files.</span>
+              <span style="color:#A83836;font-size:var(--text-sm);font-weight:500;">You can only upload up to 10 files.</span>
             </div>
             <div id="typeError" style="display:none;padding:20px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
               <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
-              <span style="color:#A83836;font-size:15px;font-weight:500;">Only PDF, JPG, or PNG files are allowed.</span>
+              <span style="color:#A83836;font-size:var(--text-sm);font-weight:500;">Only PDF, JPG, or PNG files are allowed.</span>
             </div>
             <div class="upload-area" id="insuranceUploadArea" onclick="document.getElementById('fileInput').click()">
               <i class="ti ti-cloud-upload" style="font-size:52px;color:var(--green);"></i>

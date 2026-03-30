@@ -446,6 +446,14 @@
     }
     .ins-doc-del:hover { background: #FEF2F2; color: #EF4444; }
 
+    .ins-doc-dl {
+      width: 44px; height: 44px; border-radius: 8px;
+      background: transparent; color: #9CA3AF;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, color 0.15s; flex-shrink: 0; text-decoration: none;
+    }
+    .ins-doc-dl:hover { background: var(--green-light); color: var(--green); }
+
     .upload-area {
       width: 100%;
       max-width: 880px;
@@ -1092,7 +1100,12 @@
             <div class="ins-doc-size">${formatSize(file.size)}</div>
           </div>
         </div>
-        <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:20px;"></i></button>`;
+        <div style="display:flex;align-items:center;gap:4px;">
+          <a class="ins-doc-dl" title="Download" href="${URL.createObjectURL(file)}" download="${file.name}">
+            <i class="ti ti-download" style="font-size:20px;"></i>
+          </a>
+          <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:20px;"></i></button>
+        </div>`;
 
       item.querySelector('.ins-doc-del').onclick = () => {
         const idx = uploadedFiles.findIndex(f => f.name === file.name && f.size === file.size);

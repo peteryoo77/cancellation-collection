@@ -35,7 +35,7 @@
 
     /* ══ NAV ══ */
     nav {
-      background: var(--green-light);
+      background: var(--bg);
       padding: 0 160px;
       height: 72px;
       display: flex;
@@ -44,7 +44,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid rgba(21,195,147,0.15);
+      border-bottom: 1px solid var(--border);
     }
 
     .nav-inner {
@@ -200,18 +200,6 @@
       font-weight: 500;
     }
 
-    .empty-images {
-      padding: 32px;
-      background: #FAFAFA;
-      border: 1.5px dashed var(--border);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      color: #9CA3AF;
-      font-size: 14px;
-    }
-
     /* ══ UPLOAD AREA ══ */
     .upload-section { display: flex; flex-direction: column; gap: 16px; }
 
@@ -254,16 +242,6 @@
       padding-top: 32px; border-top: 1px solid var(--border);
     }
 
-    .btn-cancel {
-      padding: 14px 28px;
-      background: transparent; border: 1.5px solid var(--border);
-      border-radius: 10px; color: var(--text-sub);
-      font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 500;
-      cursor: pointer; transition: border-color 0.18s, background 0.18s;
-      text-decoration: none; display: inline-flex; align-items: center;
-    }
-    .btn-cancel:hover { border-color: #9CA3AF; background: #F9FAFB; }
-
     .btn-save {
       padding: 14px 36px;
       background: var(--green); border: none; border-radius: 10px;
@@ -291,7 +269,7 @@
       .images-grid { grid-template-columns: repeat(2, 1fr); }
       .upload-area { padding: 40px 20px; }
       .form-actions { flex-direction: column-reverse; }
-      .btn-cancel, .btn-save { width: 100%; justify-content: center; text-align: center; }
+      .btn-save { width: 100%; justify-content: center; text-align: center; }
       .image-item .delete-btn { opacity: 1; }
     }
 
@@ -343,14 +321,10 @@
         </div>
 
         <!-- Uploaded Images -->
-        <div class="images-section">
+        <div class="images-section" id="imagesSection" style="display:none;">
           <p class="images-label">Uploaded Images</p>
           <div class="images-grid" id="imagesGrid">
             <!-- populated by JS -->
-          </div>
-          <div class="empty-images" id="emptyState">
-            <i class="ti ti-photo-off" style="font-size:24px;flex-shrink:0;"></i>
-            <span>No images uploaded yet. Use the upload area below to add your insurance card.</span>
           </div>
         </div>
 
@@ -371,7 +345,6 @@
 
         <!-- Actions -->
         <div class="form-actions">
-          <a href="index.html" class="btn-cancel">Cancel</a>
           <button class="btn-save" onclick="handleSave(this)">Save Changes</button>
         </div>
 
@@ -382,7 +355,7 @@
 
   <script>
     const grid = document.getElementById('imagesGrid');
-    const emptyState = document.getElementById('emptyState');
+    const imagesSection = document.getElementById('imagesSection');
 
     // Drag and drop
     const uploadArea = document.querySelector('.upload-area');
@@ -404,7 +377,7 @@
     }
 
     function addImage(src, name) {
-      emptyState.style.display = 'none';
+      imagesSection.style.display = 'flex';
 
       const item = document.createElement('div');
       item.className = 'image-item';
@@ -423,7 +396,7 @@
       del.title = 'Remove';
       del.onclick = () => {
         item.remove();
-        if (grid.children.length === 0) emptyState.style.display = 'flex';
+        if (grid.children.length === 0) imagesSection.style.display = 'none';
       };
 
       item.appendChild(img);

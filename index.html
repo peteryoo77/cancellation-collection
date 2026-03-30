@@ -415,6 +415,57 @@
       gap: 56px;
     }
 
+    /* ══ UPLOAD SUCCESS STATE ══ */
+    .ins-success { display: none; flex-direction: column; align-items: center; gap: 48px; width: 100%; }
+    .ins-success.show { display: flex; }
+
+    .ins-success-icon {
+      width: 96px; height: 96px; border-radius: 9999px;
+      background: var(--green-light); display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .ins-success-title { font-size: 36px; font-weight: 600; color: var(--text-dark); text-align: center; }
+
+    .ins-success-body { width: 100%; max-width: 880px; display: flex; flex-direction: column; gap: 20px; }
+
+    .ins-info-banner {
+      padding: 20px 16px; background: var(--green-light);
+      border-radius: 8px; outline: 1px solid rgba(21,195,147,0.2);
+      display: flex; align-items: center; gap: 12px;
+      font-size: 15px; font-weight: 500; color: var(--text-muted); line-height: 1.5;
+    }
+    .ins-info-banner a { color: var(--green); text-decoration: underline; }
+
+    .ins-doc-list {
+      background: var(--bg); border-radius: 14px;
+      padding: 36px; display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .ins-doc-label {
+      font-size: 13px; font-weight: 700; color: #9CA3AF;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      margin-bottom: 4px;
+    }
+
+    .ins-doc-item {
+      background: var(--white); border-radius: 12px;
+      outline: 1.5px solid rgba(173,178,187,0.25); outline-offset: -1.5px;
+      padding: 14px 20px; display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+    }
+
+    .ins-doc-left { display: flex; align-items: center; gap: 14px; }
+
+    .ins-doc-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: var(--green-light); display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .ins-doc-name { font-size: 15px; font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 480px; }
+    .ins-doc-size { font-size: 13px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
+
     .upload-area {
       width: 100%;
       max-width: 880px;
@@ -830,33 +881,57 @@
     <!-- Insurance Information -->
     <div class="card">
       <div class="insurance">
-        <div class="section-heading">
-          <span class="section-badge">Important</span>
-          <h2>Insurance Information</h2>
-          <p>Please share your insurance information with the care team. Adding it only takes a moment.</p>
-        </div>
-        <div id="insuranceImagesGrid" class="ins-grid" style="display:none;width:100%;max-width:880px;gap:12px;"></div>
 
-        <div style="width:100%;max-width:880px;display:flex;flex-direction:column;gap:24px;">
-          <div id="uploadError" style="display:none;padding:24px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
-            <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
-            <span style="color:#A83836;font-size:16px;font-weight:500;font-family:'Poppins',sans-serif;">You can only upload up to 10 files.</span>
+        <!-- Upload state -->
+        <div id="insUploadState" style="display:flex;flex-direction:column;align-items:center;gap:48px;width:100%;">
+          <div class="section-heading">
+            <span class="section-badge">Important</span>
+            <h2>Insurance Information</h2>
+            <p>Please share your insurance information with the care team. Adding it only takes a moment.</p>
           </div>
-          <div id="typeError" style="display:none;padding:24px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
-            <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
-            <span style="color:#A83836;font-size:16px;font-weight:500;font-family:'Poppins',sans-serif;">Only PDF, JPG, or PNG files are allowed.</span>
-          </div>
-          <div class="upload-area" id="insuranceUploadArea" onclick="document.getElementById('fileInput').click()">
-            <i class="ti ti-cloud-upload" style="font-size:52px;color:var(--green);"></i>
-            <div class="upload-text">
-              <p>Drag &amp; drop or select a file</p>
-              <span>PDF, JPG, or PNG — up to 10MB</span>
+          <div id="insuranceImagesGrid" class="ins-grid" style="display:none;width:100%;max-width:880px;gap:12px;"></div>
+          <div style="width:100%;max-width:880px;display:flex;flex-direction:column;gap:16px;">
+            <div id="uploadError" style="display:none;padding:20px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
+              <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
+              <span style="color:#A83836;font-size:15px;font-weight:500;">You can only upload up to 10 files.</span>
             </div>
-            <button class="btn-select" type="button">Select Files</button>
-            <input id="fileInput" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="handleInsuranceFiles(this.files)" />
+            <div id="typeError" style="display:none;padding:20px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
+              <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
+              <span style="color:#A83836;font-size:15px;font-weight:500;">Only PDF, JPG, or PNG files are allowed.</span>
+            </div>
+            <div class="upload-area" id="insuranceUploadArea" onclick="document.getElementById('fileInput').click()">
+              <i class="ti ti-cloud-upload" style="font-size:52px;color:var(--green);"></i>
+              <div class="upload-text">
+                <p>Drag &amp; drop or select a file</p>
+                <span>PDF, JPG, or PNG — up to 10MB</span>
+              </div>
+              <button class="btn-select" type="button">Select Files</button>
+              <input id="fileInput" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="handleInsuranceFiles(this.files)" />
+            </div>
+          </div>
+          <button id="completeUploadBtn" class="btn-disabled" disabled onclick="completeUpload()">Complete Upload</button>
+        </div>
+
+        <!-- Success state -->
+        <div class="ins-success" id="insSuccessState">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:24px;">
+            <div class="ins-success-icon">
+              <i class="ti ti-check" style="font-size:40px;color:var(--green);"></i>
+            </div>
+            <p class="ins-success-title">Upload Successful</p>
+          </div>
+          <div class="ins-success-body">
+            <div class="ins-info-banner">
+              <i class="ti ti-info-circle" style="font-size:22px;color:var(--green);flex-shrink:0;"></i>
+              <span>Need to make a change? Update your insurance details in <a href="edit-insurance.html">Profile Settings</a>.</span>
+            </div>
+            <div class="ins-doc-list">
+              <p class="ins-doc-label" id="insDocLabel">Received Documents</p>
+              <div id="insDocItems"></div>
+            </div>
           </div>
         </div>
-        <button id="completeUploadBtn" class="btn-disabled" disabled>Complete Upload</button>
+
       </div>
     </div>
 
@@ -969,11 +1044,39 @@
 
     const uploadError = document.getElementById('uploadError');
     const completeBtn = document.getElementById('completeUploadBtn');
+    const uploadedFiles = [];
 
     function updateCompleteBtn() {
       const hasFiles = insGrid.children.length > 0;
       completeBtn.disabled = !hasFiles;
       completeBtn.classList.toggle('active', hasFiles);
+    }
+
+    function formatSize(bytes) {
+      if (bytes >= 1048576) return (bytes / 1048576).toFixed(1) + ' MB';
+      return (bytes / 1024).toFixed(0) + ' KB';
+    }
+
+    function completeUpload() {
+      const docItems = document.getElementById('insDocItems');
+      const docLabel = document.getElementById('insDocLabel');
+      docItems.innerHTML = '';
+      docLabel.textContent = 'Received Documents (' + uploadedFiles.length + ')';
+      uploadedFiles.forEach(f => {
+        const row = document.createElement('div');
+        row.className = 'ins-doc-item';
+        row.innerHTML = `
+          <div class="ins-doc-left">
+            <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
+            <div>
+              <div class="ins-doc-name">${f.name}</div>
+              <div class="ins-doc-size">${formatSize(f.size)}</div>
+            </div>
+          </div>`;
+        docItems.appendChild(row);
+      });
+      document.getElementById('insUploadState').style.display = 'none';
+      document.getElementById('insSuccessState').classList.add('show');
     }
     const typeError = document.getElementById('typeError');
     const MAX_FILES = 10;
@@ -996,13 +1099,14 @@
       uploadError.style.display = 'none';
       fileArr.slice(0, remaining).forEach(file => {
         const reader = new FileReader();
-        reader.onload = e => addInsuranceImage(e.target.result, file.name);
+        reader.onload = e => addInsuranceImage(e.target.result, file.name, file.size);
         reader.readAsDataURL(file);
       });
     }
 
-    function addInsuranceImage(src, name) {
+    function addInsuranceImage(src, name, size) {
       insGrid.style.display = 'grid';
+      uploadedFiles.push({ name, size });
 
       const item = document.createElement('div');
       item.className = 'ins-image-item';
@@ -1018,6 +1122,8 @@
       del.innerHTML = '<i class="ti ti-trash"></i>';
       del.onclick = e => {
         e.stopPropagation();
+        const idx = uploadedFiles.findIndex(f => f.name === name);
+        if (idx !== -1) uploadedFiles.splice(idx, 1);
         item.remove();
         if (!insGrid.children.length) insGrid.style.display = 'none';
         if (insGrid.children.length < MAX_FILES) uploadError.style.display = 'none';

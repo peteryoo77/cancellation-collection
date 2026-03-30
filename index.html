@@ -332,6 +332,16 @@
       font-size: 18px;
       font-weight: 600;
       cursor: not-allowed;
+      transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+    }
+    .btn-disabled.active {
+      background: var(--green);
+      color: #fff;
+      cursor: pointer;
+    }
+    .btn-disabled.active:hover {
+      background: var(--green-hover);
+      box-shadow: 0 6px 20px rgba(21,195,147,0.32);
     }
 
     .btn-action {
@@ -846,7 +856,7 @@
             <input id="fileInput" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="handleInsuranceFiles(this.files)" />
           </div>
         </div>
-        <button class="btn-disabled" disabled>Complete Upload</button>
+        <button id="completeUploadBtn" class="btn-disabled" disabled>Complete Upload</button>
       </div>
     </div>
 
@@ -958,6 +968,13 @@
     insUpload.addEventListener('drop', e => { e.preventDefault(); insUpload.style.borderColor = ''; handleInsuranceFiles(e.dataTransfer.files); });
 
     const uploadError = document.getElementById('uploadError');
+    const completeBtn = document.getElementById('completeUploadBtn');
+
+    function updateCompleteBtn() {
+      const hasFiles = insGrid.children.length > 0;
+      completeBtn.disabled = !hasFiles;
+      completeBtn.classList.toggle('active', hasFiles);
+    }
     const typeError = document.getElementById('typeError');
     const MAX_FILES = 10;
     const ALLOWED = ['image/jpeg', 'image/png', 'application/pdf'];
@@ -1004,10 +1021,12 @@
         item.remove();
         if (!insGrid.children.length) insGrid.style.display = 'none';
         if (insGrid.children.length < MAX_FILES) uploadError.style.display = 'none';
+        updateCompleteBtn();
       };
 
       item.appendChild(img); item.appendChild(label); item.appendChild(del);
       insGrid.appendChild(item);
+      updateCompleteBtn();
     }
 
     function selectRating(el) {

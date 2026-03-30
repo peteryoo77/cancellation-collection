@@ -331,6 +331,10 @@
         <!-- Upload -->
         <div class="upload-section">
           <p class="images-label">Upload</p>
+          <div id="uploadError" style="display:none;padding:24px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
+            <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
+            <span style="color:#A83836;font-size:16px;font-weight:500;font-family:'Poppins',sans-serif;">You can only upload up to 10 files.</span>
+          </div>
           <div class="upload-area" onclick="document.getElementById('fileInput').click()">
             <i class="ti ti-cloud-upload" style="font-size:52px;color:var(--green);"></i>
             <div class="upload-text">
@@ -356,6 +360,8 @@
   <script>
     const grid = document.getElementById('imagesGrid');
     const imagesSection = document.getElementById('imagesSection');
+    const uploadError = document.getElementById('uploadError');
+    const MAX_FILES = 10;
 
     // Drag and drop
     const uploadArea = document.querySelector('.upload-area');
@@ -368,7 +374,13 @@
     });
 
     function handleFiles(files) {
-      Array.from(files).forEach(file => {
+      const current = grid.children.length;
+      const remaining = MAX_FILES - current;
+      if (remaining <= 0 || files.length > remaining) {
+        uploadError.style.display = 'flex';
+        return;
+      }
+      Array.from(files).slice(0, remaining).forEach(file => {
         if (!file.type.match('image.*') && file.type !== 'application/pdf') return;
         const reader = new FileReader();
         reader.onload = e => addImage(e.target.result, file.name);
@@ -397,6 +409,7 @@
       del.onclick = () => {
         item.remove();
         if (grid.children.length === 0) imagesSection.style.display = 'none';
+        if (grid.children.length < MAX_FILES) uploadError.style.display = 'none';
       };
 
       item.appendChild(img);

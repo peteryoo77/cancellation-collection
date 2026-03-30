@@ -134,6 +134,7 @@
       transition: background 0.15s, color 0.15s; flex-shrink: 0;
     }
     .ins-doc-del:hover { background: #FEF2F2; color: #EF4444; }
+    .ins-doc-date { font-size: var(--text-sm); font-weight: 400; color: #9CA3AF; }
 
     .ins-doc-dl {
       width: 44px; height: 44px; border-radius: 8px;
@@ -319,8 +320,8 @@
     const uploadedFiles = [];
 
     const preloaded = [
-      { name: 'Insurance_Card_Front.jpg', src: 'Insurance_Card_Front.jpg' },
-      { name: 'Insurance_Card_Back.jpg',  src: 'Insurance_Card_Back.jpg'  }
+      { name: 'Insurance_Card_Front.jpg', src: 'Insurance_Card_Front.jpg', uploaded: 'Mar 15, 2026' },
+      { name: 'Insurance_Card_Back.jpg',  src: 'Insurance_Card_Back.jpg',  uploaded: 'Mar 15, 2026' }
     ];
 
     function formatSize(bytes) {
@@ -352,7 +353,7 @@
       fileArr.slice(0, remaining).forEach(file => addFile(file));
     }
 
-    function renderFileRow(name, size, fileObj = null) {
+    function renderFileRow(name, size, fileObj = null, uploadedDate = null) {
       uploadedFiles.push({ name, size });
       imagesSection.style.display = 'flex';
 
@@ -361,6 +362,10 @@
           <i class="ti ti-download" style="font-size:20px;"></i>
         </a>` : '';
 
+      const dateLabel = uploadedDate
+        ? `<div class="ins-doc-date">Uploaded ${uploadedDate}</div>`
+        : '';
+
       const item = document.createElement('div');
       item.className = 'ins-doc-item';
       item.innerHTML = `
@@ -368,7 +373,10 @@
           <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
           <div>
             <div class="ins-doc-name">${name}</div>
-            <div class="ins-doc-size">${formatSize(size)}</div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="ins-doc-size">${size > 0 ? formatSize(size) : ''}</div>
+              ${dateLabel}
+            </div>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:4px;">
@@ -395,11 +403,11 @@
           .then(r => r.blob())
           .then(blob => {
             const file = new File([blob], f.name, { type: blob.type });
-            renderFileRow(file.name, file.size, file);
+            renderFileRow(file.name, file.size, file, f.uploaded);
           })
-          .catch(() => renderFileRow(f.name, 0));
+          .catch(() => renderFileRow(f.name, 0, null, f.uploaded));
       } else {
-        renderFileRow(f.name, 0);
+        renderFileRow(f.name, 0, null, f.uploaded);
       }
     });
 

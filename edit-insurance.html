@@ -128,7 +128,7 @@
     .ins-doc-name { font-size: var(--text-sm); font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 400px; }
     .ins-doc-size { font-size: var(--text-sm); font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
     .ins-doc-del {
-      width: 36px; height: 36px; border-radius: 8px; border: none;
+      width: 44px; height: 44px; border-radius: 8px; border: none;
       background: transparent; color: #9CA3AF; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: background 0.15s, color 0.15s; flex-shrink: 0;
@@ -340,7 +340,7 @@
             <div class="ins-doc-size">${formatSize(file.size)}</div>
           </div>
         </div>
-        <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:16px;"></i></button>`;
+        <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:20px;"></i></button>`;
 
       item.querySelector('.ins-doc-del').onclick = () => {
         const idx = uploadedFiles.findIndex(f => f.name === file.name && f.size === file.size);

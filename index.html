@@ -120,13 +120,9 @@
     .hero {
       background: var(--green-light);
       padding: 80px 160px;
-    }
-
-    .hero-inner {
       display: flex;
-      align-items: center;
-      gap: 29px;
-      max-width: 1120px;
+      justify-content: flex-start;
+      align-items: flex-start;
     }
 
     .hero-content {
@@ -493,15 +489,15 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <div class="hero-text">
-          <h1>Schedule Your Session</h1>
-          <p>Book your session whenever it feels right and we'll be here waiting for you.</p>
+    <div style="width:1120px;display:inline-flex;justify-content:flex-start;align-items:center;gap:29px;">
+      <div style="width:563px;display:inline-flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:52px;">
+        <div style="width:483px;display:flex;flex-direction:column;gap:16px;">
+          <h1 style="font-size:40px;font-weight:700;color:#000;font-family:'Poppins',sans-serif;">Schedule Your Session</h1>
+          <p style="font-size:20px;font-weight:400;color:#333333;font-family:'Poppins',sans-serif;">Book your session whenever it feels right and we'll be here waiting for you.</p>
         </div>
         <button class="btn-primary">Schedule Appointment</button>
       </div>
-      <img class="hero-image" src="https://placehold.co/528x360/cce9e2/096249" alt="Session preview" />
+      <img style="width:528px;height:360px;border-radius:20px;object-fit:cover;" src="https://placehold.co/528x360/cce9e2/096249" alt="Session preview" />
     </div>
   </section>
 
@@ -570,20 +566,20 @@
     <!-- Meet your Care Team -->
     <div class="card care-team">
       <h2>Meet your Care Team</h2>
-      <div class="team-members">
-        <div class="team-member">
-          <img class="member-photo" src="https://placehold.co/96x96/cce9e2/096249" alt="Sofia Skinner" />
-          <div class="member-info">
-            <h3>Sofia Skinner, LMSW</h3>
-            <p>Sofia is a dually licensed master social worker in New Jersey and New York. She has years of experience supporting survivors of acute, chronic, and complex trauma. She integrates a trauma-informed, strengths-based approach, using modalities such as motivational interviewing, CBT, CPT for PTSD, and narrative therapy. Sofia is passionate about meeting people where they are—fostering a supportive environment where clients can discover resilience and find sustainable pathways to healing. Outside of work, she enjoys quality time with her miniature schnauzer mixes Ash and Nester and following the New York Jets.</p>
-          </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="width:84px;height:96px;overflow:hidden;border-radius:16px;position:relative;flex-shrink:0;">
+          <img style="width:96px;height:96px;position:absolute;left:0;top:0;object-fit:cover;" src="https://placehold.co/96x96/cce9e2/096249" alt="Sofia Skinner" />
         </div>
-        <div class="team-member" style="margin-top: 24px;">
-          <img class="member-photo" src="https://placehold.co/96x96/cce9e2/096249" alt="Richard Callado" />
-          <div class="member-info">
-            <h3>Richard Callado, PMHNP</h3>
-            <p>Richard is a board-certified Psychiatric Nurse Practitioner with over 20 years of experience in mental health. He currently specializes in interventional psychiatry and treatment-resistant conditions at Curated Mental Health in NYC. His experience spans pediatric and adult psychiatry across multiple settings. He has expertise in complex psychiatric conditions, including treatment-resistant depression, schizophrenia, rapid cycling bipolar disorder, and anxiety disorders.</p>
-          </div>
+        <div style="width:919px;display:flex;flex-direction:column;gap:18px;">
+          <h3 style="font-size:24px;font-weight:600;color:#333333;">Sofia Skinner, LMSW</h3>
+          <p style="font-size:18px;font-weight:400;color:#4B5563;line-height:28px;">Sofia is a dually licensed master social worker in New Jersey and New York. She has years of experience supporting survivors of acute, chronic, and complex trauma. She integrates a trauma-informed, strengths-based approach, using modalities such as motivational interviewing, CBT, CPT for PTSD, and narrative therapy. Sofia is passionate about meeting people where they are—fostering a supportive environment where clients can discover resilience and find sustainable pathways to healing. Outside of work, she enjoys quality time with her miniature schnauzer mixes Ash and Nester and following the New York Jets.</p>
+        </div>
+        <div style="width:84px;height:96px;overflow:hidden;border-radius:16px;position:relative;flex-shrink:0;margin-top:14px;">
+          <img style="width:96px;height:96px;position:absolute;left:0;top:0;object-fit:cover;" src="https://placehold.co/96x96/cce9e2/096249" alt="Richard Callado" />
+        </div>
+        <div style="width:919px;display:flex;flex-direction:column;gap:16px;">
+          <h3 style="font-size:24px;font-weight:600;color:#333333;">Richard Callado, PMHNP</h3>
+          <p style="font-size:18px;font-weight:400;color:#4B5563;line-height:28px;">Richard is a board-certified Psychiatric Nurse Practitioner with over 20 years of experience in mental health. He currently specializes in interventional psychiatry and treatment-resistant conditions at Curated Mental Health in NYC. His experience spans pediatric and adult psychiatry across multiple settings. He has expertise in complex psychiatric conditions, including treatment-resistant depression, schizophrenia, rapid cycling bipolar disorder, and anxiety disorders.</p>
         </div>
       </div>
     </div>

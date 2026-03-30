@@ -378,24 +378,15 @@
     .section-heading h2 { font-size: 34px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.3px; line-height: 1.25; margin-top: 4px; }
     .section-heading p  { font-size: var(--text-base); font-weight: 400; color: var(--text-muted); line-height: 1.7; margin-top: -4px; }
 
-    /* ══ PULSE DOT ══ */
-    .section-heading-title {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-    }
-
-    .pulse-dot {
-      width: 12px; height: 12px; border-radius: 9999px;
-      background: var(--green); flex-shrink: 0;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(21,195,147,0.5); }
-      50%       { box-shadow: 0 0 0 8px rgba(21,195,147,0); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .pulse-dot { animation: none; }
+    /* ══ ACTION BANNER ══ */
+    .ins-action-banner {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 32px;
+      background: var(--green-light);
+      border-bottom: 1.5px solid var(--green-muted);
+      color: var(--green-dark);
+      font-size: var(--text-sm); font-weight: 600; line-height: 1.5;
+      border-radius: var(--radius-card) var(--radius-card) 0 0;
     }
 
     /* ══ INSURANCE CARD ══ */
@@ -888,15 +879,16 @@
 
     <!-- Insurance Information -->
     <div class="card">
+      <div class="ins-action-banner">
+        <i class="ti ti-clipboard-text" style="font-size:22px;flex-shrink:0;"></i>
+        <span>Please complete this before your visit.</span>
+      </div>
       <div class="insurance">
 
         <!-- Upload state -->
         <div id="insUploadState" style="display:flex;flex-direction:column;align-items:center;gap:48px;width:100%;">
           <div class="section-heading">
-            <div class="section-heading-title">
-              <span class="pulse-dot"></span>
-              <h2>Insurance Information</h2>
-            </div>
+            <h2>Insurance Information</h2>
             <p>Please share your insurance information with the care team.<br>Adding it only takes a moment.</p>
           </div>
           <div id="insuranceFileList" style="display:none;width:100%;max-width:880px;flex-direction:column;gap:16px;max-height:432px;overflow-y:auto;"></div>

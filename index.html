@@ -378,8 +378,8 @@
     .section-heading h2 { font-size: 34px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.3px; line-height: 1.25; margin-top: 4px; }
     .section-heading p  { font-size: var(--text-base); font-weight: 400; color: var(--text-muted); line-height: 1.7; margin-top: -4px; }
 
-    .section-heading-title {
-      display: flex; align-items: center; justify-content: center; gap: 12px;
+    .card-accent {
+      border-left: 5px solid var(--green);
     }
 
     /* ══ INSURANCE CARD ══ */
@@ -871,16 +871,13 @@
   <main class="sections">
 
     <!-- Insurance Information -->
-    <div class="card">
+    <div class="card card-accent">
       <div class="insurance">
 
         <!-- Upload state -->
         <div id="insUploadState" style="display:flex;flex-direction:column;align-items:center;gap:48px;width:100%;">
           <div class="section-heading">
-            <div class="section-heading-title">
-              <i class="ti ti-alert-circle" style="font-size:32px;color:var(--green);flex-shrink:0;"></i>
-              <h2>Insurance Information</h2>
-            </div>
+            <h2>Insurance Information</h2>
             <p>Please share your insurance information with the care team.<br>Adding it only takes a moment.</p>
           </div>
           <div id="insuranceFileList" style="display:none;width:100%;max-width:880px;flex-direction:column;gap:16px;max-height:432px;overflow-y:auto;"></div>

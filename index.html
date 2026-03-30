@@ -831,6 +831,10 @@
             <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
             <span style="color:#A83836;font-size:16px;font-weight:500;font-family:'Poppins',sans-serif;">You can only upload up to 10 files.</span>
           </div>
+          <div id="typeError" style="display:none;padding:24px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
+            <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
+            <span style="color:#A83836;font-size:16px;font-weight:500;font-family:'Poppins',sans-serif;">Only PDF, JPG, or PNG files are allowed.</span>
+          </div>
           <div class="upload-area" id="insuranceUploadArea" onclick="document.getElementById('fileInput').click()">
             <i class="ti ti-cloud-upload" style="font-size:52px;color:var(--green);"></i>
             <div class="upload-text">
@@ -953,17 +957,26 @@
     insUpload.addEventListener('drop', e => { e.preventDefault(); insUpload.style.borderColor = ''; handleInsuranceFiles(e.dataTransfer.files); });
 
     const uploadError = document.getElementById('uploadError');
+    const typeError = document.getElementById('typeError');
     const MAX_FILES = 10;
+    const ALLOWED = ['image/jpeg', 'image/png', 'application/pdf'];
 
     function handleInsuranceFiles(files) {
+      const fileArr = Array.from(files);
+      const invalid = fileArr.some(f => !ALLOWED.includes(f.type));
+      if (invalid) {
+        typeError.style.display = 'flex';
+        return;
+      }
+      typeError.style.display = 'none';
       const current = insGrid.children.length;
       const remaining = MAX_FILES - current;
-      if (remaining <= 0 || files.length > remaining) {
+      if (remaining <= 0 || fileArr.length > remaining) {
         uploadError.style.display = 'flex';
         return;
       }
       uploadError.style.display = 'none';
-      Array.from(files).slice(0, remaining).forEach(file => {
+      fileArr.slice(0, remaining).forEach(file => {
         const reader = new FileReader();
         reader.onload = e => addInsuranceImage(e.target.result, file.name);
         reader.readAsDataURL(file);

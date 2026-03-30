@@ -310,6 +310,11 @@
     const ALLOWED = ['image/jpeg', 'image/png', 'application/pdf'];
     const uploadedFiles = [];
 
+    const preloaded = [
+      { name: 'Insurance_Card_Front.jpg', size: 1243648 },
+      { name: 'Insurance_Card_Back.jpg',  size: 987136  }
+    ];
+
     function formatSize(bytes) {
       if (bytes >= 1048576) return (bytes / 1048576).toFixed(1) + ' MB';
       return (bytes / 1024).toFixed(0) + ' KB';
@@ -339,8 +344,8 @@
       fileArr.slice(0, remaining).forEach(file => addFile(file));
     }
 
-    function addFile(file) {
-      uploadedFiles.push({ name: file.name, size: file.size });
+    function renderFileRow(name, size) {
+      uploadedFiles.push({ name, size });
       imagesSection.style.display = 'flex';
 
       const item = document.createElement('div');
@@ -349,14 +354,14 @@
         <div class="ins-doc-left">
           <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
           <div>
-            <div class="ins-doc-name">${file.name}</div>
-            <div class="ins-doc-size">${formatSize(file.size)}</div>
+            <div class="ins-doc-name">${name}</div>
+            <div class="ins-doc-size">${formatSize(size)}</div>
           </div>
         </div>
         <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:20px;"></i></button>`;
 
       item.querySelector('.ins-doc-del').onclick = () => {
-        const idx = uploadedFiles.findIndex(f => f.name === file.name && f.size === file.size);
+        const idx = uploadedFiles.findIndex(f => f.name === name && f.size === size);
         if (idx !== -1) uploadedFiles.splice(idx, 1);
         item.remove();
         if (uploadedFiles.length === 0) imagesSection.style.display = 'none';
@@ -365,6 +370,10 @@
 
       grid.appendChild(item);
     }
+
+    function addFile(file) { renderFileRow(file.name, file.size); }
+
+    preloaded.forEach(f => renderFileRow(f.name, f.size));
 
     function handleSave() {
       document.querySelector('.card-body').style.display = 'none';

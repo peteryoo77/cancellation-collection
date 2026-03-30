@@ -29,12 +29,13 @@
       background: var(--bg);
       color: var(--text-mid);
       min-width: 320px;
+      overflow-x: hidden;
     }
 
     /* ── NAV ── */
     nav {
       background: var(--green-light);
-      padding: 20px 160px;
+      padding: 16px 160px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -48,15 +49,8 @@
       align-items: center;
     }
 
-    .nav-logo {
-      height: 48px;
-      width: auto;
-      display: flex;
-      align-items: center;
-    }
-
     .nav-logo span {
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 700;
       color: var(--green);
       letter-spacing: -0.5px;
@@ -65,13 +59,13 @@
     .nav-right {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 24px;
     }
 
     .nav-lang {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       color: var(--text-sub);
       font-size: 16px;
       font-weight: 500;
@@ -79,19 +73,23 @@
       padding: 6px 10px;
       border-radius: 8px;
       transition: background 0.2s;
+      min-height: 44px;
     }
 
     .nav-lang:hover { background: rgba(21,195,147,0.1); }
 
-    .nav-lang svg { flex-shrink: 0; }
-
     .nav-icon {
       cursor: pointer;
       color: var(--text-sub);
-      padding: 4px;
+      padding: 8px;
       border-radius: 8px;
       transition: background 0.2s, color 0.2s;
       line-height: 1;
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .nav-icon:hover { background: rgba(21,195,147,0.1); color: var(--green); }
@@ -106,6 +104,7 @@
       border-radius: 9999px;
       cursor: pointer;
       transition: box-shadow 0.2s, border-color 0.2s;
+      min-height: 44px;
     }
 
     .nav-profile:hover { border-color: var(--green); box-shadow: 0 0 0 3px rgba(21,195,147,0.1); }
@@ -130,67 +129,41 @@
       padding: 80px 160px;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
     }
 
     .hero-inner {
-      width: 1120px;
+      width: 100%;
+      max-width: 1120px;
       display: flex;
       justify-content: flex-start;
       align-items: center;
       gap: 29px;
-      flex-shrink: 0;
     }
 
     .hero-left {
-      width: 563px;
-      display: flex;
-      flex-direction: column;
-      gap: 52px;
-      flex-shrink: 0;
-    }
-
-    .hero-text {
-      width: 483px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .hero-text h1 { font-size: 40px; font-weight: 700; color: #000; }
-    .hero-text p  { font-size: 20px; font-weight: 400; color: #333333; }
-
-    .hero-img {
-      width: 528px;
-      height: 360px;
-      border-radius: 20px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    .hero-content {
       flex: 0 0 563px;
       display: flex;
       flex-direction: column;
       gap: 52px;
     }
 
-    .hero-text { display: flex; flex-direction: column; gap: 16px; }
-
-    .hero-text h1 {
-      font-size: 40px;
-      font-weight: 700;
-      color: #000;
-      line-height: 1.2;
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
-    .hero-text p {
-      font-size: 20px;
-      font-weight: 400;
-      color: var(--text-mid);
-      line-height: 1.5;
+    .hero-text h1 { font-size: 40px; font-weight: 700; color: #000; line-height: 1.2; }
+    .hero-text p  { font-size: 20px; font-weight: 400; color: #333333; line-height: 1.5; }
+
+    .hero-img {
+      flex: 0 0 528px;
+      height: 360px;
+      border-radius: 20px;
+      object-fit: cover;
     }
 
+    /* ── BUTTONS ── */
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -205,98 +178,14 @@
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      text-decoration: none;
-      width: fit-content;
+      min-height: 44px;
     }
 
-    .btn-primary:hover {
-      background: #11a87e;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(21,195,147,0.35);
-    }
-
+    .btn-primary:hover { background: #11a87e; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(21,195,147,0.35); }
     .btn-primary:active { transform: translateY(0); }
 
-    .hero-image {
-      flex: 0 0 528px;
-      height: 360px;
-      border-radius: 20px;
-      object-fit: cover;
-      background: #cce9e2;
-    }
-
-    /* ── SECTIONS WRAPPER ── */
-    .sections {
-      padding: 80px 160px;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      max-width: 1440px;
-      margin: 0 auto;
-    }
-
-    .card {
-      background: var(--white);
-      border-radius: 10px;
-      border: 1.5px solid var(--border);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      overflow: hidden;
-    }
-
-    /* ── INSURANCE CARD ── */
-    .insurance { padding: 64px 80px; display: flex; flex-direction: column; align-items: center; gap: 56px; }
-
-    .section-badge {
-      padding: 8px 22px;
-      background: rgba(21,195,147,0.1);
-      border-radius: 9999px;
-      color: var(--green);
-      font-size: 18px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-
-    .section-header { display: flex; flex-direction: column; align-items: center; gap: 32px; max-width: 727px; }
-
-    .section-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-
-    .section-title h2 { font-size: 40px; font-weight: 600; color: var(--text-dark); }
-
-    .section-title p { font-size: 24px; font-weight: 400; color: var(--text-muted); line-height: 36px; text-align: center; }
-
-    .upload-area {
-      width: 100%;
-      max-width: 960px;
-      padding: 60px 32px;
-      background: #F9FAFB;
-      border-radius: 16px;
-      border: 3px solid rgba(173,178,187,0.4);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 48px;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .upload-area:hover { border-color: var(--green); background: rgba(21,195,147,0.03); }
-
-    .upload-icon {
-      width: 67px;
-      height: 48px;
-      background: var(--green);
-      clip-path: polygon(0 100%, 55% 100%, 100% 45%, 100% 0, 0 0);
-    }
-
-    .upload-text { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-
-    .upload-text p { font-size: 24px; font-weight: 400; color: var(--text-muted); text-align: center; }
-
-    .upload-text span { font-size: 18px; font-weight: 400; color: var(--text-muted); }
-
     .btn-select {
-      padding: 16px 24px;
+      padding: 14px 24px;
       background: var(--white);
       border: 1px solid #DCDEE3;
       border-radius: 11.67px;
@@ -306,6 +195,7 @@
       font-weight: 500;
       cursor: pointer;
       transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      min-height: 44px;
     }
 
     .btn-select:hover { border-color: var(--green); box-shadow: 0 0 0 3px rgba(21,195,147,0.1); background: rgba(21,195,147,0.03); }
@@ -320,90 +210,8 @@
       font-size: 24px;
       font-weight: 600;
       cursor: not-allowed;
+      min-height: 44px;
     }
-
-    /* ── ASSESSMENTS CARD ── */
-    .assessments { padding: 80px; display: flex; justify-content: center; }
-
-    .assessments-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; gap: 56px; }
-
-    .assessment-banner {
-      width: 100%;
-      height: 236px;
-      border-radius: 10px;
-      background: linear-gradient(rgba(9,98,73,0.5), rgba(9,98,73,0.5)), url('https://placehold.co/960x236/2d6b55/2d6b55') center/cover no-repeat;
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      gap: 10px;
-    }
-
-    .assessment-banner h2 { font-size: 40px; font-weight: 700; color: #fff; }
-
-    .assessment-banner p { font-size: 20px; font-weight: 400; color: #fff; }
-
-    .empty-state {
-      padding: 30px 24px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .empty-inner { display: flex; flex-direction: column; align-items: center; gap: 24px; }
-
-    .empty-icon {
-      width: 96px;
-      height: 96px;
-      border-radius: 9999px;
-      background: rgba(209,213,219,0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .empty-icon svg { opacity: 0.3; }
-
-    .empty-state p { font-size: 20px; font-weight: 400; color: var(--text-muted); }
-
-    /* ── MESSAGE CARD ── */
-    .message-card { padding: 80px 48px; display: flex; justify-content: center; border-radius: 12px; }
-
-    .message-inner { width: 100%; max-width: 1024px; display: flex; flex-direction: column; align-items: center; gap: 28px; }
-
-    .message-inner h2 { font-size: 40px; font-weight: 600; color: #000; text-align: center; }
-
-    .textarea-wrap { width: 100%; max-width: 960px; display: flex; flex-direction: column; gap: 8px; }
-
-    textarea {
-      width: 100%;
-      height: 208px;
-      padding: 18px;
-      background: #F9FAFB;
-      border: 1px solid #D1D5DB;
-      border-radius: 12px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 18px;
-      font-weight: 400;
-      color: var(--text-placeholder);
-      line-height: 28px;
-      resize: vertical;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      outline: none;
-    }
-
-    textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(21,195,147,0.1); }
-
-    .char-count { text-align: right; font-size: 14px; color: var(--text-placeholder); }
-
-    .crisis-notice {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .crisis-notice svg { flex-shrink: 0; color: #FFC107; }
-
-    .crisis-notice p { font-size: 18px; font-weight: 400; color: var(--text-sub); line-height: 28px; }
 
     .btn-submit-muted {
       width: 320px;
@@ -437,41 +245,158 @@
 
     .btn-submit-green:hover { background: #11a87e; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(21,195,147,0.35); }
 
-    /* ── CARE TEAM CARD ── */
-    .care-team { padding: 48px; border-radius: 8px; }
-
-    .care-team h2 { font-size: 36px; font-weight: 600; color: #000; margin-bottom: 45px; }
-
-    .team-members { display: flex; flex-direction: column; gap: 10px; }
-
-    .team-member { display: flex; flex-direction: column; gap: 10px; }
-
-    .member-photo {
-      width: 96px;
-      height: 96px;
-      border-radius: 16px;
-      object-fit: cover;
-      background: #cce9e2;
+    /* ── SECTIONS WRAPPER ── */
+    .sections {
+      padding: 80px 160px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 1440px;
+      margin: 0 auto;
     }
 
-    .member-info { display: flex; flex-direction: column; gap: 18px; max-width: 919px; }
+    .card {
+      background: var(--white);
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
 
+    /* ── INSURANCE CARD ── */
+    .insurance { padding: 64px 80px; display: flex; flex-direction: column; align-items: center; gap: 56px; }
+
+    .section-badge {
+      padding: 8px 22px;
+      background: rgba(21,195,147,0.1);
+      border-radius: 9999px;
+      color: var(--green);
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .section-header { display: flex; flex-direction: column; align-items: center; gap: 32px; max-width: 727px; width: 100%; }
+
+    .section-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+
+    .section-title h2 { font-size: 40px; font-weight: 600; color: var(--text-dark); }
+
+    .section-title p { font-size: 24px; font-weight: 400; color: var(--text-muted); line-height: 36px; }
+
+    .upload-area {
+      width: 100%;
+      max-width: 960px;
+      padding: 60px 32px;
+      background: #F9FAFB;
+      border-radius: 16px;
+      border: 3px solid rgba(173,178,187,0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .upload-area:hover { border-color: var(--green); background: rgba(21,195,147,0.03); }
+
+    .upload-text { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .upload-text p { font-size: 24px; font-weight: 400; color: var(--text-muted); text-align: center; }
+    .upload-text span { font-size: 18px; font-weight: 400; color: var(--text-muted); }
+
+    /* ── ASSESSMENTS CARD ── */
+    .assessments { padding: 80px; display: flex; justify-content: center; }
+    .assessments-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; gap: 56px; }
+
+    .assessment-banner {
+      width: 100%;
+      min-height: 236px;
+      border-radius: 10px;
+      background: linear-gradient(rgba(9,98,73,0.5), rgba(9,98,73,0.5)), url('https://placehold.co/960x236/2d6b55/2d6b55') center/cover no-repeat;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .assessment-banner h2 { font-size: 40px; font-weight: 700; color: #fff; }
+    .assessment-banner p  { font-size: 20px; font-weight: 400; color: #fff; }
+
+    .empty-state { padding: 30px 24px; display: flex; justify-content: center; }
+    .empty-inner { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+    .empty-icon {
+      width: 96px; height: 96px;
+      border-radius: 9999px;
+      background: rgba(209,213,219,0.5);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .empty-state p { font-size: 20px; font-weight: 400; color: var(--text-muted); }
+
+    /* ── MESSAGE CARD ── */
+    .message-card { padding: 80px 48px; display: flex; justify-content: center; border-radius: 12px; }
+    .message-inner { width: 100%; max-width: 1024px; display: flex; flex-direction: column; align-items: center; gap: 28px; }
+    .message-inner h2 { font-size: 40px; font-weight: 600; color: #000; text-align: center; }
+
+    .textarea-wrap { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+
+    textarea {
+      width: 100%;
+      height: 208px;
+      padding: 18px;
+      background: #F9FAFB;
+      border: 1px solid #D1D5DB;
+      border-radius: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-placeholder);
+      line-height: 28px;
+      resize: vertical;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(21,195,147,0.1); }
+    .char-count { text-align: right; font-size: 14px; color: var(--text-placeholder); }
+
+    .crisis-notice { display: flex; align-items: flex-start; gap: 16px; width: 100%; max-width: 960px; }
+    .crisis-notice p { font-size: 18px; font-weight: 400; color: var(--text-sub); line-height: 28px; }
+
+    /* ── CARE TEAM CARD ── */
+    .care-team { padding: 48px; }
+    .care-team h2 { font-size: 36px; font-weight: 600; color: #000; margin-bottom: 45px; }
+
+    .team-member { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+
+    .member-photo-wrap {
+      width: 84px; height: 96px;
+      overflow: hidden; border-radius: 16px;
+      position: relative; flex-shrink: 0;
+    }
+
+    .member-photo-wrap img {
+      width: 96px; height: 96px;
+      position: absolute; left: 0; top: 0;
+      object-fit: cover;
+    }
+
+    .member-info { display: flex; flex-direction: column; gap: 18px; }
     .member-info h3 { font-size: 24px; font-weight: 600; color: var(--text-mid); }
-
-    .member-info p { font-size: 18px; font-weight: 400; color: var(--text-sub); line-height: 28px; }
+    .member-info p  { font-size: 18px; font-weight: 400; color: var(--text-sub); line-height: 28px; }
 
     /* ── RATING CARD ── */
-    .rating-card { padding: 48px; border-radius: 12px; display: flex; justify-content: center; }
-
+    .rating-card { padding: 48px; display: flex; justify-content: center; }
     .rating-inner { width: 100%; max-width: 1024px; display: flex; flex-direction: column; align-items: center; gap: 32px; }
-
     .rating-inner h2 { font-size: 40px; font-weight: 600; color: #000; text-align: center; }
 
     .rating-options { display: flex; gap: 8px; width: 100%; }
 
     .rating-option {
       flex: 1;
-      padding: 18px;
+      padding: 18px 8px;
       border-radius: 24px;
       border: 1.5px solid transparent;
       display: flex;
@@ -480,34 +405,97 @@
       gap: 18px;
       cursor: pointer;
       transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      min-height: 44px;
     }
 
     .rating-option:hover { border-color: var(--green); background: rgba(21,195,147,0.05); transform: translateY(-2px); }
-
-    .rating-option img { width: 72px; height: 72px; }
-
-    .rating-option span { font-size: 20px; font-weight: 500; color: #8C8C8C; text-align: center; }
-
+    .rating-option img { width: 72px; height: 72px; border-radius: 50%; }
+    .rating-option span { font-size: 18px; font-weight: 500; color: #8C8C8C; text-align: center; }
     .rating-option:hover span { color: var(--green); }
 
-    .feedback-wrap { width: 100%; max-width: 960px; display: flex; flex-direction: column; gap: 12px; }
-
+    .feedback-wrap { width: 100%; display: flex; flex-direction: column; gap: 12px; }
     .feedback-wrap label { font-size: 20px; font-weight: 500; color: var(--text-mid); }
 
+    /* ══════════════════════════════════════
+       RESPONSIVE — TABLET (≤1200px)
+    ══════════════════════════════════════ */
     @media (max-width: 1200px) {
-      nav, .hero, .sections { padding-left: 40px; padding-right: 40px; }
-      .hero-inner { flex-direction: column; }
-      .hero-content { flex: unset; width: 100%; }
-      .hero-image { flex: unset; width: 100%; height: auto; }
+      nav { padding: 16px 40px; }
+      .hero { padding: 60px 40px; }
+      .sections { padding: 60px 40px; }
+
+      .hero-inner { flex-direction: column; align-items: flex-start; gap: 40px; }
+      .hero-left { flex: unset; width: 100%; }
+      .hero-img { flex: unset; width: 100%; height: auto; aspect-ratio: 528/360; }
+
+      .insurance { padding: 48px 40px; }
+      .assessments { padding: 48px 40px; }
+      .message-card { padding: 48px 40px; }
+      .care-team { padding: 40px; }
+      .rating-card { padding: 40px; }
     }
 
+    /* ══════════════════════════════════════
+       RESPONSIVE — MOBILE (≤768px)
+    ══════════════════════════════════════ */
     @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      .hero, .sections { padding-left: 20px; padding-right: 20px; }
+      nav { padding: 14px 20px; }
+      .nav-lang span, .nav-lang .ti-chevron-down { display: none; }
+      .nav-right { gap: 8px; }
+
+      .hero { padding: 40px 20px; }
+      .sections { padding: 24px 20px; gap: 24px; }
+
+      .hero-inner { gap: 28px; }
+      .hero-left { gap: 32px; }
       .hero-text h1 { font-size: 28px; }
-      .section-title h2, .rating-inner h2, .message-inner h2 { font-size: 28px; }
-      .rating-options { flex-wrap: wrap; }
-      .rating-option { flex: 0 0 calc(33% - 8px); }
+      .hero-text p  { font-size: 16px; }
+      .btn-primary { width: 100%; font-size: 18px; padding: 16px; }
+
+      .insurance { padding: 32px 20px; gap: 32px; }
+      .section-title h2 { font-size: 26px; }
+      .section-title p  { font-size: 16px; line-height: 26px; }
+      .section-badge { font-size: 14px; }
+
+      .upload-area { padding: 40px 20px; gap: 28px; }
+      .upload-text p { font-size: 18px; }
+      .upload-text span { font-size: 14px; }
+      .btn-select { font-size: 16px; width: 100%; text-align: center; }
+      .btn-disabled { width: 100%; padding: 18px; font-size: 18px; }
+
+      .assessments { padding: 32px 20px; }
+      .assessment-banner { min-height: 160px; padding: 24px; }
+      .assessment-banner h2 { font-size: 24px; }
+      .assessment-banner p  { font-size: 15px; }
+
+      .message-card { padding: 32px 20px; }
+      .message-inner h2 { font-size: 24px; }
+      .crisis-notice p { font-size: 15px; line-height: 22px; }
+      textarea { font-size: 15px; height: 160px; }
+      .btn-submit-muted, .btn-submit-green { width: 100%; }
+
+      .care-team { padding: 32px 20px; }
+      .care-team h2 { font-size: 24px; margin-bottom: 28px; }
+      .member-info h3 { font-size: 20px; }
+      .member-info p  { font-size: 15px; line-height: 24px; }
+
+      .rating-card { padding: 32px 20px; }
+      .rating-inner h2 { font-size: 22px; }
+      .rating-options { flex-wrap: wrap; justify-content: center; gap: 12px; }
+      .rating-option { flex: 0 0 calc(33.33% - 12px); padding: 12px 4px; gap: 10px; border-radius: 16px; }
+      .rating-option img { width: 48px; height: 48px; }
+      .rating-option span { font-size: 13px; }
+      .feedback-wrap label { font-size: 16px; }
+    }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE — SMALL MOBILE (≤400px)
+    ══════════════════════════════════════ */
+    @media (max-width: 400px) {
+      .rating-option { flex: 0 0 calc(50% - 12px); }
+      .hero-text h1 { font-size: 24px; }
+      .nav-profile span { display: none; }
+      .nav-profile { padding: 6px; }
     }
   </style>
 </head>
@@ -516,19 +504,19 @@
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
-    <div class="nav-logo"><span>IGSchedule</span></div>
-    <div class="nav-right">
-      <div class="nav-lang" title="Language">
-        <i class="ti ti-world" style="font-size:22px;"></i>
-        <span>EN</span>
-        <i class="ti ti-chevron-down" style="font-size:16px;"></i>
+      <div class="nav-logo"><span>IGSchedule</span></div>
+      <div class="nav-right">
+        <div class="nav-lang" title="Language">
+          <i class="ti ti-world" style="font-size:22px;"></i>
+          <span>EN</span>
+          <i class="ti ti-chevron-down" style="font-size:16px;"></i>
+        </div>
+        <i class="ti ti-bell nav-icon" style="font-size:22px;"></i>
+        <div class="nav-profile" title="Profile">
+          <img src="https://placehold.co/32x32/15C393/ffffff" alt="Profile" />
+          <span>Profile</span>
+        </div>
       </div>
-      <i class="ti ti-bell nav-icon" style="font-size:24px;"></i>
-      <div class="nav-profile" title="Profile">
-        <img src="https://placehold.co/32x32/15C393/ffffff" alt="Profile" />
-        <span>Profile</span>
-      </div>
-    </div>
     </div>
   </nav>
 
@@ -601,7 +589,7 @@
           <div class="char-count"><span id="msgCount">0</span> / 500 Characters</div>
         </div>
         <div class="crisis-notice">
-          <i class="ti ti-alert-triangle" style="font-size:24px;color:#FFC107;flex-shrink:0;"></i>
+          <i class="ti ti-alert-triangle" style="font-size:24px;color:#FFC107;flex-shrink:0;margin-top:2px;"></i>
           <p>If you are in crisis or danger, please call 988 (Crisis Lifeline) or 911 immediately.</p>
         </div>
         <button class="btn-submit-muted">Submit</button>
@@ -611,20 +599,22 @@
     <!-- Meet your Care Team -->
     <div class="card care-team">
       <h2>Meet your Care Team</h2>
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        <div style="width:84px;height:96px;overflow:hidden;border-radius:16px;position:relative;flex-shrink:0;">
-          <img style="width:96px;height:96px;position:absolute;left:0;top:0;object-fit:cover;" src="https://placehold.co/96x96/cce9e2/096249" alt="Sofia Skinner" />
+      <div class="team-member">
+        <div class="member-photo-wrap">
+          <img src="https://placehold.co/96x96/cce9e2/096249" alt="Sofia Skinner" />
         </div>
-        <div style="width:919px;display:flex;flex-direction:column;gap:18px;">
-          <h3 style="font-size:24px;font-weight:600;color:#333333;">Sofia Skinner, LMSW</h3>
-          <p style="font-size:18px;font-weight:400;color:#4B5563;line-height:28px;">Sofia is a dually licensed master social worker in New Jersey and New York. She has years of experience supporting survivors of acute, chronic, and complex trauma. She integrates a trauma-informed, strengths-based approach, using modalities such as motivational interviewing, CBT, CPT for PTSD, and narrative therapy. Sofia is passionate about meeting people where they are—fostering a supportive environment where clients can discover resilience and find sustainable pathways to healing. Outside of work, she enjoys quality time with her miniature schnauzer mixes Ash and Nester and following the New York Jets.</p>
+        <div class="member-info">
+          <h3>Sofia Skinner, LMSW</h3>
+          <p>Sofia is a dually licensed master social worker in New Jersey and New York. She has years of experience supporting survivors of acute, chronic, and complex trauma. She integrates a trauma-informed, strengths-based approach, using modalities such as motivational interviewing, CBT, CPT for PTSD, and narrative therapy. Sofia is passionate about meeting people where they are—fostering a supportive environment where clients can discover resilience and find sustainable pathways to healing. Outside of work, she enjoys quality time with her miniature schnauzer mixes Ash and Nester and following the New York Jets.</p>
         </div>
-        <div style="width:84px;height:96px;overflow:hidden;border-radius:16px;position:relative;flex-shrink:0;margin-top:14px;">
-          <img style="width:96px;height:96px;position:absolute;left:0;top:0;object-fit:cover;" src="https://placehold.co/96x96/cce9e2/096249" alt="Richard Callado" />
+      </div>
+      <div class="team-member">
+        <div class="member-photo-wrap">
+          <img src="https://placehold.co/96x96/cce9e2/096249" alt="Richard Callado" />
         </div>
-        <div style="width:919px;display:flex;flex-direction:column;gap:16px;">
-          <h3 style="font-size:24px;font-weight:600;color:#333333;">Richard Callado, PMHNP</h3>
-          <p style="font-size:18px;font-weight:400;color:#4B5563;line-height:28px;">Richard is a board-certified Psychiatric Nurse Practitioner with over 20 years of experience in mental health. He currently specializes in interventional psychiatry and treatment-resistant conditions at Curated Mental Health in NYC. His experience spans pediatric and adult psychiatry across multiple settings. He has expertise in complex psychiatric conditions, including treatment-resistant depression, schizophrenia, rapid cycling bipolar disorder, and anxiety disorders.</p>
+        <div class="member-info">
+          <h3>Richard Callado, PMHNP</h3>
+          <p>Richard is a board-certified Psychiatric Nurse Practitioner with over 20 years of experience in mental health. He currently specializes in interventional psychiatry and treatment-resistant conditions at Curated Mental Health in NYC. His experience spans pediatric and adult psychiatry across multiple settings. He has expertise in complex psychiatric conditions, including treatment-resistant depression, schizophrenia, rapid cycling bipolar disorder, and anxiety disorders.</p>
         </div>
       </div>
     </div>
@@ -659,7 +649,7 @@
           <label>How can we improve? (Optional)</label>
           <div class="textarea-wrap">
             <textarea placeholder="Please provide any additional details or comments." maxlength="500" oninput="document.getElementById('ratingCount').textContent = this.value.length"></textarea>
-            <div class="char-count"><span id="ratingCount">100</span> / 500 Characters</div>
+            <div class="char-count"><span id="ratingCount">0</span> / 500 Characters</div>
           </div>
         </div>
         <button class="btn-submit-green">Submit</button>

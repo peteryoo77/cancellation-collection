@@ -466,6 +466,14 @@
     .ins-doc-name { font-size: 15px; font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 480px; }
     .ins-doc-size { font-size: 13px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
 
+    .ins-doc-del {
+      width: 36px; height: 36px; border-radius: 8px; border: none;
+      background: transparent; color: #9CA3AF; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, color 0.15s; flex-shrink: 0;
+    }
+    .ins-doc-del:hover { background: #FEF2F2; color: #EF4444; }
+
     .upload-area {
       width: 100%;
       max-width: 880px;
@@ -889,7 +897,7 @@
             <h2>Insurance Information</h2>
             <p>Please share your insurance information with the care team. Adding it only takes a moment.</p>
           </div>
-          <div id="insuranceImagesGrid" class="ins-grid" style="display:none;width:100%;max-width:880px;gap:12px;"></div>
+          <div id="insuranceFileList" style="display:none;width:100%;max-width:880px;flex-direction:column;gap:10px;"></div>
           <div style="width:100%;max-width:880px;display:flex;flex-direction:column;gap:16px;">
             <div id="uploadError" style="display:none;padding:20px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
               <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
@@ -1035,7 +1043,7 @@
 
   <script>
     // ── Insurance upload ──
-    const insGrid = document.getElementById('insuranceImagesGrid');
+    const insFileList = document.getElementById('insuranceFileList');
     const insUpload = document.getElementById('insuranceUploadArea');
 
     insUpload.addEventListener('dragover', e => { e.preventDefault(); insUpload.style.borderColor = 'var(--green)'; });
@@ -1047,7 +1055,7 @@
     const uploadedFiles = [];
 
     function updateCompleteBtn() {
-      const hasFiles = insGrid.children.length > 0;
+      const hasFiles = uploadedFiles.length > 0;
       completeBtn.disabled = !hasFiles;
       completeBtn.classList.toggle('active', hasFiles);
     }
@@ -1078,6 +1086,7 @@
       document.getElementById('insUploadState').style.display = 'none';
       document.getElementById('insSuccessState').classList.add('show');
     }
+
     const typeError = document.getElementById('typeError');
     const MAX_FILES = 10;
     const ALLOWED = ['image/jpeg', 'image/png', 'application/pdf'];
@@ -1085,53 +1094,44 @@
     function handleInsuranceFiles(files) {
       const fileArr = Array.from(files);
       const invalid = fileArr.some(f => !ALLOWED.includes(f.type));
-      if (invalid) {
-        typeError.style.display = 'flex';
-        return;
-      }
+      if (invalid) { typeError.style.display = 'flex'; return; }
       typeError.style.display = 'none';
-      const current = insGrid.children.length;
-      const remaining = MAX_FILES - current;
+      const remaining = MAX_FILES - uploadedFiles.length;
       if (remaining <= 0 || fileArr.length > remaining) {
         uploadError.style.display = 'flex';
         return;
       }
       uploadError.style.display = 'none';
-      fileArr.slice(0, remaining).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = e => addInsuranceImage(e.target.result, file.name, file.size);
-        reader.readAsDataURL(file);
-      });
+      fileArr.slice(0, remaining).forEach(file => addInsuranceFile(file));
     }
 
-    function addInsuranceImage(src, name, size) {
-      insGrid.style.display = 'grid';
-      uploadedFiles.push({ name, size });
+    function addInsuranceFile(file) {
+      const fileObj = { name: file.name, size: file.size };
+      uploadedFiles.push(fileObj);
+      insFileList.style.display = 'flex';
 
       const item = document.createElement('div');
-      item.className = 'ins-image-item';
+      item.className = 'ins-doc-item';
+      item.innerHTML = `
+        <div class="ins-doc-left">
+          <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
+          <div>
+            <div class="ins-doc-name">${file.name}</div>
+            <div class="ins-doc-size">${formatSize(file.size)}</div>
+          </div>
+        </div>
+        <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:16px;"></i></button>`;
 
-      const img = document.createElement('img');
-      img.src = src; img.alt = name;
-
-      const label = document.createElement('div');
-      label.className = 'ins-name'; label.textContent = name;
-
-      const del = document.createElement('button');
-      del.className = 'ins-delete';
-      del.innerHTML = '<i class="ti ti-trash"></i>';
-      del.onclick = e => {
-        e.stopPropagation();
-        const idx = uploadedFiles.findIndex(f => f.name === name);
+      item.querySelector('.ins-doc-del').onclick = () => {
+        const idx = uploadedFiles.findIndex(f => f.name === file.name && f.size === file.size);
         if (idx !== -1) uploadedFiles.splice(idx, 1);
         item.remove();
-        if (!insGrid.children.length) insGrid.style.display = 'none';
-        if (insGrid.children.length < MAX_FILES) uploadError.style.display = 'none';
+        if (uploadedFiles.length === 0) insFileList.style.display = 'none';
+        if (uploadedFiles.length < MAX_FILES) uploadError.style.display = 'none';
         updateCompleteBtn();
       };
 
-      item.appendChild(img); item.appendChild(label); item.appendChild(del);
-      insGrid.appendChild(item);
+      insFileList.appendChild(item);
       updateCompleteBtn();
     }
 

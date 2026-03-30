@@ -4,23 +4,648 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IGSchedule</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; background: #F8F9FA; }
-    .design-wrapper {
-      width: 100%;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #15C393;
+      --green-light: #E8F9F4;
+      --green-muted: #A5D9CC;
+      --green-dark: #096249;
+      --text-dark: #2D333A;
+      --text-mid: #333333;
+      --text-sub: #4B5563;
+      --text-muted: #5A5F67;
+      --text-placeholder: #62758C;
+      --border: #E6E7EA;
+      --bg: #F8F9FA;
+      --white: #ffffff;
     }
-    .design-wrapper object {
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text-mid);
+      min-width: 320px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--green-light);
+      padding: 20px 160px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      height: 48px;
+      width: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo span {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-lang {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-sub);
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .nav-lang:hover { background: rgba(21,195,147,0.1); }
+
+    .nav-lang svg { flex-shrink: 0; }
+
+    .nav-icon {
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      color: var(--text-sub);
+      padding: 2px;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-icon:hover { background: rgba(21,195,147,0.1); color: var(--green); }
+
+    .nav-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 16px 6px 6px;
+      background: #F8FAFC;
+      border: 1px solid #F1F5F9;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .nav-profile:hover { border-color: var(--green); box-shadow: 0 0 0 3px rgba(21,195,147,0.1); }
+
+    .nav-profile img {
+      width: 32px;
+      height: 32px;
+      border-radius: 9999px;
+      object-fit: cover;
+      opacity: 0.6;
+    }
+
+    .nav-profile span {
+      font-size: 16px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--green-light);
+      padding: 80px 160px;
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 29px;
+      max-width: 1120px;
+    }
+
+    .hero-content {
+      flex: 0 0 563px;
+      display: flex;
+      flex-direction: column;
+      gap: 52px;
+    }
+
+    .hero-text { display: flex; flex-direction: column; gap: 16px; }
+
+    .hero-text h1 {
+      font-size: 40px;
+      font-weight: 700;
+      color: #000;
+      line-height: 1.2;
+    }
+
+    .hero-text p {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 24px;
+      background: var(--green);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .btn-primary:hover {
+      background: #11a87e;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(21,195,147,0.35);
+    }
+
+    .btn-primary:active { transform: translateY(0); }
+
+    .hero-image {
+      flex: 0 0 528px;
+      height: 360px;
+      border-radius: 20px;
+      object-fit: cover;
+      background: #cce9e2;
+    }
+
+    /* ── SECTIONS WRAPPER ── */
+    .sections {
+      padding: 80px 160px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    /* ── INSURANCE CARD ── */
+    .insurance { padding: 64px 80px; display: flex; flex-direction: column; align-items: center; gap: 56px; }
+
+    .section-badge {
+      padding: 8px 22px;
+      background: rgba(21,195,147,0.1);
+      border-radius: 9999px;
+      color: var(--green);
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .section-header { display: flex; flex-direction: column; align-items: center; gap: 32px; max-width: 727px; }
+
+    .section-title { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+
+    .section-title h2 { font-size: 40px; font-weight: 600; color: var(--text-dark); }
+
+    .section-title p { font-size: 24px; font-weight: 400; color: var(--text-muted); line-height: 36px; text-align: center; }
+
+    .upload-area {
       width: 100%;
-      height: auto;
-      display: block;
-      aspect-ratio: 1440 / 4763;
+      max-width: 960px;
+      padding: 80px 32px;
+      background: #F9FAFB;
+      border-radius: 16px;
+      border: 3px dashed rgba(173,178,187,0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .upload-area:hover { border-color: var(--green); background: rgba(21,195,147,0.03); }
+
+    .upload-icon {
+      width: 67px;
+      height: 48px;
+      background: var(--green);
+      clip-path: polygon(0 100%, 55% 100%, 100% 45%, 100% 0, 0 0);
+    }
+
+    .upload-text { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+
+    .upload-text p { font-size: 24px; font-weight: 400; color: var(--text-muted); text-align: center; }
+
+    .upload-text span { font-size: 18px; font-weight: 400; color: var(--text-muted); }
+
+    .btn-select {
+      padding: 16px 24px;
+      background: var(--white);
+      border: 1px solid #DCDEE3;
+      border-radius: 11.67px;
+      color: var(--green);
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .btn-select:hover { border-color: var(--green); box-shadow: 0 0 0 3px rgba(21,195,147,0.1); background: rgba(21,195,147,0.03); }
+
+    .upload-footer {
+      width: 100%;
+      max-width: 960px;
+      padding-top: 56px;
+      border-top: 1.46px solid rgba(173,178,187,0.1);
+      display: flex;
+      justify-content: center;
+    }
+
+    .btn-disabled {
+      padding: 22px 70px;
+      background: #CCCCCC;
+      border: none;
+      border-radius: 11.67px;
+      color: #F8F8FF;
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      cursor: not-allowed;
+    }
+
+    /* ── ASSESSMENTS CARD ── */
+    .assessments { padding: 80px; display: flex; justify-content: center; }
+
+    .assessments-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; gap: 56px; }
+
+    .assessment-banner {
+      width: 100%;
+      height: 236px;
+      border-radius: 10px;
+      background: linear-gradient(rgba(9,98,73,0.5), rgba(9,98,73,0.5)), url('https://placehold.co/960x236/2d6b55/2d6b55') center/cover no-repeat;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+
+    .assessment-banner h2 { font-size: 40px; font-weight: 700; color: #fff; }
+
+    .assessment-banner p { font-size: 20px; font-weight: 400; color: #fff; }
+
+    .empty-state {
+      padding: 30px 24px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .empty-inner { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+
+    .empty-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 9999px;
+      background: rgba(209,213,219,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .empty-icon svg { opacity: 0.3; }
+
+    .empty-state p { font-size: 20px; font-weight: 400; color: var(--text-muted); }
+
+    /* ── MESSAGE CARD ── */
+    .message-card { padding: 80px 48px; display: flex; justify-content: center; border-radius: 12px; }
+
+    .message-inner { width: 100%; max-width: 1024px; display: flex; flex-direction: column; align-items: center; gap: 28px; }
+
+    .message-inner h2 { font-size: 40px; font-weight: 600; color: #000; text-align: center; }
+
+    .textarea-wrap { width: 100%; max-width: 960px; display: flex; flex-direction: column; gap: 8px; }
+
+    textarea {
+      width: 100%;
+      height: 208px;
+      padding: 18px;
+      background: #F9FAFB;
+      border: 1px solid #D1D5DB;
+      border-radius: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-placeholder);
+      line-height: 28px;
+      resize: vertical;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(21,195,147,0.1); }
+
+    .char-count { text-align: right; font-size: 14px; color: var(--text-placeholder); }
+
+    .crisis-notice {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .crisis-notice svg { flex-shrink: 0; color: #FFC107; }
+
+    .crisis-notice p { font-size: 18px; font-weight: 400; color: var(--text-sub); line-height: 28px; }
+
+    .btn-submit-muted {
+      width: 320px;
+      height: 56px;
+      background: var(--green-muted);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+
+    .btn-submit-muted:hover { background: var(--green); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(21,195,147,0.35); }
+
+    .btn-submit-green {
+      width: 320px;
+      height: 56px;
+      background: var(--green);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+
+    .btn-submit-green:hover { background: #11a87e; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(21,195,147,0.35); }
+
+    /* ── CARE TEAM CARD ── */
+    .care-team { padding: 48px; border-radius: 8px; }
+
+    .care-team h2 { font-size: 36px; font-weight: 600; color: #000; margin-bottom: 45px; }
+
+    .team-members { display: flex; flex-direction: column; gap: 10px; }
+
+    .team-member { display: flex; flex-direction: column; gap: 10px; }
+
+    .member-photo {
+      width: 96px;
+      height: 96px;
+      border-radius: 16px;
+      object-fit: cover;
+      background: #cce9e2;
+    }
+
+    .member-info { display: flex; flex-direction: column; gap: 18px; max-width: 919px; }
+
+    .member-info h3 { font-size: 24px; font-weight: 600; color: var(--text-mid); }
+
+    .member-info p { font-size: 18px; font-weight: 400; color: var(--text-sub); line-height: 28px; }
+
+    /* ── RATING CARD ── */
+    .rating-card { padding: 48px; border-radius: 12px; display: flex; justify-content: center; }
+
+    .rating-inner { width: 100%; max-width: 1024px; display: flex; flex-direction: column; align-items: center; gap: 32px; }
+
+    .rating-inner h2 { font-size: 40px; font-weight: 600; color: #000; text-align: center; }
+
+    .rating-options { display: flex; gap: 8px; width: 100%; }
+
+    .rating-option {
+      flex: 1;
+      padding: 18px;
+      border-radius: 24px;
+      border: 1.5px solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    }
+
+    .rating-option:hover { border-color: var(--green); background: rgba(21,195,147,0.05); transform: translateY(-2px); }
+
+    .rating-option img { width: 72px; height: 72px; }
+
+    .rating-option span { font-size: 20px; font-weight: 500; color: #8C8C8C; text-align: center; }
+
+    .rating-option:hover span { color: var(--green); }
+
+    .feedback-wrap { width: 100%; max-width: 960px; display: flex; flex-direction: column; gap: 12px; }
+
+    .feedback-wrap label { font-size: 20px; font-weight: 500; color: var(--text-mid); }
+
+    @media (max-width: 1200px) {
+      nav, .hero, .sections { padding-left: 40px; padding-right: 40px; }
+      .hero-inner { flex-direction: column; }
+      .hero-content { flex: unset; width: 100%; }
+      .hero-image { flex: unset; width: 100%; height: auto; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .hero, .sections { padding-left: 20px; padding-right: 20px; }
+      .hero-text h1 { font-size: 28px; }
+      .section-title h2, .rating-inner h2, .message-inner h2 { font-size: 28px; }
+      .rating-options { flex-wrap: wrap; }
+      .rating-option { flex: 0 0 calc(33% - 8px); }
     }
   </style>
 </head>
 <body>
-  <div class="design-wrapper">
-    <object type="image/svg+xml" data="homescreen.svg" style="width:100%;height:auto;display:block;"></object>
-  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo"><span>IGSchedule</span></div>
+    <div class="nav-right">
+      <div class="nav-lang" title="Language">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        <span>EN</span>
+        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 1 6 7 11 1"/></svg>
+      </div>
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+        <path d="M12 2a7 7 0 0 1 7 7c0 5.25 2 6.5 2 8H3c0-1.5 2-2.75 2-8a7 7 0 0 1 7-7zm0 20a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2z"/>
+      </svg>
+      <div class="nav-profile" title="Profile">
+        <img src="https://placehold.co/32x32/15C393/ffffff" alt="Profile" />
+        <span>Profile</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Schedule Your Session</h1>
+          <p>Book your session whenever it feels right and we'll be here waiting for you.</p>
+        </div>
+        <button class="btn-primary">Schedule Appointment</button>
+      </div>
+      <img class="hero-image" src="https://placehold.co/528x360/cce9e2/096249" alt="Session preview" />
+    </div>
+  </section>
+
+  <!-- SECTIONS -->
+  <main class="sections">
+
+    <!-- Insurance Information -->
+    <div class="card">
+      <div class="insurance">
+        <div class="section-header">
+          <span class="section-badge">Important</span>
+          <div class="section-title">
+            <h2>Insurance Information</h2>
+            <p>Please share your insurance information with the care team. Adding it only takes a moment.</p>
+          </div>
+        </div>
+        <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+          <div class="upload-icon"></div>
+          <div class="upload-text">
+            <p>Drag &amp; drop or select a file</p>
+            <span>PDF, JPG, or PNG up to 10MB</span>
+          </div>
+          <button class="btn-select">Select Files</button>
+          <input id="fileInput" type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none" />
+        </div>
+        <div class="upload-footer">
+          <button class="btn-disabled" disabled>Complete Upload</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Assessments -->
+    <div class="card">
+      <div class="assessments">
+        <div class="assessments-inner">
+          <div class="assessment-banner">
+            <h2>Your Assessments</h2>
+            <p>Here are a few questions to help us understand how you are feeling.</p>
+          </div>
+          <div class="empty-state">
+            <div class="empty-inner">
+              <div class="empty-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="rgba(75,85,99,0.3)">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="rgba(75,85,99,0.3)" stroke-width="2"/>
+                </svg>
+              </div>
+              <p>No assessments for now</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message to Care Team -->
+    <div class="card message-card">
+      <div class="message-inner">
+        <h2>Message to Care Team</h2>
+        <div class="textarea-wrap">
+          <textarea placeholder="Please share anything you'd like your care team to know about your needs." maxlength="500" oninput="document.getElementById('msgCount').textContent = this.value.length"></textarea>
+          <div class="char-count"><span id="msgCount">0</span> / 500 Characters</div>
+        </div>
+        <div class="crisis-notice">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFC107" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <p>If you are in crisis or danger, please call 988 (Crisis Lifeline) or 911 immediately.</p>
+        </div>
+        <button class="btn-submit-muted">Submit</button>
+      </div>
+    </div>
+
+    <!-- Meet your Care Team -->
+    <div class="card care-team">
+      <h2>Meet your Care Team</h2>
+      <div class="team-members">
+        <div class="team-member">
+          <img class="member-photo" src="https://placehold.co/96x96/cce9e2/096249" alt="Sofia Skinner" />
+          <div class="member-info">
+            <h3>Sofia Skinner, LMSW</h3>
+            <p>Sofia is a dually licensed master social worker in New Jersey and New York. She has years of experience supporting survivors of acute, chronic, and complex trauma. She integrates a trauma-informed, strengths-based approach, using modalities such as motivational interviewing, CBT, CPT for PTSD, and narrative therapy. Sofia is passionate about meeting people where they are—fostering a supportive environment where clients can discover resilience and find sustainable pathways to healing. Outside of work, she enjoys quality time with her miniature schnauzer mixes Ash and Nester and following the New York Jets.</p>
+          </div>
+        </div>
+        <div class="team-member" style="margin-top: 24px;">
+          <img class="member-photo" src="https://placehold.co/96x96/cce9e2/096249" alt="Richard Callado" />
+          <div class="member-info">
+            <h3>Richard Callado, PMHNP</h3>
+            <p>Richard is a board-certified Psychiatric Nurse Practitioner with over 20 years of experience in mental health. He currently specializes in interventional psychiatry and treatment-resistant conditions at Curated Mental Health in NYC. His experience spans pediatric and adult psychiatry across multiple settings. He has expertise in complex psychiatric conditions, including treatment-resistant depression, schizophrenia, rapid cycling bipolar disorder, and anxiety disorders.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rate your experience -->
+    <div class="card rating-card">
+      <div class="rating-inner">
+        <h2>Rate your experience on our platform</h2>
+        <div class="rating-options">
+          <div class="rating-option">
+            <img src="https://placehold.co/72x72/ffeeee/cc4444" alt="Very Poor" />
+            <span>Very Poor</span>
+          </div>
+          <div class="rating-option">
+            <img src="https://placehold.co/72x72/fff0e0/cc7700" alt="Poor" />
+            <span>Poor</span>
+          </div>
+          <div class="rating-option">
+            <img src="https://placehold.co/72x72/ffffdd/999900" alt="Neutral" />
+            <span>Neutral</span>
+          </div>
+          <div class="rating-option">
+            <img src="https://placehold.co/72x72/eeffee/336633" alt="Good" />
+            <span>Good</span>
+          </div>
+          <div class="rating-option">
+            <img src="https://placehold.co/72x72/e8f9f4/096249" alt="Excellent" />
+            <span>Excellent</span>
+          </div>
+        </div>
+        <div class="feedback-wrap">
+          <label>How can we improve? (Optional)</label>
+          <div class="textarea-wrap">
+            <textarea placeholder="Please provide any additional details or comments." maxlength="500" oninput="document.getElementById('ratingCount').textContent = this.value.length"></textarea>
+            <div class="char-count"><span id="ratingCount">100</span> / 500 Characters</div>
+          </div>
+        </div>
+        <button class="btn-submit-green">Submit</button>
+      </div>
+    </div>
+
+  </main>
+
 </body>
 </html>

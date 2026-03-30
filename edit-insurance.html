@@ -380,6 +380,7 @@
         uploadError.style.display = 'flex';
         return;
       }
+      uploadError.style.display = 'none';
       Array.from(files).slice(0, remaining).forEach(file => {
         if (!file.type.match('image.*') && file.type !== 'application/pdf') return;
         const reader = new FileReader();

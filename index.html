@@ -955,6 +955,7 @@
         uploadError.style.display = 'flex';
         return;
       }
+      uploadError.style.display = 'none';
       Array.from(files).slice(0, remaining).forEach(file => {
         const reader = new FileReader();
         reader.onload = e => addInsuranceImage(e.target.result, file.name);

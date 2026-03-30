@@ -261,10 +261,10 @@
 
     /* ══ SECTIONS ══ */
     .sections {
-      padding: 64px 160px 96px;
+      padding: 80px 160px 120px;
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 48px;
       max-width: 1440px;
       margin: 0 auto;
     }
@@ -294,47 +294,47 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       text-align: center;
-      max-width: 640px;
+      max-width: 600px;
     }
 
-    .section-heading h2 { font-size: 34px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.3px; line-height: 1.2; }
-    .section-heading p  { font-size: 18px; font-weight: 400; color: var(--text-muted); line-height: 1.6; }
+    .section-heading h2 { font-size: 34px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.3px; line-height: 1.25; margin-top: 4px; }
+    .section-heading p  { font-size: 17px; font-weight: 400; color: var(--text-muted); line-height: 1.7; margin-top: -4px; }
 
     /* ══ INSURANCE CARD ══ */
     .insurance {
-      padding: 64px;
+      padding: 72px 64px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 48px;
+      gap: 56px;
     }
 
     .upload-area {
       width: 100%;
       max-width: 880px;
-      padding: 56px 40px;
+      padding: 64px 48px;
       background: #FAFAFA;
       border-radius: 12px;
       border: 2px dashed rgba(173,178,187,0.5);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 24px;
       cursor: pointer;
       transition: border-color 0.18s, background 0.18s;
     }
 
     .upload-area:hover { border-color: var(--green); background: rgba(21,195,147,0.02); }
 
-    .upload-text { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .upload-text { display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .upload-text p    { font-size: 18px; font-weight: 500; color: var(--text-muted); }
     .upload-text span { font-size: 14px; font-weight: 400; color: #9CA3AF; }
 
     /* ══ ASSESSMENTS CARD ══ */
-    .assessments { padding: 56px 64px; display: flex; justify-content: center; }
-    .assessments-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; gap: 40px; }
+    .assessments { padding: 64px; display: flex; justify-content: center; }
+    .assessments-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; gap: 48px; }
 
     .assessment-banner {
       width: 100%;
@@ -353,12 +353,12 @@
     .assessment-banner p  { font-size: 17px; font-weight: 400; color: rgba(255,255,255,0.85); line-height: 1.5; }
 
     .empty-state {
-      padding: 40px 24px;
+      padding: 48px 24px;
       display: flex;
       justify-content: center;
     }
 
-    .empty-inner { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .empty-inner { display: flex; flex-direction: column; align-items: center; gap: 20px; }
 
     .empty-icon {
       width: 80px;
@@ -374,7 +374,7 @@
 
     /* ══ MESSAGE CARD ══ */
     .message-card {
-      padding: 64px;
+      padding: 72px 64px;
       display: flex;
       justify-content: center;
     }
@@ -385,7 +385,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 24px;
+      gap: 32px;
     }
 
     .message-inner h2 { font-size: 34px; font-weight: 700; color: #0a0a0a; text-align: center; letter-spacing: -0.3px; }
@@ -415,25 +415,25 @@
     .crisis-notice {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: 14px;
       width: 100%;
-      padding: 14px 18px;
+      padding: 18px 22px;
       background: #FFFBEB;
       border: 1px solid #FDE68A;
       border-radius: 10px;
     }
 
-    .crisis-notice p { font-size: 15px; font-weight: 400; color: #92400E; line-height: 1.6; }
+    .crisis-notice p { font-size: 15px; font-weight: 400; color: #92400E; line-height: 1.7; }
 
     /* ══ CARE TEAM CARD ══ */
-    .care-team { padding: 56px 64px; }
-    .care-team > h2 { font-size: 30px; font-weight: 700; color: #0a0a0a; margin-bottom: 40px; letter-spacing: -0.3px; }
+    .care-team { padding: 64px; }
+    .care-team > h2 { font-size: 30px; font-weight: 700; color: #0a0a0a; margin-bottom: 48px; letter-spacing: -0.3px; }
 
     .team-member {
       display: flex;
       flex-direction: row;
-      gap: 28px;
-      padding: 32px 0;
+      gap: 32px;
+      padding: 40px 0;
       border-top: 1px solid var(--border);
     }
 
@@ -445,31 +445,32 @@
       border-radius: 14px;
       overflow: hidden;
       flex-shrink: 0;
+      margin-top: 4px;
     }
 
     .member-photo-wrap img { width: 100%; height: 100%; object-fit: cover; }
 
-    .member-info { display: flex; flex-direction: column; gap: 10px; }
+    .member-info { display: flex; flex-direction: column; gap: 12px; }
     .member-info h3 { font-size: 20px; font-weight: 600; color: var(--text-mid); }
-    .member-info p  { font-size: 15px; font-weight: 400; color: var(--text-sub); line-height: 1.75; }
+    .member-info p  { font-size: 15px; font-weight: 400; color: var(--text-sub); line-height: 1.8; }
 
     /* ══ RATING CARD ══ */
-    .rating-card { padding: 64px; display: flex; justify-content: center; }
-    .rating-inner { width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+    .rating-card { padding: 72px 64px; display: flex; justify-content: center; }
+    .rating-inner { width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: center; gap: 48px; }
     .rating-inner > h2 { font-size: 34px; font-weight: 700; color: #0a0a0a; text-align: center; letter-spacing: -0.3px; }
 
-    .rating-options { display: flex; gap: 8px; width: 100%; }
+    .rating-options { display: flex; gap: 12px; width: 100%; }
 
     .rating-option {
       flex: 1;
-      padding: 20px 8px;
+      padding: 24px 12px;
       border-radius: 14px;
       border: 1.5px solid var(--border);
       background: #FAFAFA;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       cursor: pointer;
       transition: border-color 0.18s, background 0.18s, transform 0.15s, box-shadow 0.18s;
     }
@@ -503,11 +504,11 @@
       .hero-left { flex: unset; width: 100%; }
       .hero-img { flex: unset; width: 100%; height: auto; aspect-ratio: 528/360; }
 
-      .insurance { padding: 48px 40px; }
-      .assessments { padding: 40px; }
-      .message-card { padding: 48px 40px; }
+      .insurance { padding: 56px 40px; }
+      .assessments { padding: 48px 40px; }
+      .message-card { padding: 56px 40px; }
       .care-team { padding: 48px 40px; }
-      .rating-card { padding: 48px 40px; }
+      .rating-card { padding: 56px 40px; }
     }
 
     /* ══ RESPONSIVE — MOBILE (≤768px) ══ */
@@ -518,7 +519,7 @@
       .nav-profile { margin-left: 4px; }
 
       .hero { padding: 40px 20px 56px; }
-      .sections { padding: 24px 20px 56px; gap: 20px; }
+      .sections { padding: 32px 20px 64px; gap: 28px; }
 
       .hero-inner { gap: 28px; }
       .hero-left { gap: 28px; }

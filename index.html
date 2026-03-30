@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IGSchedule</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -77,13 +78,12 @@
     .nav-lang svg { flex-shrink: 0; }
 
     .nav-icon {
-      width: 28px;
-      height: 28px;
       cursor: pointer;
       color: var(--text-sub);
-      padding: 2px;
+      padding: 4px;
       border-radius: 8px;
       transition: background 0.2s, color 0.2s;
+      line-height: 1;
     }
 
     .nav-icon:hover { background: rgba(21,195,147,0.1); color: var(--green); }
@@ -479,16 +479,11 @@
     <div class="nav-logo"><span>IGSchedule</span></div>
     <div class="nav-right">
       <div class="nav-lang" title="Language">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-        </svg>
+        <i class="ti ti-world" style="font-size:22px;"></i>
         <span>EN</span>
-        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 1 6 7 11 1"/></svg>
+        <i class="ti ti-chevron-down" style="font-size:16px;"></i>
       </div>
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-        <path d="M12 2a7 7 0 0 1 7 7c0 5.25 2 6.5 2 8H3c0-1.5 2-2.75 2-8a7 7 0 0 1 7-7zm0 20a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2z"/>
-      </svg>
+      <i class="ti ti-bell nav-icon" style="font-size:24px;"></i>
       <div class="nav-profile" title="Profile">
         <img src="https://placehold.co/32x32/15C393/ffffff" alt="Profile" />
         <span>Profile</span>
@@ -524,7 +519,7 @@
           </div>
         </div>
         <div class="upload-area" onclick="document.getElementById('fileInput').click()">
-          <div style="width:67px;height:48px;background:var(--green);border-radius:2px;flex-shrink:0;"></div>
+          <i class="ti ti-cloud-upload" style="font-size:64px;color:var(--green);"></i>
           <div class="upload-text">
             <p>Drag &amp; drop or select a file</p>
             <span>PDF, JPG, or PNG up to 10MB</span>
@@ -547,9 +542,7 @@
           <div class="empty-state">
             <div class="empty-inner">
               <div class="empty-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="rgba(75,85,99,0.3)">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="rgba(75,85,99,0.3)" stroke-width="2"/>
-                </svg>
+                <i class="ti ti-file-description" style="font-size:48px;color:rgba(75,85,99,0.3);"></i>
               </div>
               <p>No assessments for now</p>
             </div>
@@ -567,9 +560,7 @@
           <div class="char-count"><span id="msgCount">0</span> / 500 Characters</div>
         </div>
         <div class="crisis-notice">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFC107" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-          </svg>
+          <i class="ti ti-alert-triangle" style="font-size:24px;color:#FFC107;flex-shrink:0;"></i>
           <p>If you are in crisis or danger, please call 988 (Crisis Lifeline) or 911 immediately.</p>
         </div>
         <button class="btn-submit-muted">Submit</button>

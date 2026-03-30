@@ -134,76 +134,30 @@
     .card-header h1 { font-size: 28px; font-weight: 700; color: #0a0a0a; letter-spacing: -0.3px; }
     .card-header p  { font-size: 15px; font-weight: 400; color: var(--text-muted); line-height: 1.6; }
 
-    /* ══ UPLOADED IMAGES ══ */
+    /* ══ UPLOADED FILES ══ */
     .images-section { display: flex; flex-direction: column; gap: 12px; }
 
-    .images-label {
-      font-size: 13px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 1px; color: #9CA3AF;
+    .ins-doc-item {
+      background: var(--white); border-radius: 12px;
+      outline: 1.5px solid rgba(173,178,187,0.25); outline-offset: -1.5px;
+      padding: 14px 20px; display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
     }
-
-    .images-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+    .ins-doc-left { display: flex; align-items: center; gap: 14px; }
+    .ins-doc-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: var(--green-light); display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
     }
-    @media (min-width: 600px) {
-      .images-grid { grid-template-columns: repeat(3, 1fr); }
+    .ins-doc-name { font-size: 15px; font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 400px; }
+    .ins-doc-size { font-size: 13px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
+    .ins-doc-del {
+      width: 36px; height: 36px; border-radius: 8px; border: none;
+      background: transparent; color: #9CA3AF; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, color 0.15s; flex-shrink: 0;
     }
-    @media (min-width: 900px) {
-      .images-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
-    }
-
-    .image-item {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1.5px solid var(--border);
-      background: #F9FAFB;
-      aspect-ratio: 4/3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .image-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .image-item .delete-btn {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      width: 32px;
-      height: 32px;
-      background: rgba(0,0,0,0.55);
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      opacity: 0;
-      transition: opacity 0.15s, background 0.15s;
-      font-size: 16px;
-    }
-
-    .image-item:hover .delete-btn { opacity: 1; }
-    .image-item .delete-btn:hover { background: #EF4444; }
-
-    .image-item .img-label {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 8px 12px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.5));
-      color: #fff;
-      font-size: 12px;
-      font-weight: 500;
-    }
+    .ins-doc-del:hover { background: #FEF2F2; color: #EF4444; }
 
     /* ══ UPLOAD AREA ══ */
     .upload-section { display: flex; flex-direction: column; gap: 12px; }
@@ -273,7 +227,6 @@
       .upload-area { padding: 40px 20px; }
       .form-actions { flex-direction: column-reverse; }
       .btn-save { width: 100%; justify-content: center; text-align: center; }
-      .image-item .delete-btn { opacity: 1; }
     }
 
     @media (max-width: 400px) {
@@ -322,11 +275,9 @@
           <p>Upload images of your insurance card. Your care team will extract the details from the images.</p>
         </div>
 
-        <!-- Uploaded Images -->
+        <!-- Uploaded Files -->
         <div class="images-section" id="imagesSection" style="display:none;">
-          <div class="images-grid" id="imagesGrid">
-            <!-- populated by JS -->
-          </div>
+          <div id="imagesGrid" style="display:flex;flex-direction:column;gap:12px;"></div>
         </div>
 
         <!-- Upload -->
@@ -368,6 +319,12 @@
     const typeError = document.getElementById('typeError');
     const MAX_FILES = 10;
     const ALLOWED = ['image/jpeg', 'image/png', 'application/pdf'];
+    const uploadedFiles = [];
+
+    function formatSize(bytes) {
+      if (bytes >= 1048576) return (bytes / 1048576).toFixed(1) + ' MB';
+      return (bytes / 1024).toFixed(0) + ' KB';
+    }
 
     // Drag and drop
     const uploadArea = document.querySelector('.upload-area');
@@ -382,53 +339,41 @@
     function handleFiles(files) {
       const fileArr = Array.from(files);
       const invalid = fileArr.some(f => !ALLOWED.includes(f.type));
-      if (invalid) {
-        typeError.style.display = 'flex';
-        return;
-      }
+      if (invalid) { typeError.style.display = 'flex'; return; }
       typeError.style.display = 'none';
-      const current = grid.children.length;
-      const remaining = MAX_FILES - current;
+      const remaining = MAX_FILES - uploadedFiles.length;
       if (remaining <= 0 || fileArr.length > remaining) {
         uploadError.style.display = 'flex';
         return;
       }
       uploadError.style.display = 'none';
-      fileArr.slice(0, remaining).forEach(file => {
-        if (!ALLOWED.includes(file.type)) return;
-        const reader = new FileReader();
-        reader.onload = e => addImage(e.target.result, file.name);
-        reader.readAsDataURL(file);
-      });
+      fileArr.slice(0, remaining).forEach(file => addFile(file));
     }
 
-    function addImage(src, name) {
+    function addFile(file) {
+      uploadedFiles.push({ name: file.name, size: file.size });
       imagesSection.style.display = 'flex';
 
       const item = document.createElement('div');
-      item.className = 'image-item';
+      item.className = 'ins-doc-item';
+      item.innerHTML = `
+        <div class="ins-doc-left">
+          <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
+          <div>
+            <div class="ins-doc-name">${file.name}</div>
+            <div class="ins-doc-size">${formatSize(file.size)}</div>
+          </div>
+        </div>
+        <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:16px;"></i></button>`;
 
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = name;
-
-      const label = document.createElement('div');
-      label.className = 'img-label';
-      label.textContent = name;
-
-      const del = document.createElement('button');
-      del.className = 'delete-btn';
-      del.innerHTML = '<i class="ti ti-trash"></i>';
-      del.title = 'Remove';
-      del.onclick = () => {
+      item.querySelector('.ins-doc-del').onclick = () => {
+        const idx = uploadedFiles.findIndex(f => f.name === file.name && f.size === file.size);
+        if (idx !== -1) uploadedFiles.splice(idx, 1);
         item.remove();
-        if (grid.children.length === 0) imagesSection.style.display = 'none';
-        if (grid.children.length < MAX_FILES) uploadError.style.display = 'none';
+        if (uploadedFiles.length === 0) imagesSection.style.display = 'none';
+        if (uploadedFiles.length < MAX_FILES) uploadError.style.display = 'none';
       };
 
-      item.appendChild(img);
-      item.appendChild(label);
-      item.appendChild(del);
       grid.appendChild(item);
     }
 

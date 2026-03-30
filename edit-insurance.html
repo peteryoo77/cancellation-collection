@@ -145,8 +145,14 @@
 
     .images-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 16px;
+    }
+    @media (min-width: 600px) {
+      .images-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 900px) {
+      .images-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
     }
 
     .image-item {
@@ -266,7 +272,6 @@
       .page { padding: 28px 20px 64px; gap: 20px; }
       .card-body { padding: 28px 20px; gap: 32px; }
       .card-header h1 { font-size: 22px; }
-      .images-grid { grid-template-columns: repeat(2, 1fr); }
       .upload-area { padding: 40px 20px; }
       .form-actions { flex-direction: column-reverse; }
       .btn-save { width: 100%; justify-content: center; text-align: center; }
@@ -276,7 +281,6 @@
     @media (max-width: 400px) {
       .nav-profile span { display: none; }
       .nav-profile { padding: 5px; }
-      .images-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>

@@ -118,6 +118,44 @@
     .nav-profile img { width: 32px; height: 32px; border-radius: 9999px; object-fit: cover; opacity: 0.7; }
     .nav-profile span { font-size: 14px; font-weight: 600; color: #334155; }
 
+    .profile-wrapper { position: relative; }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      min-width: 180px;
+      overflow: hidden;
+      z-index: 200;
+    }
+
+    .dropdown.open { display: block; }
+
+    .dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-sub);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      cursor: pointer;
+    }
+
+    .dropdown a:hover { background: var(--green-light); color: var(--green); }
+
+    .dropdown a.danger { color: #EF4444; }
+    .dropdown a.danger:hover { background: #FEF2F2; color: #DC2626; }
+
+    .dropdown-divider { height: 1px; background: var(--border); margin: 4px 0; }
+
     /* ══ HERO ══ */
     .hero {
       background: var(--green-light);
@@ -551,9 +589,17 @@
           <i class="ti ti-chevron-down" style="font-size:14px;"></i>
         </div>
         <i class="ti ti-bell nav-icon"></i>
-        <div class="nav-profile" title="Profile">
-          <img src="https://placehold.co/32x32/15C393/ffffff" alt="Profile" />
-          <span>Profile</span>
+        <div class="profile-wrapper">
+          <div class="nav-profile" onclick="toggleDropdown()" title="Profile">
+            <img src="https://placehold.co/32x32/15C393/ffffff" alt="Profile" />
+            <span>Profile</span>
+            <i class="ti ti-chevron-down" style="font-size:13px;color:#94A3B8;margin-left:2px;"></i>
+          </div>
+          <div class="dropdown" id="profileDropdown">
+            <a href="#"><i class="ti ti-shield" style="font-size:16px;"></i> Edit Insurance</a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="danger"><i class="ti ti-logout" style="font-size:16px;"></i> Sign Out</a>
+          </div>
         </div>
       </div>
     </div>
@@ -700,6 +746,16 @@
       document.querySelectorAll('.rating-option').forEach(o => o.classList.remove('selected'));
       el.classList.add('selected');
     }
+
+    function toggleDropdown() {
+      document.getElementById('profileDropdown').classList.toggle('open');
+    }
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.profile-wrapper')) {
+        document.getElementById('profileDropdown').classList.remove('open');
+      }
+    });
   </script>
 
 </body>

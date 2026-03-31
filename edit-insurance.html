@@ -147,18 +147,10 @@
     }
     .ins-doc-item.confirming .ins-doc-confirm { display: flex; }
     .ins-doc-item.confirming .ins-doc-del { display: none; }
-    .ins-doc-confirm-text {
-      font-size: var(--text-sm); font-weight: 500; color: #EF4444; white-space: nowrap;
-    }
     .btn-confirm-remove {
-      padding: 6px 14px; background: #EF4444; border: none; border-radius: 8px;
+      padding: 6px 16px; background: #EF4444; border: none; border-radius: 8px;
       color: #fff; font-family: 'Poppins', sans-serif; font-size: var(--text-sm);
       font-weight: 600; cursor: pointer; white-space: nowrap;
-    }
-    .btn-confirm-keep {
-      padding: 6px 14px; background: transparent; border: 1.5px solid #D1D5DB;
-      border-radius: 8px; color: var(--text-sub); font-family: 'Poppins', sans-serif;
-      font-size: var(--text-sm); font-weight: 500; cursor: pointer; white-space: nowrap;
     }
 
     /* Compact add-more button */
@@ -450,9 +442,7 @@
         </div>
         <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
           <div class="ins-doc-confirm">
-            <span class="ins-doc-confirm-text">Remove?</span>
-            <button class="btn-confirm-keep">Keep</button>
-            <button class="btn-confirm-remove">Remove</button>
+            <button class="btn-confirm-remove">Remove?</button>
           </div>
           <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:20px;"></i></button>
         </div>`;
@@ -460,8 +450,10 @@
       item.querySelector('.ins-doc-del').onclick = () => {
         item.classList.add('confirming');
       };
-      item.querySelector('.btn-confirm-keep').onclick = () => {
-        item.classList.remove('confirming');
+      item.onclick = (e) => {
+        if (item.classList.contains('confirming') && !e.target.closest('.btn-confirm-remove') && !e.target.closest('.ins-doc-del')) {
+          item.classList.remove('confirming');
+        }
       };
       item.querySelector('.btn-confirm-remove').onclick = () => {
         const idx = uploadedFiles.findIndex(f => f.name === name && f.size === size);

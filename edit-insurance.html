@@ -326,11 +326,14 @@
             <input id="fileInput" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none"
               onchange="handleFiles(this.files)" />
           </div>
-          <div id="btnAddMore" style="display:none;flex-direction:column;align-items:center;gap:6px;">
+          <div id="btnAddMore" style="display:none;flex-direction:column;align-items:center;">
             <button class="btn-add-more" onclick="document.getElementById('fileInput').click()">
-              <i class="ti ti-plus" style="font-size:18px;"></i> Add more files
+              <i class="ti ti-plus" style="font-size:18px;"></i>
+              <span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;">
+                <span>Add more files</span>
+                <span style="font-size:var(--text-xs);font-weight:400;color:#9CA3AF;">PDF, JPG, or PNG — up to 10MB each</span>
+              </span>
             </button>
-            <span style="font-size:var(--text-xs);color:#9CA3AF;">PDF, JPG, or PNG — up to 10MB each</span>
           </div>
         </div>
 

@@ -462,7 +462,7 @@
     }
     .verify-ins-text { flex: 1; min-width: 0; }
     .verify-ins-text h3 { font-size: var(--text-base); font-weight: 700; color: var(--text-dark); }
-    .verify-ins-text p { font-size: var(--text-sm); color: var(--text-muted); margin-top: 2px; }
+    .verify-ins-text p { font-size: var(--text-sm); color: var(--text-muted); margin-top: 2px; max-width: 72ch; }
     .verify-ins-actions { display: flex; gap: 10px; flex-shrink: 0; }
     .btn-verify-confirm {
       padding: 10px 20px; background: var(--green); border: none; border-radius: 10px;
@@ -964,7 +964,7 @@
         </div>
         <div class="verify-ins-text">
           <h3>Is your insurance still current?</h3>
-          <p>Last updated <strong>Mar 15, 2026</strong></p>
+          <p>Last updated <strong>Mar 15, 2026</strong> — please confirm it's still accurate so your care team has the right information.</p>
         </div>
         <div class="verify-ins-actions">
           <button class="btn-verify-confirm" onclick="confirmInsurance()">Still current</button>

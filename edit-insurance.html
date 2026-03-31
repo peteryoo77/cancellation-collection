@@ -138,6 +138,40 @@
     }
     .ins-doc-del:hover { background: #FEF2F2; color: #EF4444; }
 
+    /* Delete confirmation state */
+    .ins-doc-item.confirming {
+      background: #FEF2F2; border-color: rgba(239,68,68,0.3);
+    }
+    .ins-doc-confirm {
+      display: none; align-items: center; gap: 10px; flex-shrink: 0;
+    }
+    .ins-doc-item.confirming .ins-doc-confirm { display: flex; }
+    .ins-doc-item.confirming .ins-doc-del { display: none; }
+    .ins-doc-confirm-text {
+      font-size: var(--text-sm); font-weight: 500; color: #EF4444; white-space: nowrap;
+    }
+    .btn-confirm-remove {
+      padding: 6px 14px; background: #EF4444; border: none; border-radius: 8px;
+      color: #fff; font-family: 'Poppins', sans-serif; font-size: var(--text-sm);
+      font-weight: 600; cursor: pointer; white-space: nowrap;
+    }
+    .btn-confirm-keep {
+      padding: 6px 14px; background: transparent; border: 1.5px solid #D1D5DB;
+      border-radius: 8px; color: var(--text-sub); font-family: 'Poppins', sans-serif;
+      font-size: var(--text-sm); font-weight: 500; cursor: pointer; white-space: nowrap;
+    }
+
+    /* Compact add-more button */
+    .btn-add-more {
+      display: none; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 14px; background: var(--white);
+      border: 1.5px dashed rgba(173,178,187,0.6); border-radius: 12px;
+      color: var(--green); font-family: 'Poppins', sans-serif;
+      font-size: var(--text-sm); font-weight: 600; cursor: pointer;
+      transition: border-color 0.18s, background 0.18s;
+    }
+    .btn-add-more:hover { border-color: var(--green); background: rgba(21,195,147,0.02); }
+
 
     /* ══ UPLOAD AREA ══ */
     .upload-section { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 880px; align-self: center; }
@@ -285,7 +319,7 @@
             <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
             <span style="color:#A83836;font-size:16px;font-weight:500;font-family:'Poppins',sans-serif;">We were unable to accept this file. Please try again.</span>
           </div>
-          <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+          <div id="uploadAreaFull" class="upload-area" onclick="document.getElementById('fileInput').click()">
             <i class="ti ti-cloud-upload" style="font-size:52px;color:var(--green);"></i>
             <div class="upload-text">
               <p>Drag &amp; drop or select files</p>
@@ -295,6 +329,9 @@
             <input id="fileInput" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none"
               onchange="handleFiles(this.files)" />
           </div>
+          <button id="btnAddMore" class="btn-add-more" onclick="document.getElementById('fileInput').click()">
+            <i class="ti ti-plus" style="font-size:18px;"></i> Add more files
+          </button>
         </div>
 
         <!-- Actions -->
@@ -333,6 +370,12 @@
       const changed = uploadedFiles.length !== initialCount;
       saveBtn.disabled = !changed;
       saveBtn.classList.toggle('active', changed);
+    }
+
+    function updateUploadArea() {
+      const hasFiles = uploadedFiles.length > 0;
+      document.getElementById('uploadAreaFull').style.display = hasFiles ? 'none' : 'flex';
+      document.getElementById('btnAddMore').style.display = hasFiles ? 'flex' : 'none';
     }
     const ALLOWED = ['image/jpeg', 'image/png', 'application/pdf'];
     const uploadedFiles = [];
@@ -405,24 +448,35 @@
             <div class="ins-doc-meta ins-doc-meta--mobile">${[size > 0 ? formatSize(size) : '', uploadedDate || ''].filter(Boolean).join(' · ')}</div>
           </div>
         </div>
-        <div style="display:flex;align-items:center;gap:4px;">
-          ${downloadBtn}
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+          <div class="ins-doc-confirm">
+            <span class="ins-doc-confirm-text">Remove?</span>
+            <button class="btn-confirm-keep">Keep</button>
+            <button class="btn-confirm-remove">Remove</button>
+          </div>
           <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:20px;"></i></button>
         </div>`;
 
       item.querySelector('.ins-doc-del').onclick = () => {
+        item.classList.add('confirming');
+      };
+      item.querySelector('.btn-confirm-keep').onclick = () => {
+        item.classList.remove('confirming');
+      };
+      item.querySelector('.btn-confirm-remove').onclick = () => {
         const idx = uploadedFiles.findIndex(f => f.name === name && f.size === size);
         if (idx !== -1) uploadedFiles.splice(idx, 1);
         item.remove();
         if (uploadedFiles.length === 0) imagesSection.style.display = 'none';
         if (uploadedFiles.length < MAX_FILES) uploadError.style.display = 'none';
         updateSaveBtn();
+        updateUploadArea();
       };
 
       grid.appendChild(item);
     }
 
-    function addFile(file) { renderFileRow(file.name, file.size, file); updateSaveBtn(); }
+    function addFile(file) { renderFileRow(file.name, file.size, file); updateSaveBtn(); updateUploadArea(); }
 
     const preloadPromises = preloaded.map(f => {
       if (f.src) {
@@ -441,6 +495,7 @@
 
     Promise.allSettled(preloadPromises).then(() => {
       initialCount = uploadedFiles.length;
+      updateUploadArea();
     });
 
     function handleSave() {

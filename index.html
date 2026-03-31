@@ -461,47 +461,6 @@
     .verify-ins-content { display: flex; flex-direction: column; gap: 16px; flex: 1; min-width: 0; }
     .verify-ins-text h3 { font-size: var(--text-base); font-weight: 700; color: var(--text-dark); }
     .verify-ins-text p { font-size: var(--text-sm); color: var(--text-muted); margin-top: 4px; max-width: 60ch; }
-    .verify-ins-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-    }
-    .verify-grid-item {
-      position: relative; border-radius: 10px; overflow: hidden;
-      border: 1.5px solid var(--border); cursor: pointer; aspect-ratio: 3/2;
-      background: var(--bg);
-    }
-    .verify-grid-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .verify-grid-item.pdf-item {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 6px; text-decoration: none;
-    }
-    .verify-grid-item.pdf-item span { font-size: var(--text-xs); color: var(--text-muted); text-align: center; padding: 0 8px; word-break: break-all; }
-    .verify-grid-overflow {
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(0,0,0,0.55); position: absolute; inset: 0;
-      border-radius: 8px; color: #fff; font-size: var(--text-lg); font-weight: 700;
-      cursor: pointer;
-    }
-    /* Lightbox */
-    .lightbox {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85);
-      z-index: 1000; align-items: center; justify-content: center; padding: 20px;
-    }
-    .lightbox.open { display: flex; }
-    .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
-    .lightbox-inner img { max-width: 90vw; max-height: 85vh; border-radius: 10px; display: block; object-fit: contain; }
-    .lightbox-close {
-      position: absolute; top: -16px; right: -16px; width: 36px; height: 36px;
-      background: #fff; border: none; border-radius: 9999px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; font-size: 18px; color: #333;
-    }
-    .lightbox-nav {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      width: 40px; height: 40px; background: rgba(255,255,255,0.15);
-      border: none; border-radius: 9999px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; color: #fff; font-size: 20px;
-    }
-    .lightbox-nav.prev { left: -52px; }
-    .lightbox-nav.next { right: -52px; }
     .verify-ins-actions { display: flex; gap: 10px; }
     .btn-verify-confirm {
       padding: 10px 20px; background: var(--green); border: none; border-radius: 10px;
@@ -778,8 +737,6 @@
       .upload-area { padding: 40px 20px; gap: 16px; }
       .verify-ins { padding: 24px 20px; gap: 16px; }
       .verify-ins-confirmed { padding: 24px 20px; }
-      .lightbox-nav.prev { left: -44px; }
-      .lightbox-nav.next { right: -44px; }
       .verify-ins-actions { width: 100%; }
       .btn-verify-confirm { flex: 1; text-align: center; }
       .btn-verify-update { flex: 1; justify-content: center; }
@@ -1005,12 +962,10 @@
         </div>
         <div class="verify-ins-content">
           <div class="verify-ins-text">
-            <h3>Is your insurance still current?</h3>
-            <p>Last updated <strong>Mar 15, 2026</strong>. Please confirm your insurance is still current.</p>
+            <h3>Has your insurance information changed?</h3>
           </div>
-          <div class="verify-ins-grid" id="verifyInsGrid"></div>
           <div class="verify-ins-actions">
-            <button class="btn-verify-confirm" onclick="confirmInsurance()">Still current</button>
+            <button class="btn-verify-confirm" onclick="confirmInsurance()">No changes</button>
             <a href="edit-insurance.html" class="btn-verify-update">Update</a>
           </div>
         </div>
@@ -1119,17 +1074,8 @@
 
   </main>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-    <div class="lightbox-inner">
-      <button class="lightbox-close" onclick="closeLightboxDirect()"><i class="ti ti-x"></i></button>
-      <button class="lightbox-nav prev" onclick="lightboxNav(-1)"><i class="ti ti-chevron-left"></i></button>
-      <img id="lightboxImg" src="" alt="" />
-      <button class="lightbox-nav next" onclick="lightboxNav(1)"><i class="ti ti-chevron-right"></i></button>
-    </div>
-  </div>
 
-  <script>
+<script>
     // ── Insurance upload ──
     const insFileList = document.getElementById('insuranceFileList');
     const insUpload = document.getElementById('insuranceUploadArea');
@@ -1251,54 +1197,6 @@
     function selectRating(el) {
       document.querySelectorAll('.rating-option').forEach(o => o.classList.remove('selected'));
       el.classList.add('selected');
-    }
-
-    const verifyFiles = [
-      { name: 'Insurance_Card_Front.jpg', src: 'Insurance_Card_Front.jpg' },
-      { name: 'Insurance_Card_Back.jpg',  src: 'Insurance_Card_Back.jpg' }
-    ];
-    const MAX_VISIBLE = 4;
-    let lightboxIndex = 0;
-    const lightboxSrcs = verifyFiles.filter(f => !f.name.toLowerCase().endsWith('.pdf')).map(f => f.src);
-
-    (function renderVerifyGrid() {
-      const container = document.getElementById('verifyInsGrid');
-      verifyFiles.forEach((f, i) => {
-        const isPDF = f.name.toLowerCase().endsWith('.pdf');
-        const isOverflow = i === MAX_VISIBLE - 1 && verifyFiles.length > MAX_VISIBLE;
-        const cell = document.createElement('div');
-        cell.className = 'verify-grid-item' + (isPDF ? ' pdf-item' : '');
-
-        if (isOverflow) {
-          cell.innerHTML = `<img src="${f.src}" alt="${f.name}" /><div class="verify-grid-overflow">+${verifyFiles.length - MAX_VISIBLE + 1}</div>`;
-          cell.onclick = () => openLightbox(i);
-        } else if (i >= MAX_VISIBLE) {
-          return;
-        } else if (isPDF) {
-          cell.innerHTML = `<i class="ti ti-file-type-pdf" style="font-size:36px;color:#EF4444;"></i><span>${f.name}</span>`;
-          cell.onclick = () => window.open(f.src, '_blank');
-        } else {
-          const img = document.createElement('img');
-          img.src = f.src; img.alt = f.name;
-          cell.appendChild(img);
-          cell.onclick = () => openLightbox(i);
-        }
-        container.appendChild(cell);
-      });
-    })();
-
-    function openLightbox(index) {
-      lightboxIndex = index;
-      document.getElementById('lightboxImg').src = verifyFiles[lightboxIndex].src;
-      document.getElementById('lightbox').classList.add('open');
-    }
-    function closeLightbox(e) {
-      if (e.target === document.getElementById('lightbox')) document.getElementById('lightbox').classList.remove('open');
-    }
-    function closeLightboxDirect() { document.getElementById('lightbox').classList.remove('open'); }
-    function lightboxNav(dir) {
-      lightboxIndex = (lightboxIndex + dir + verifyFiles.length) % verifyFiles.length;
-      document.getElementById('lightboxImg').src = verifyFiles[lightboxIndex].src;
     }
 
     function confirmInsurance() {

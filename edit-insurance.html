@@ -223,8 +223,13 @@
       .ins-doc-name { font-size: var(--text-sm); }
       .ins-doc-meta--full { display: none; }
       .ins-doc-meta--mobile { display: block; font-size: var(--text-xs); }
+      .ins-doc-item { position: relative; }
       .ins-doc-item.confirming .ins-doc-left { visibility: hidden; }
-      .ins-doc-item.confirming .ins-doc-confirm { gap: 8px; }
+      .ins-doc-item.confirming .ins-doc-del { display: none; }
+      .ins-doc-item.confirming .ins-doc-confirm {
+        display: flex; gap: 8px;
+        position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      }
     }
 
     @media (max-width: 400px) {

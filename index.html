@@ -419,28 +419,30 @@
     }
 
     .ins-doc-item {
-      background: var(--white); border-radius: 12px;
-      outline: 1.5px solid rgba(173,178,187,0.25); outline-offset: -1.5px;
-      padding: 14px 20px; display: flex; align-items: center;
+      background: var(--white); border-radius: 14px;
+      border: 1.5px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 18px 20px; display: flex; align-items: center;
       justify-content: space-between; gap: 16px;
     }
 
     .ins-doc-left { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
 
     .ins-doc-icon {
-      width: 44px; height: 44px; border-radius: 10px;
+      width: 48px; height: 48px; border-radius: 10px;
       background: var(--green-light); display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
 
     .ins-doc-text { min-width: 0; flex: 1; }
-    .ins-doc-name { font-size: var(--text-sm); font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .ins-doc-size { font-size: var(--text-sm); font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
+    .ins-doc-name { font-size: var(--text-sm); font-weight: 700; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ins-doc-status { font-size: 13px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 3px; }
 
     .ins-doc-del {
-      width: 44px; height: 44px; border-radius: 8px; border: none;
+      width: 36px; height: 36px; border-radius: 8px; border: none;
       background: transparent; color: #9CA3AF; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 400;
       transition: background 0.15s, color 0.15s; flex-shrink: 0;
     }
     .ins-doc-del:hover { background: #FEF2F2; color: #EF4444; }
@@ -1059,7 +1061,7 @@
             <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
             <div class="ins-doc-text">
               <div class="ins-doc-name">${f.name}</div>
-              <div class="ins-doc-size">${formatSize(f.size)}</div>
+              <div class="ins-doc-status">Uploaded</div>
             </div>
           </div>`;
         docItems.appendChild(row);
@@ -1096,12 +1098,12 @@
       item.innerHTML = `
         <div class="ins-doc-left">
           <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
-          <div>
+          <div class="ins-doc-text">
             <div class="ins-doc-name">${file.name}</div>
-            <div class="ins-doc-size">${formatSize(file.size)}</div>
+            <div class="ins-doc-status">Ready to upload</div>
           </div>
         </div>
-        <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:20px;"></i></button>`;
+        <button class="ins-doc-del" title="Remove">×</button>`;
 
       item.querySelector('.ins-doc-del').onclick = () => {
         const idx = uploadedFiles.findIndex(f => f.name === file.name && f.size === file.size);

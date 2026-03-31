@@ -947,7 +947,7 @@
     <div class="card verify-ins-card">
       <div class="verify-ins-left">
         <div class="verify-ins-body">
-          <strong id="verifyInsQuestion">Is your insurance still Blue Cross Blue Shield and Aetna?</strong>
+          <strong id="verifyInsQuestion">Is your insurance still <span style="color:var(--green);">Blue Cross Blue Shield</span> and <span style="color:var(--green);">Aetna</span>?</strong>
           <span style="font-size:var(--text-sm);color:var(--text-muted);margin-top:4px;">Last updated Mar 15, 2026</span>
         </div>
       </div>
@@ -1188,10 +1188,11 @@
       if (!providers.length) return;
 
       // Update question text
+      const color = p => `<span style="color:var(--green);">${p}</span>`;
       const label = providers.length === 2
-        ? `Is your insurance still ${providers[0]} and ${providers[1]}?`
-        : `Is your insurance still ${providers[0]}?`;
-      document.getElementById('verifyInsQuestion').textContent = label;
+        ? `Is your insurance still ${color(providers[0])} and ${color(providers[1])}?`
+        : `Is your insurance still ${color(providers[0])}?`;
+      document.getElementById('verifyInsQuestion').innerHTML = label;
 
     })();
 

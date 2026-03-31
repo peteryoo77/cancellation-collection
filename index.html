@@ -451,38 +451,7 @@
 
     .upload-area:hover { border-color: var(--green); background: rgba(21,195,147,0.02); }
 
-    /* ══ VERIFY INSURANCE ══ */
-    .verify-ins { padding: 28px 40px; display: flex; align-items: flex-start; gap: 24px; }
-    .verify-ins-icon {
-      width: 52px; height: 52px; border-radius: 12px;
-      background: var(--green-light); display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-top: 2px;
-    }
-    .verify-ins-content { display: flex; flex-direction: column; gap: 16px; flex: 1; min-width: 0; }
-    .verify-ins-text h3 { font-size: var(--text-base); font-weight: 700; color: var(--text-dark); }
-    .verify-ins-text p { font-size: var(--text-sm); color: var(--text-muted); margin-top: 4px; max-width: 60ch; }
-    .verify-ins-actions { display: flex; gap: 10px; }
-    .btn-verify-confirm {
-      padding: 10px 20px; background: var(--green); border: none; border-radius: 10px;
-      color: #fff; font-family: 'Poppins', sans-serif; font-size: var(--text-sm);
-      font-weight: 600; cursor: pointer; white-space: nowrap;
-      transition: background 0.18s, transform 0.15s;
-    }
-    .btn-verify-confirm:hover { background: var(--green-hover); transform: translateY(-1px); }
-    .btn-verify-update {
-      padding: 10px 20px; background: transparent; border: 1.5px solid var(--border);
-      border-radius: 10px; color: var(--text-sub); font-family: 'Poppins', sans-serif;
-      font-size: var(--text-sm); font-weight: 500; cursor: pointer; white-space: nowrap;
-      text-decoration: none; display: flex; align-items: center;
-      transition: border-color 0.18s, color 0.18s;
-    }
-    .btn-verify-update:hover { border-color: var(--green); color: var(--green); }
-    .verify-ins-confirmed {
-      padding: 28px 40px; display: none; align-items: center; justify-content: center; gap: 12px;
-    }
-    .verify-ins-confirmed p { font-size: var(--text-base); font-weight: 600; color: var(--green); }
-
-    .upload-text { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.upload-text { display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .upload-text p    { font-size: 18px; font-weight: 500; color: var(--text-muted); }
     .upload-text span { font-size: var(--text-sm); font-weight: 400; color: #9CA3AF; }
 
@@ -735,11 +704,6 @@
       .section-badge { font-size: var(--text-sm); }
 
       .upload-area { padding: 40px 20px; gap: 16px; }
-      .verify-ins { padding: 24px 20px; gap: 16px; }
-      .verify-ins-confirmed { padding: 24px 20px; }
-      .verify-ins-actions { width: 100%; }
-      .btn-verify-confirm { flex: 1; text-align: center; }
-      .btn-verify-update { flex: 1; justify-content: center; }
       .ins-image-item .ins-delete { opacity: 1; }
       .upload-text p { font-size: 16px; }
       .btn-disabled { width: 100%; padding: 15px; font-size: 16px; }
@@ -951,28 +915,6 @@
           </div>
         </div>
 
-      </div>
-    </div>
-
-    <!-- Verify Insurance -->
-    <div class="card" id="verifyInsuranceCard">
-      <div class="verify-ins" id="verifyInsBody">
-        <div class="verify-ins-icon">
-          <i class="ti ti-shield-check" style="font-size:30px;color:var(--green);"></i>
-        </div>
-        <div class="verify-ins-content">
-          <div class="verify-ins-text">
-            <h3>Has your insurance information changed?</h3>
-          </div>
-          <div class="verify-ins-actions">
-            <button class="btn-verify-confirm" onclick="confirmInsurance()">No changes</button>
-            <a href="edit-insurance.html" class="btn-verify-update">Update</a>
-          </div>
-        </div>
-      </div>
-      <div class="verify-ins-confirmed" id="verifyInsConfirmed">
-        <i class="ti ti-circle-check" style="font-size:32px;color:var(--green);"></i>
-        <p>Insurance confirmed — thank you!</p>
       </div>
     </div>
 
@@ -1198,12 +1140,6 @@
       document.querySelectorAll('.rating-option').forEach(o => o.classList.remove('selected'));
       el.classList.add('selected');
     }
-
-    function confirmInsurance() {
-      document.getElementById('verifyInsBody').style.display = 'none';
-      document.getElementById('verifyInsConfirmed').style.display = 'flex';
-    }
-
 
     function toggleDropdown() {
       document.getElementById('notifDropdown').classList.remove('open');

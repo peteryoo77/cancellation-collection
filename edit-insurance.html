@@ -396,18 +396,15 @@
       });
     }
 
-    function renderFileRow(name, size, fileObj = null, uploadedDate = null) {
+    function renderFileRow(name, size, fileObj = null, uploadedDate = null, preloadSrc = null) {
       uploadedFiles.push({ name, size });
       imagesSection.style.display = 'flex';
 
-      const downloadBtn = '';
-
-      const dateLabel = uploadedDate
-        ? `<div class="ins-doc-date">Uploaded ${uploadedDate}</div>`
-        : '';
+      const fileUrl = preloadSrc || (fileObj ? URL.createObjectURL(fileObj) : null);
 
       const item = document.createElement('div');
       item.className = 'ins-doc-item';
+      if (fileUrl) { item.style.cursor = 'pointer'; item.title = 'Tap to view'; }
       item.innerHTML = `
         <div class="ins-doc-left">
           <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:32px;color:var(--green);"></i></div>
@@ -424,6 +421,12 @@
           </div>
           <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:24px;"></i></button>
         </div>`;
+
+      if (fileUrl) {
+        item.addEventListener('click', e => {
+          if (!e.target.closest('.ins-doc-del, .ins-doc-confirm')) window.open(fileUrl, '_blank');
+        });
+      }
 
       item.querySelector('.ins-doc-del').onclick = () => {
         item.classList.add('confirming');
@@ -453,7 +456,7 @@
             const file = new File([blob], f.name, { type: blob.type });
             renderFileRow(file.name, file.size, file, f.uploaded);
           })
-          .catch(() => renderFileRow(f.name, 0, null, f.uploaded));
+          .catch(() => renderFileRow(f.name, 0, null, f.uploaded, f.src));
       } else {
         renderFileRow(f.name, 0, null, f.uploaded);
         return Promise.resolve();

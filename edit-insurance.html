@@ -120,8 +120,7 @@
     }
     .ins-doc-left { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
     .ins-doc-icon {
-      width: 44px; height: 44px; border-radius: 10px;
-      background: var(--green-light); display: flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
     .ins-doc-text { min-width: 0; flex: 1; }
@@ -234,8 +233,7 @@
       .btn-save { width: 100%; justify-content: center; text-align: center; }
       #imagesGrid { gap: 8px !important; }
       .ins-doc-item { padding: 12px 14px; }
-      .ins-doc-icon { width: 36px; height: 36px; border-radius: 8px; }
-      .ins-doc-icon i { font-size: 18px !important; }
+      .ins-doc-icon { width: 28px; height: 28px; }
       .ins-doc-left { gap: 10px; }
       .ins-doc-name { font-size: var(--text-sm); }
       .ins-doc-meta--full { display: none; }
@@ -421,7 +419,7 @@
       item.className = 'ins-doc-item';
       item.innerHTML = `
         <div class="ins-doc-left">
-          <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
+          <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:28px;color:var(--green);"></i></div>
           <div class="ins-doc-text">
             <div class="ins-doc-name" title="${name}">${truncateName(name)}</div>
             <div class="ins-doc-meta ins-doc-meta--full">${size > 0 ? formatSize(size) : ''}${uploadedDate ? ' · ' + uploadedDate : ''}</div>
@@ -433,7 +431,7 @@
             <button class="btn-confirm-keep">Keep</button>
             <button class="btn-confirm-remove">Remove?</button>
           </div>
-          <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:20px;"></i></button>
+          <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:24px;"></i></button>
         </div>`;
 
       item.querySelector('.ins-doc-del').onclick = () => {

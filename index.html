@@ -420,7 +420,7 @@
 
     .ins-doc-item {
       background: var(--white); border-radius: 12px;
-      outline: 1.5px solid rgba(173,178,187,0.25); outline-offset: -1.5px;
+      border: 1.5px solid var(--border);
       padding: 14px 20px; display: flex; align-items: center;
       justify-content: space-between; gap: 16px;
     }
@@ -436,6 +436,8 @@
     .ins-doc-text { min-width: 0; flex: 1; }
     .ins-doc-name { font-size: var(--text-sm); font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .ins-doc-size { font-size: var(--text-sm); font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
+    .ins-doc-meta { font-size: var(--text-sm); font-weight: 400; color: #9CA3AF; margin-top: 2px; }
+    .ins-doc-meta--mobile { display: none; }
 
     .ins-doc-del {
       width: 44px; height: 44px; border-radius: 8px; border: none;
@@ -709,7 +711,9 @@
       .ins-doc-left { gap: 10px; }
       .ins-doc-del { width: 44px; height: 44px; flex-shrink: 0; }
       .ins-doc-name { font-size: var(--text-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      .ins-doc-size { font-size: var(--text-xs); }
+      .ins-doc-size { display: none; }
+      .ins-doc-meta--full { display: none; }
+      .ins-doc-meta--mobile { display: block; font-size: var(--text-xs); }
       .section-heading h2 { font-size: 24px; }
       .section-heading p  { font-size: var(--text-base); }
       .section-badge { font-size: var(--text-sm); }
@@ -1058,7 +1062,9 @@
       const docLabel = document.getElementById('insDocLabel');
       docItems.innerHTML = '';
       docLabel.textContent = 'Received Documents (' + uploadedFiles.length + ')';
+      const date = formatUploadDate();
       uploadedFiles.forEach(f => {
+        const sizeStr = formatSize(f.size);
         const row = document.createElement('div');
         row.className = 'ins-doc-item';
         row.innerHTML = `
@@ -1066,7 +1072,8 @@
             <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
             <div class="ins-doc-text">
               <div class="ins-doc-name">${truncateName(f.name)}</div>
-              <div class="ins-doc-size">${formatSize(f.size)}</div>
+              <div class="ins-doc-meta ins-doc-meta--full">${sizeStr} · ${date}</div>
+              <div class="ins-doc-meta ins-doc-meta--mobile">${sizeStr} · ${date}</div>
             </div>
           </div>`;
         docItems.appendChild(row);
@@ -1105,11 +1112,18 @@
       });
     }
 
+    function formatUploadDate() {
+      const d = new Date();
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
     function addInsuranceFile(file) {
       const fileObj = { name: file.name, size: file.size };
       uploadedFiles.push(fileObj);
       insFileList.style.display = 'flex';
       genericError.style.display = 'none';
+      const date = formatUploadDate();
+      const sizeStr = formatSize(file.size);
 
       const item = document.createElement('div');
       item.className = 'ins-doc-item';
@@ -1118,7 +1132,8 @@
           <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
           <div class="ins-doc-text">
             <div class="ins-doc-name">${truncateName(file.name)}</div>
-            <div class="ins-doc-size">${formatSize(file.size)}</div>
+            <div class="ins-doc-meta ins-doc-meta--full">${sizeStr} · ${date}</div>
+            <div class="ins-doc-meta ins-doc-meta--mobile">${sizeStr} · ${date}</div>
           </div>
         </div>
         <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:20px;"></i></button>`;

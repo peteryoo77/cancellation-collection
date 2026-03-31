@@ -955,8 +955,7 @@
         <i class="ti ti-shield-check" style="font-size:20px;color:var(--green);"></i>
       </div>
       <div class="verify-ins-label">
-        <strong>Still with Blue Cross Blue Shield?</strong>
-        <span>Member ID: XYZ123456789</span>
+        <strong id="verifyInsQuestion">Still with Blue Cross Blue Shield?</strong>
       </div>
       <div class="verify-ins-actions">
         <a href="edit-insurance.html" class="btn-verify-update">Update</a>
@@ -1186,6 +1185,18 @@
       document.querySelectorAll('.rating-option').forEach(o => o.classList.remove('selected'));
       el.classList.add('selected');
     }
+
+    // ── Verify insurance widget ──
+    (function initVerifyWidget() {
+      const stored = localStorage.getItem('igschedule_providers');
+      if (!stored) return;
+      const providers = JSON.parse(stored).filter(Boolean);
+      if (!providers.length) return;
+      const label = providers.length === 2
+        ? `Still with ${providers[0]} and ${providers[1]}?`
+        : `Still with ${providers[0]}?`;
+      document.getElementById('verifyInsQuestion').textContent = label;
+    })();
 
     function toggleDropdown() {
       document.getElementById('notifDropdown').classList.remove('open');

@@ -152,6 +152,11 @@
       color: #fff; font-family: 'Poppins', sans-serif; font-size: var(--text-sm);
       font-weight: 600; cursor: pointer; white-space: nowrap;
     }
+    .btn-confirm-keep {
+      padding: 6px 14px; background: transparent; border: 1.5px solid #D1D5DB;
+      border-radius: 8px; color: var(--text-sub); font-family: 'Poppins', sans-serif;
+      font-size: var(--text-sm); font-weight: 500; cursor: pointer; white-space: nowrap;
+    }
 
     /* Compact add-more button */
     .btn-add-more {
@@ -442,6 +447,7 @@
         </div>
         <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
           <div class="ins-doc-confirm">
+            <button class="btn-confirm-keep">Keep</button>
             <button class="btn-confirm-remove">Remove?</button>
           </div>
           <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:20px;"></i></button>
@@ -450,10 +456,8 @@
       item.querySelector('.ins-doc-del').onclick = () => {
         item.classList.add('confirming');
       };
-      item.onclick = (e) => {
-        if (item.classList.contains('confirming') && !e.target.closest('.btn-confirm-remove') && !e.target.closest('.ins-doc-del')) {
-          item.classList.remove('confirming');
-        }
+      item.querySelector('.btn-confirm-keep').onclick = () => {
+        item.classList.remove('confirming');
       };
       item.querySelector('.btn-confirm-remove').onclick = () => {
         const idx = uploadedFiles.findIndex(f => f.name === name && f.size === size);

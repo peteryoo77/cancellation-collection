@@ -726,9 +726,6 @@
       .section-badge { font-size: var(--text-sm); }
 
       .upload-area { padding: 40px 20px; gap: 16px; }
-      .verify-ins-card { flex-wrap: wrap; padding: 22px 20px; gap: 14px; align-items: flex-start; }
-      .verify-ins-left { flex-basis: 100%; }
-      .verify-ins-actions { justify-content: flex-end; }
       .ins-image-item .ins-delete { opacity: 1; }
       .upload-text p { font-size: 16px; }
       .btn-disabled { width: 100%; padding: 15px; font-size: 16px; }
@@ -764,7 +761,13 @@
     }
 
     /* ══ RESPONSIVE — SMALL MOBILE (≤400px) ══ */
-@media (max-width: 400px) {
+@media (max-width: 600px) {
+      .verify-ins-card { flex-wrap: wrap; padding: 22px 20px; gap: 14px; align-items: flex-start; }
+      .verify-ins-left { flex-basis: 100%; }
+      .verify-ins-actions { width: 100%; justify-content: flex-end; }
+    }
+
+    @media (max-width: 400px) {
       .hero-text h1 { font-size: 24px; }
       .nav-profile span { display: none; }
       .nav-profile { padding: 5px; }

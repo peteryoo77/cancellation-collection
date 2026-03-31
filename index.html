@@ -466,6 +466,15 @@
       flex: 1; min-width: 0; border-radius: 10px; border: 1.5px solid var(--border);
       object-fit: cover; max-height: 180px; width: 100%;
     }
+    .verify-pdf-card {
+      flex: 1; min-width: 0; border-radius: 10px; border: 1.5px solid var(--border);
+      background: var(--bg); display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 8px;
+      padding: 24px 16px; text-decoration: none; transition: border-color 0.18s, background 0.18s;
+    }
+    .verify-pdf-card:hover { border-color: var(--green); background: var(--green-light); }
+    .verify-pdf-card span { font-size: var(--text-xs); font-weight: 500; color: var(--text-muted); text-align: center; word-break: break-all; }
+    .verify-pdf-card small { font-size: var(--text-xs); color: var(--green); font-weight: 600; }
     .verify-ins-actions { display: flex; gap: 10px; }
     .btn-verify-confirm {
       padding: 10px 20px; background: var(--green); border: none; border-radius: 10px;
@@ -744,6 +753,7 @@
       .verify-ins-confirmed { padding: 24px 20px; }
       .verify-ins-images { flex-direction: column; }
       .verify-ins-images img { max-height: 160px; }
+      .verify-pdf-card { min-height: 100px; }
       .verify-ins-actions { width: 100%; }
       .btn-verify-confirm { flex: 1; text-align: center; }
       .btn-verify-update { flex: 1; justify-content: center; }
@@ -972,10 +982,7 @@
             <h3>Is your insurance still current?</h3>
             <p>Last updated <strong>Mar 15, 2026</strong>. Please confirm your insurance is still current.</p>
           </div>
-          <div class="verify-ins-images">
-            <img src="Insurance_Card_Front.jpg" alt="Insurance Card Front" />
-            <img src="Insurance_Card_Back.jpg" alt="Insurance Card Back" />
-          </div>
+          <div class="verify-ins-images" id="verifyInsImages"></div>
           <div class="verify-ins-actions">
             <button class="btn-verify-confirm" onclick="confirmInsurance()">Still current</button>
             <a href="edit-insurance.html" class="btn-verify-update">Update</a>
@@ -1209,6 +1216,34 @@
       document.querySelectorAll('.rating-option').forEach(o => o.classList.remove('selected'));
       el.classList.add('selected');
     }
+
+    const verifyFiles = [
+      { name: 'Insurance_Card_Front.jpg', src: 'Insurance_Card_Front.jpg' },
+      { name: 'Insurance_Card_Back.jpg',  src: 'Insurance_Card_Back.jpg' }
+    ];
+
+    (function renderVerifyImages() {
+      const container = document.getElementById('verifyInsImages');
+      verifyFiles.forEach(f => {
+        const isPDF = f.name.toLowerCase().endsWith('.pdf');
+        if (isPDF) {
+          const a = document.createElement('a');
+          a.href = f.src; a.target = '_blank'; a.className = 'verify-pdf-card';
+          a.innerHTML = `<i class="ti ti-file-type-pdf" style="font-size:36px;color:#EF4444;"></i><span>${f.name}</span><small>Tap to view</small>`;
+          container.appendChild(a);
+        } else {
+          const img = document.createElement('img');
+          img.src = f.src; img.alt = f.name;
+          img.onerror = () => {
+            const a = document.createElement('a');
+            a.href = f.src; a.target = '_blank'; a.className = 'verify-pdf-card';
+            a.innerHTML = `<i class="ti ti-file" style="font-size:36px;color:var(--green);"></i><span>${f.name}</span><small>Tap to view</small>`;
+            img.replaceWith(a);
+          };
+          container.appendChild(img);
+        }
+      });
+    })();
 
     function confirmInsurance() {
       document.getElementById('verifyInsBody').style.display = 'none';

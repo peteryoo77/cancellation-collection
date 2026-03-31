@@ -158,16 +158,6 @@
       font-size: var(--text-sm); font-weight: 500; cursor: pointer; white-space: nowrap;
     }
 
-    /* Compact add-more button */
-    .btn-add-more {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%; padding: 14px; background: var(--white);
-      border: 1.5px dashed rgba(173,178,187,0.6); border-radius: 12px;
-      color: var(--green); font-family: 'Poppins', sans-serif;
-      font-size: var(--text-sm); font-weight: 600; cursor: pointer;
-      transition: border-color 0.18s, background 0.18s;
-    }
-    .btn-add-more:hover { border-color: var(--green); background: rgba(21,195,147,0.02); }
 
 
     /* ══ UPLOAD AREA ══ */
@@ -316,7 +306,7 @@
             <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
             <span style="color:#A83836;font-size:16px;font-weight:500;font-family:'Poppins',sans-serif;">We were unable to accept this file. Please try again.</span>
           </div>
-          <div id="uploadAreaFull" class="upload-area" onclick="document.getElementById('fileInput').click()">
+          <div class="upload-area" onclick="document.getElementById('fileInput').click()">
             <i class="ti ti-cloud-upload" style="font-size:52px;color:var(--green);"></i>
             <div class="upload-text">
               <p>Drag &amp; drop or select files</p>
@@ -324,15 +314,6 @@
             </div>
             <input id="fileInput" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none"
               onchange="handleFiles(this.files)" />
-          </div>
-          <div id="btnAddMore" style="display:none;flex-direction:column;align-items:center;">
-            <button class="btn-add-more" onclick="document.getElementById('fileInput').click()">
-              <i class="ti ti-plus" style="font-size:18px;"></i>
-              <span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;">
-                <span>Add more files</span>
-                <span style="font-size:var(--text-xs);font-weight:400;color:#9CA3AF;">PDF, JPG, or PNG — up to 10MB each</span>
-              </span>
-            </button>
           </div>
         </div>
 
@@ -374,12 +355,6 @@
       saveBtn.classList.toggle('active', changed);
     }
 
-    function updateUploadArea() {
-      const hasFiles = uploadedFiles.length > 0;
-      document.getElementById('uploadAreaFull').style.display = hasFiles ? 'none' : 'flex';
-      document.getElementById('btnAddMore').style.display = hasFiles ? 'flex' : 'none';
-      document.getElementById('btnAddMore').style.flexDirection = 'column';
-    }
     const ALLOWED = ['image/jpeg', 'image/png', 'application/pdf'];
     const uploadedFiles = [];
 
@@ -472,8 +447,7 @@
         if (uploadedFiles.length === 0) imagesSection.style.display = 'none';
         if (uploadedFiles.length < MAX_FILES) uploadError.style.display = 'none';
         updateSaveBtn();
-        updateUploadArea();
-      };
+             };
 
       grid.appendChild(item);
     }
@@ -497,8 +471,7 @@
 
     Promise.allSettled(preloadPromises).then(() => {
       initialCount = uploadedFiles.length;
-      updateUploadArea();
-    });
+         });
 
     function handleSave() {
       document.querySelector('.card-body').style.display = 'none';

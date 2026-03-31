@@ -729,7 +729,6 @@
       .verify-ins-card { flex-wrap: wrap; padding: 18px 20px; gap: 12px; }
       .verify-ins-label { flex-basis: calc(100% - 58px); }
       .verify-ins-actions { width: 100%; justify-content: flex-end; }
-      .btn-verify-confirm, .btn-verify-update { flex: 1; justify-content: center; text-align: center; }
       .ins-image-item .ins-delete { opacity: 1; }
       .upload-text p { font-size: 16px; }
       .btn-disabled { width: 100%; padding: 15px; font-size: 16px; }
@@ -765,6 +764,10 @@
     }
 
     /* ══ RESPONSIVE — SMALL MOBILE (≤400px) ══ */
+    @media (max-width: 480px) {
+      .btn-verify-confirm, .btn-verify-update { flex: 1; justify-content: center; text-align: center; }
+    }
+
     @media (max-width: 400px) {
       .hero-text h1 { font-size: 24px; }
       .nav-profile span { display: none; }

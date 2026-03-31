@@ -201,6 +201,57 @@
     .btn-save.active:hover { background: var(--green-hover); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(21,195,147,0.32); }
     .btn-save.active:active { transform: translateY(0); }
 
+    /* ══ INSURANCE FORM ══ */
+    .ins-form-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .ins-form-group { display: flex; flex-direction: column; gap: 8px; }
+    .ins-form-group.full { grid-column: 1 / -1; }
+    .ins-form-label { font-size: var(--text-sm); font-weight: 600; color: var(--text-dark); }
+    .ins-form-input, .ins-form-select {
+      width: 100%; padding: 14px 16px;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      font-family: 'Poppins', sans-serif; font-size: var(--text-base);
+      color: var(--text-dark); background: var(--white);
+      outline: none; transition: border-color 0.18s, box-shadow 0.18s;
+      appearance: none; -webkit-appearance: none;
+    }
+    .ins-form-input:focus, .ins-form-select:focus {
+      border-color: var(--green); box-shadow: 0 0 0 3px rgba(21,195,147,0.12);
+    }
+    .ins-form-input::placeholder { color: var(--text-placeholder); }
+    .ins-form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; }
+
+    .ins-entry-divider { height: 1px; background: var(--border); margin: 8px 0; }
+    .ins-entry-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .ins-entry-title { font-size: var(--text-base); font-weight: 700; color: var(--text-dark); }
+    .btn-remove-entry {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 12px; border: none; background: transparent;
+      color: #EF4444; font-family: 'Poppins', sans-serif; font-size: var(--text-sm);
+      font-weight: 500; cursor: pointer; border-radius: 8px; transition: background 0.15s;
+    }
+    .btn-remove-entry:hover { background: #FEF2F2; }
+
+    .btn-add-insurance {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 14px 20px;
+      border: 1.5px dashed var(--border); border-radius: 10px;
+      background: transparent; color: var(--text-sub);
+      font-family: 'Poppins', sans-serif; font-size: var(--text-sm);
+      font-weight: 500; cursor: pointer; transition: border-color 0.18s, color 0.18s;
+    }
+    .btn-add-insurance:hover { border-color: var(--green); color: var(--green); }
+
+    .btn-ins-save {
+      padding: 14px 36px; background: var(--green); border: none; border-radius: 10px;
+      color: #fff; font-family: 'Poppins', sans-serif; font-size: var(--text-sm);
+      font-weight: 600; cursor: pointer; transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
+    }
+    .btn-ins-save:hover { background: var(--green-hover); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(21,195,147,0.32); }
+    .btn-ins-save:active { transform: translateY(0); }
+    .btn-ins-save.saved { background: var(--green-dark); }
+
     /* ══ RESPONSIVE ══ */
     @media (max-width: 1200px) {
       nav { padding: 0 40px; }
@@ -233,6 +284,12 @@
         display: flex; gap: 8px;
         position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
       }
+    }
+
+    @media (max-width: 768px) {
+      .ins-form-grid { grid-template-columns: 1fr; }
+      .ins-form-group.full { grid-column: 1; }
+      .btn-ins-save { width: 100%; }
     }
 
     @media (max-width: 400px) {
@@ -367,6 +424,59 @@
         <a href="index.html" style="padding:14px 36px;background:var(--green);border-radius:10px;color:#fff;font-family:'Poppins',sans-serif;font-size:var(--text-sm);font-weight:600;text-decoration:none;transition:background 0.18s;" onmouseover="this.style.background='var(--green-hover)'" onmouseout="this.style.background='var(--green)'">Back to Home</a>
       </div>
 
+    </div>
+
+    <!-- Insurance Details Form Card -->
+    <div class="card">
+      <div class="card-body">
+
+        <div class="card-header">
+          <h1>Insurance Details</h1>
+        </div>
+
+        <div id="insuranceEntries" style="display:flex;flex-direction:column;gap:0;width:100%;max-width:880px;align-self:center;">
+          <div class="ins-entry" id="entry1">
+            <div class="ins-entry-header" id="entry1Header" style="display:none;">
+              <span class="ins-entry-title">Insurance 1</span>
+            </div>
+            <div class="ins-form-grid">
+              <div class="ins-form-group full">
+                <label class="ins-form-label">Insurance Provider</label>
+                <input type="text" class="ins-form-input" data-field="provider" placeholder="e.g. Blue Cross Blue Shield, Aetna" />
+              </div>
+              <div class="ins-form-group">
+                <label class="ins-form-label">Member ID</label>
+                <input type="text" class="ins-form-input" data-field="memberId" placeholder="e.g. XYZ123456789" />
+              </div>
+              <div class="ins-form-group">
+                <label class="ins-form-label">Group Number</label>
+                <input type="text" class="ins-form-input" data-field="groupNumber" placeholder="e.g. 12345" />
+              </div>
+              <div class="ins-form-group">
+                <label class="ins-form-label">Plan Name</label>
+                <input type="text" class="ins-form-input" data-field="planName" placeholder="e.g. PPO, HMO, Medicare Advantage" />
+              </div>
+              <div class="ins-form-group">
+                <label class="ins-form-label">Plan Type</label>
+                <select class="ins-form-select" data-field="planType">
+                  <option value="primary">Primary</option>
+                  <option value="secondary">Secondary</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="width:100%;max-width:880px;align-self:center;display:flex;flex-direction:column;gap:16px;">
+          <button class="btn-add-insurance" id="addInsuranceBtn" onclick="addInsuranceEntry()">
+            <i class="ti ti-plus" style="font-size:18px;"></i> Add Another Insurance
+          </button>
+          <div class="form-actions">
+            <button class="btn-ins-save" id="insFormSaveBtn" onclick="saveInsuranceForm()">Save</button>
+          </div>
+        </div>
+
+      </div>
     </div>
 
   </main>
@@ -559,6 +669,114 @@
       document.getElementById('fileViewerBody').innerHTML = '';
       document.body.style.overflow = '';
     }
+
+    // ── Insurance Details Form ──
+    let insEntryCount = 1;
+
+    function addInsuranceEntry() {
+      if (insEntryCount >= 2) return;
+      insEntryCount++;
+
+      document.getElementById('entry1Header').style.display = 'flex';
+
+      const container = document.getElementById('insuranceEntries');
+
+      const divider = document.createElement('div');
+      divider.className = 'ins-entry-divider';
+      divider.style.margin = '28px 0';
+      container.appendChild(divider);
+
+      const entry = document.createElement('div');
+      entry.className = 'ins-entry';
+      entry.id = 'entry2';
+      entry.innerHTML = `
+        <div class="ins-entry-header">
+          <span class="ins-entry-title">Insurance 2</span>
+          <button class="btn-remove-entry" onclick="removeInsuranceEntry()">
+            <i class="ti ti-trash" style="font-size:16px;"></i> Remove
+          </button>
+        </div>
+        <div class="ins-form-grid">
+          <div class="ins-form-group full">
+            <label class="ins-form-label">Insurance Provider</label>
+            <input type="text" class="ins-form-input" data-field="provider" placeholder="e.g. Blue Cross Blue Shield, Aetna" />
+          </div>
+          <div class="ins-form-group">
+            <label class="ins-form-label">Member ID</label>
+            <input type="text" class="ins-form-input" data-field="memberId" placeholder="e.g. XYZ123456789" />
+          </div>
+          <div class="ins-form-group">
+            <label class="ins-form-label">Group Number</label>
+            <input type="text" class="ins-form-input" data-field="groupNumber" placeholder="e.g. 12345" />
+          </div>
+          <div class="ins-form-group">
+            <label class="ins-form-label">Plan Name</label>
+            <input type="text" class="ins-form-input" data-field="planName" placeholder="e.g. PPO, HMO, Medicare Advantage" />
+          </div>
+          <div class="ins-form-group">
+            <label class="ins-form-label">Plan Type</label>
+            <select class="ins-form-select" data-field="planType">
+              <option value="primary">Primary</option>
+              <option value="secondary">Secondary</option>
+            </select>
+          </div>
+        </div>`;
+      container.appendChild(entry);
+
+      document.getElementById('addInsuranceBtn').style.display = 'none';
+    }
+
+    function removeInsuranceEntry() {
+      document.getElementById('entry2')?.remove();
+      document.querySelector('.ins-entry-divider')?.remove();
+      insEntryCount--;
+      document.getElementById('entry1Header').style.display = 'none';
+      document.getElementById('addInsuranceBtn').style.display = 'flex';
+    }
+
+    function getEntryData(entry) {
+      return {
+        provider:    entry.querySelector('[data-field="provider"]').value.trim(),
+        memberId:    entry.querySelector('[data-field="memberId"]').value.trim(),
+        groupNumber: entry.querySelector('[data-field="groupNumber"]').value.trim(),
+        planName:    entry.querySelector('[data-field="planName"]').value.trim(),
+        planType:    entry.querySelector('[data-field="planType"]').value,
+      };
+    }
+
+    function fillEntry(entry, data) {
+      entry.querySelector('[data-field="provider"]').value    = data.provider    || '';
+      entry.querySelector('[data-field="memberId"]').value    = data.memberId    || '';
+      entry.querySelector('[data-field="groupNumber"]').value = data.groupNumber || '';
+      entry.querySelector('[data-field="planName"]').value    = data.planName    || '';
+      entry.querySelector('[data-field="planType"]').value    = data.planType    || 'primary';
+    }
+
+    function saveInsuranceForm() {
+      const entries = document.querySelectorAll('.ins-entry');
+      const data = Array.from(entries).map(getEntryData);
+      localStorage.setItem('igschedule_insurance_info', JSON.stringify(data));
+      const providers = data.map(d => d.provider).filter(Boolean);
+      localStorage.setItem('igschedule_providers', JSON.stringify(providers));
+
+      const btn = document.getElementById('insFormSaveBtn');
+      btn.textContent = 'Saved!';
+      btn.classList.add('saved');
+      setTimeout(() => { btn.textContent = 'Save'; btn.classList.remove('saved'); }, 2000);
+    }
+
+    (function loadInsuranceForm() {
+      const stored = localStorage.getItem('igschedule_insurance_info');
+      if (!stored) return;
+      const data = JSON.parse(stored);
+      if (!data.length) return;
+      const entries = document.querySelectorAll('.ins-entry');
+      if (data[0]) fillEntry(entries[0], data[0]);
+      if (data[1]) {
+        addInsuranceEntry();
+        fillEntry(document.getElementById('entry2'), data[1]);
+      }
+    })();
 
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {

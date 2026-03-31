@@ -452,12 +452,10 @@
     .upload-area:hover { border-color: var(--green); background: rgba(21,195,147,0.02); }
 
 /* ══ VERIFY INSURANCE ══ */
-    .verify-ins-card { display: flex; align-items: center; gap: 14px; padding: 28px 32px; }
-    .verify-ins-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
-    .verify-ins-left i { font-size: 32px; color: var(--green); flex-shrink: 0; }
-    .verify-ins-body { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+    .verify-ins-card { display: flex; flex-direction: column; gap: 16px; padding: 28px 32px; }
+    .verify-ins-body { display: flex; flex-direction: column; gap: 6px; }
     .verify-ins-body strong { font-size: var(--text-md); font-weight: 700; color: var(--text-dark); }
-.verify-ins-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .verify-ins-actions { display: flex; gap: 8px; justify-content: flex-end; }
     .btn-verify-update {
       padding: 12px 18px; background: var(--green); border: none; border-radius: 9px;
       color: #fff; font-family: 'Poppins', sans-serif; font-size: var(--text-sm);
@@ -761,13 +759,7 @@
     }
 
     /* ══ RESPONSIVE — SMALL MOBILE (≤400px) ══ */
-@media (max-width: 600px) {
-      .verify-ins-card { flex-wrap: wrap; padding: 22px 20px; gap: 14px; align-items: flex-start; }
-      .verify-ins-left { flex-basis: 100%; }
-      .verify-ins-actions { width: 100%; justify-content: flex-end; }
-    }
-
-    @media (max-width: 400px) {
+@media (max-width: 400px) {
       .hero-text h1 { font-size: 24px; }
       .nav-profile span { display: none; }
       .nav-profile { padding: 5px; }
@@ -948,11 +940,9 @@
 
     <!-- Verify Insurance -->
     <div class="card verify-ins-card">
-      <div class="verify-ins-left">
-        <div class="verify-ins-body">
+      <div class="verify-ins-body">
           <strong id="verifyInsQuestion">Is your insurance still <span style="color:var(--green);">Blue Cross Blue Shield</span> and <span style="color:var(--green);">Aetna</span>?</strong>
           <span style="font-size:var(--text-sm);color:var(--text-muted);margin-top:4px;">Last updated Mar 15, 2026</span>
-        </div>
       </div>
       <div class="verify-ins-actions">
         <a href="edit-insurance.html" class="btn-verify-update">Update</a>

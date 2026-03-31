@@ -433,7 +433,8 @@
       flex-shrink: 0;
     }
 
-    .ins-doc-name { font-size: var(--text-sm); font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+    .ins-doc-text { min-width: 0; flex: 1; }
+    .ins-doc-name { font-size: var(--text-sm); font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .ins-doc-size { font-size: var(--text-sm); font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
 
     .ins-doc-del {
@@ -1057,7 +1058,7 @@
         row.innerHTML = `
           <div class="ins-doc-left">
             <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
-            <div>
+            <div class="ins-doc-text">
               <div class="ins-doc-name">${f.name}</div>
               <div class="ins-doc-size">${formatSize(f.size)}</div>
             </div>

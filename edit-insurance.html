@@ -125,7 +125,8 @@
       background: var(--green-light); display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-    .ins-doc-name { font-size: var(--text-sm); font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+    .ins-doc-text { min-width: 0; flex: 1; }
+    .ins-doc-name { font-size: var(--text-sm); font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .ins-doc-size { font-size: var(--text-sm); font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
     .ins-doc-del {
       width: 44px; height: 44px; border-radius: 8px; border: none;
@@ -382,7 +383,7 @@
       item.innerHTML = `
         <div class="ins-doc-left">
           <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
-          <div>
+          <div class="ins-doc-text">
             <div class="ins-doc-name">${name}</div>
             <div style="display:flex;align-items:center;gap:10px;">
               <div class="ins-doc-size">${size > 0 ? formatSize(size) : ''}</div>

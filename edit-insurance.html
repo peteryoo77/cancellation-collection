@@ -114,7 +114,7 @@
 
     .ins-doc-item {
       background: var(--white); border-radius: 12px;
-      outline: 1.5px solid rgba(173,178,187,0.25); outline-offset: -1.5px;
+      border: 1.5px solid var(--border);
       padding: 14px 20px; display: flex; align-items: center;
       justify-content: space-between; gap: 16px;
     }
@@ -128,7 +128,7 @@
     .ins-doc-name { font-size: var(--text-sm); font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .ins-doc-size { font-size: var(--text-sm); font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
     .ins-doc-date { font-size: var(--text-sm); font-weight: 400; color: #9CA3AF; }
-    .ins-doc-meta { font-size: var(--text-sm); font-weight: 500; color: var(--text-muted); margin-top: 2px; }
+    .ins-doc-meta { font-size: var(--text-sm); font-weight: 400; color: #9CA3AF; margin-top: 2px; }
     .ins-doc-meta--mobile { display: none; }
     .ins-doc-del {
       width: 44px; height: 44px; border-radius: 8px; border: none;
@@ -211,13 +211,14 @@
       .upload-area { padding: 40px 20px; }
       .form-actions { flex-direction: column-reverse; }
       .btn-save { width: 100%; justify-content: center; text-align: center; }
-      .ins-doc-item { padding: 16px 20px; align-items: center; }
-      .ins-doc-icon { display: none; }
-      .ins-doc-left { gap: 2px; flex-direction: column; }
-      .ins-doc-del { width: 44px; height: 44px; flex-shrink: 0; }
-      .ins-doc-name { font-size: var(--text-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      #imagesGrid { gap: 8px !important; }
+      .ins-doc-item { padding: 12px 14px; }
+      .ins-doc-icon { width: 36px; height: 36px; border-radius: 8px; }
+      .ins-doc-icon i { font-size: 18px !important; }
+      .ins-doc-left { gap: 10px; }
+      .ins-doc-name { font-size: var(--text-sm); }
       .ins-doc-meta--full { display: none; }
-      .ins-doc-meta--mobile { display: block; }
+      .ins-doc-meta--mobile { display: block; font-size: 13px; }
     }
 
     @media (max-width: 400px) {

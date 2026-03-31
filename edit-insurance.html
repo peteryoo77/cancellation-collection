@@ -137,13 +137,6 @@
     .ins-doc-del:hover { background: #FEF2F2; color: #EF4444; }
     .ins-doc-date { font-size: var(--text-sm); font-weight: 400; color: #9CA3AF; }
 
-    .ins-doc-dl {
-      width: 44px; height: 44px; border-radius: 8px;
-      background: transparent; color: #9CA3AF;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.15s, color 0.15s; flex-shrink: 0; text-decoration: none;
-    }
-    .ins-doc-dl:hover { background: var(--green-light); color: var(--green); }
 
     /* ══ UPLOAD AREA ══ */
     .upload-section { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 880px; align-self: center; }
@@ -374,10 +367,7 @@
       uploadedFiles.push({ name, size });
       imagesSection.style.display = 'flex';
 
-      const downloadBtn = fileObj ? `
-        <a class="ins-doc-dl" title="Download" href="${URL.createObjectURL(fileObj)}" download="${name}">
-          <i class="ti ti-download" style="font-size:20px;"></i>
-        </a>` : '';
+      const downloadBtn = '';
 
       const dateLabel = uploadedDate
         ? `<div class="ins-doc-date">Uploaded ${uploadedDate}</div>`

@@ -129,6 +129,7 @@
     .ins-doc-size { font-size: var(--text-sm); font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
     .ins-doc-date { font-size: var(--text-sm); font-weight: 400; color: #9CA3AF; }
     .ins-doc-meta { font-size: var(--text-sm); font-weight: 500; color: var(--text-muted); margin-top: 2px; }
+    .ins-doc-meta--mobile { display: none; }
     .ins-doc-del {
       width: 44px; height: 44px; border-radius: 8px; border: none;
       background: transparent; color: #9CA3AF; cursor: pointer;
@@ -215,7 +216,8 @@
       .ins-doc-left { gap: 10px; }
       .ins-doc-del { width: 44px; height: 44px; flex-shrink: 0; }
       .ins-doc-name { font-size: var(--text-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      .ins-doc-meta { font-size: var(--text-sm); }
+      .ins-doc-meta--full { display: none; }
+      .ins-doc-meta--mobile { display: block; }
     }
 
     @media (max-width: 400px) {
@@ -398,7 +400,8 @@
           <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
           <div class="ins-doc-text">
             <div class="ins-doc-name" title="${name}">${truncateName(name)}</div>
-            <div class="ins-doc-meta">${size > 0 ? formatSize(size) : ''}${uploadedDate ? ' · Uploaded ' + uploadedDate : ''}</div>
+            <div class="ins-doc-meta ins-doc-meta--full">${size > 0 ? formatSize(size) : ''}${uploadedDate ? ' · Uploaded ' + uploadedDate : ''}</div>
+            <div class="ins-doc-meta ins-doc-meta--mobile">${uploadedDate ? 'Uploaded ' + uploadedDate : (size > 0 ? formatSize(size) : '')}</div>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:4px;">

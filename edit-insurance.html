@@ -129,13 +129,14 @@
     .ins-doc-date { font-size: var(--text-sm); font-weight: 400; color: #9CA3AF; }
     .ins-doc-meta { font-size: var(--text-sm); font-weight: 400; color: #9CA3AF; margin-top: 2px; }
     .ins-doc-meta--mobile { display: none; }
-    .ins-doc-del {
+    .ins-doc-del, .ins-doc-view {
       width: 44px; height: 44px; border-radius: 8px; border: none;
       background: transparent; color: #9CA3AF; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: background 0.15s, color 0.15s; flex-shrink: 0;
     }
     .ins-doc-del:hover { background: #FEF2F2; color: #EF4444; }
+    .ins-doc-view:hover { background: var(--green-light); color: var(--green); }
 
     /* Delete confirmation state */
     .ins-doc-item.confirming {
@@ -226,7 +227,8 @@
       .ins-doc-meta--mobile { display: block; font-size: var(--text-sm); }
       .ins-doc-item { position: relative; }
       .ins-doc-item.confirming .ins-doc-left { visibility: hidden; }
-      .ins-doc-item.confirming .ins-doc-del { display: none; }
+      .ins-doc-item.confirming .ins-doc-del,
+      .ins-doc-item.confirming .ins-doc-view { display: none; }
       .ins-doc-item.confirming .ins-doc-confirm {
         display: flex; gap: 8px;
         position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
@@ -404,7 +406,6 @@
 
       const item = document.createElement('div');
       item.className = 'ins-doc-item';
-      if (fileUrl) { item.style.cursor = 'pointer'; item.title = 'Tap to view'; }
       item.innerHTML = `
         <div class="ins-doc-left">
           <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:32px;color:var(--green);"></i></div>
@@ -419,13 +420,12 @@
             <button class="btn-confirm-keep">Keep</button>
             <button class="btn-confirm-remove">Remove?</button>
           </div>
+          ${fileUrl ? `<button class="ins-doc-view" title="View"><i class="ti ti-eye" style="font-size:24px;"></i></button>` : ''}
           <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:24px;"></i></button>
         </div>`;
 
       if (fileUrl) {
-        item.addEventListener('click', e => {
-          if (!e.target.closest('.ins-doc-del, .ins-doc-confirm')) window.open(fileUrl, '_blank');
-        });
+        item.querySelector('.ins-doc-view')?.addEventListener('click', () => window.open(fileUrl, '_blank'));
       }
 
       item.querySelector('.ins-doc-del').onclick = () => {

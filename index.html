@@ -886,15 +886,15 @@
           </div>
           <div id="insuranceFileList" style="display:none;width:100%;max-width:880px;flex-direction:column;gap:16px;max-height:432px;overflow-y:auto;"></div>
           <div style="width:100%;max-width:880px;display:flex;flex-direction:column;gap:16px;">
-            <div id="uploadError" style="display:none;padding:20px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
+            <div id="uploadError" style="display:none;padding:24px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
               <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
               <span style="color:#A83836;font-size:var(--text-sm);font-weight:500;">You can only upload up to 10 files.</span>
             </div>
-            <div id="typeError" style="display:none;padding:20px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
+            <div id="typeError" style="display:none;padding:24px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
               <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
               <span style="color:#A83836;font-size:var(--text-sm);font-weight:500;">Only PDF, JPG, or PNG files are allowed.</span>
             </div>
-            <div id="genericError" style="display:none;padding:20px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
+            <div id="genericError" style="display:none;padding:24px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
               <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
               <span style="color:#A83836;font-size:var(--text-sm);font-weight:500;">We were unable to accept this file. Please try again.</span>
             </div>
@@ -921,7 +921,7 @@
           <div class="ins-success-body">
             <div class="ins-info-banner">
               <i class="ti ti-info-circle" style="font-size:22px;color:var(--green);flex-shrink:0;"></i>
-              <span>Need to make a change? Update your insurance details in <a href="edit-insurance.html">Profile Settings</a>.</span>
+              <span>Need to make a change? Update your insurance details in <a href="edit-insurance.html">Edit Insurance</a>.</span>
             </div>
             <div class="ins-doc-list">
               <p class="ins-doc-label" id="insDocLabel">Received Documents</p>
@@ -1078,6 +1078,7 @@
       });
       document.getElementById('insUploadState').style.display = 'none';
       document.getElementById('insSuccessState').classList.add('show');
+      document.querySelector('.ins-action-banner').style.display = 'none';
     }
 
     const typeError = document.getElementById('typeError');

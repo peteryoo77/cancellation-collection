@@ -338,8 +338,8 @@
     const uploadedFiles = [];
 
     const preloaded = [
-      { name: 'Insurance_Card_Front.jpg', src: 'Insurance_Card_Front.jpg', uploaded: "Mar 15 '26" },
-      { name: 'Insurance_Card_Back.jpg',  src: 'Insurance_Card_Back.jpg',  uploaded: "Mar 15 '26" }
+      { name: 'Insurance_Card_Front.jpg', src: 'Insurance_Card_Front.jpg', uploaded: "Mar 15, 2026" },
+      { name: 'Insurance_Card_Back.jpg',  src: 'Insurance_Card_Back.jpg',  uploaded: "Mar 15, 2026" }
     ];
 
     const genericError = document.getElementById('genericError');
@@ -401,8 +401,8 @@
           <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
           <div class="ins-doc-text">
             <div class="ins-doc-name" title="${name}">${truncateName(name)}</div>
-            <div class="ins-doc-meta ins-doc-meta--full">${size > 0 ? formatSize(size) : ''}${uploadedDate ? ' · Uploaded ' + uploadedDate : ''}</div>
-            <div class="ins-doc-meta ins-doc-meta--mobile">${uploadedDate ? 'Uploaded ' + uploadedDate : (size > 0 ? formatSize(size) : '')}</div>
+            <div class="ins-doc-meta ins-doc-meta--full">${size > 0 ? formatSize(size) : ''}${uploadedDate ? ' · ' + uploadedDate : ''}</div>
+            <div class="ins-doc-meta ins-doc-meta--mobile">${uploadedDate ? uploadedDate : (size > 0 ? formatSize(size) : '')}</div>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:4px;">

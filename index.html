@@ -464,7 +464,7 @@
     .verify-ins-images { display: flex; gap: 16px; }
     .verify-ins-images img {
       flex: 1; min-width: 0; border-radius: 10px; border: 1.5px solid var(--border);
-      object-fit: cover; max-height: 180px; width: 100%;
+      width: 100%; height: auto; display: block;
     }
     .verify-pdf-card {
       flex: 1; min-width: 0; border-radius: 10px; border: 1.5px solid var(--border);
@@ -752,7 +752,7 @@
       .verify-ins { padding: 24px 20px; gap: 16px; }
       .verify-ins-confirmed { padding: 24px 20px; }
       .verify-ins-images { flex-direction: column; }
-      .verify-ins-images img { max-height: 160px; }
+      .verify-ins-images img { height: auto; }
       .verify-pdf-card { min-height: 100px; }
       .verify-ins-actions { width: 100%; }
       .btn-verify-confirm { flex: 1; text-align: center; }

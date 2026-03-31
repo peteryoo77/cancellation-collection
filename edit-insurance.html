@@ -128,6 +128,7 @@
     .ins-doc-name { font-size: var(--text-sm); font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .ins-doc-size { font-size: var(--text-sm); font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
     .ins-doc-date { font-size: var(--text-sm); font-weight: 400; color: #9CA3AF; }
+    .ins-doc-meta { font-size: var(--text-sm); font-weight: 500; color: var(--text-muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .ins-doc-del {
       width: 44px; height: 44px; border-radius: 8px; border: none;
       background: transparent; color: #9CA3AF; cursor: pointer;
@@ -211,12 +212,10 @@
       .btn-save { width: 100%; justify-content: center; text-align: center; }
       .ins-doc-item { padding: 14px 12px; gap: 10px; }
       .ins-doc-icon { width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; }
-      .ins-doc-left { gap: 10px; align-items: flex-start; }
+      .ins-doc-left { gap: 10px; }
       .ins-doc-del { width: 44px; height: 44px; flex-shrink: 0; }
-      .ins-doc-name { font-size: var(--text-sm); white-space: normal; word-break: break-word; }
-      .ins-doc-size { font-size: var(--text-sm); }
-      .ins-doc-date { font-size: var(--text-sm); }
-      .ins-doc-text > div { flex-wrap: wrap; }
+      .ins-doc-name { font-size: var(--text-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .ins-doc-meta { font-size: var(--text-sm); }
     }
 
     @media (max-width: 400px) {
@@ -399,10 +398,7 @@
           <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:22px;color:var(--green);"></i></div>
           <div class="ins-doc-text">
             <div class="ins-doc-name" title="${name}">${truncateName(name)}</div>
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div class="ins-doc-size">${size > 0 ? formatSize(size) : ''}</div>
-              ${dateLabel}
-            </div>
+            <div class="ins-doc-meta">${size > 0 ? formatSize(size) : ''}${uploadedDate ? ' · Uploaded ' + uploadedDate : ''}</div>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:4px;">

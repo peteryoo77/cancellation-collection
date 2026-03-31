@@ -175,21 +175,21 @@
 
     .upload-area {
       width: 100%;
-      padding: 56px 40px;
+      padding: 48px 48px;
       background: #FAFAFA;
       border-radius: 12px;
       border: 2px dashed rgba(173,178,187,0.5);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
       cursor: pointer;
       transition: border-color 0.18s, background 0.18s;
     }
     .upload-area:hover { border-color: var(--green); background: rgba(21,195,147,0.02); }
 
-    .upload-text { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
-    .upload-text p    { font-size: var(--text-base); font-weight: 500; color: var(--text-muted); }
+    .upload-text { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+    .upload-text p    { font-size: 18px; font-weight: 500; color: var(--text-muted); }
     .upload-text span { font-size: var(--text-sm); font-weight: 400; color: #9CA3AF; }
 
     .btn-select {
@@ -322,7 +322,6 @@
               <p>Drag &amp; drop or select files</p>
               <span>PDF, JPG, or PNG — up to 10MB each</span>
             </div>
-            <button type="button" class="btn-select">Select Files</button>
             <input id="fileInput" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none"
               onchange="handleFiles(this.files)" />
           </div>

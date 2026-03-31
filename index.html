@@ -452,14 +452,14 @@
     .upload-area {
       width: 100%;
       max-width: 880px;
-      padding: 64px 48px;
+      padding: 48px 48px;
       background: #FAFAFA;
       border-radius: 12px;
       border: 2px dashed rgba(173,178,187,0.5);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 24px;
+      gap: 16px;
       cursor: pointer;
       transition: border-color 0.18s, background 0.18s;
     }
@@ -905,7 +905,6 @@
                 <p>Drag &amp; drop or select a file</p>
                 <span>PDF, JPG, or PNG — up to 10MB</span>
               </div>
-              <button class="btn-select" type="button">Select Files</button>
               <input id="fileInput" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="handleInsuranceFiles(this.files)" />
             </div>
           </div>

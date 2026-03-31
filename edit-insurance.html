@@ -411,7 +411,7 @@
           <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:32px;color:var(--green);"></i></div>
           <div class="ins-doc-text">
             <div class="ins-doc-name" title="${name}">${truncateName(name)}</div>
-            <div class="ins-doc-meta ins-doc-meta--full">${size > 0 ? formatSize(size) : ''}${uploadedDate ? ' · ' + uploadedDate : ''}</div>
+            <div class="ins-doc-meta ins-doc-meta--full">${uploadedDate || ''}</div>
             <div class="ins-doc-meta ins-doc-meta--mobile">${uploadedDate || ''}</div>
           </div>
         </div>

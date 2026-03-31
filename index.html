@@ -453,26 +453,26 @@
 
     /* ══ VERIFY INSURANCE ══ */
     .verify-ins {
-      padding: 36px 48px; display: flex; align-items: center; gap: 28px;
+      padding: 28px 40px; display: flex; align-items: center; gap: 24px;
     }
     .verify-ins-icon {
-      width: 60px; height: 60px; border-radius: 14px;
+      width: 52px; height: 52px; border-radius: 12px;
       background: var(--green-light); display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-    .verify-ins-text { flex: 1; }
-    .verify-ins-text h3 { font-size: var(--text-lg); font-weight: 700; color: var(--text-dark); }
-    .verify-ins-text p { font-size: var(--text-sm); color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
-    .verify-ins-actions { display: flex; gap: 12px; flex-shrink: 0; }
+    .verify-ins-text { flex: 1; min-width: 0; }
+    .verify-ins-text h3 { font-size: var(--text-base); font-weight: 700; color: var(--text-dark); }
+    .verify-ins-text p { font-size: var(--text-sm); color: var(--text-muted); margin-top: 2px; }
+    .verify-ins-actions { display: flex; gap: 10px; flex-shrink: 0; }
     .btn-verify-confirm {
-      padding: 12px 24px; background: var(--green); border: none; border-radius: 10px;
+      padding: 10px 20px; background: var(--green); border: none; border-radius: 10px;
       color: #fff; font-family: 'Poppins', sans-serif; font-size: var(--text-sm);
       font-weight: 600; cursor: pointer; white-space: nowrap;
       transition: background 0.18s, transform 0.15s;
     }
     .btn-verify-confirm:hover { background: var(--green-hover); transform: translateY(-1px); }
     .btn-verify-update {
-      padding: 12px 24px; background: transparent; border: 1.5px solid var(--border);
+      padding: 10px 20px; background: transparent; border: 1.5px solid var(--border);
       border-radius: 10px; color: var(--text-sub); font-family: 'Poppins', sans-serif;
       font-size: var(--text-sm); font-weight: 500; cursor: pointer; white-space: nowrap;
       text-decoration: none; display: flex; align-items: center;
@@ -480,7 +480,7 @@
     }
     .btn-verify-update:hover { border-color: var(--green); color: var(--green); }
     .verify-ins-confirmed {
-      padding: 36px 48px; display: none; align-items: center; justify-content: center; gap: 12px;
+      padding: 28px 40px; display: none; align-items: center; justify-content: center; gap: 12px;
     }
     .verify-ins-confirmed p { font-size: var(--text-base); font-weight: 600; color: var(--green); }
 
@@ -737,8 +737,8 @@
       .section-badge { font-size: var(--text-sm); }
 
       .upload-area { padding: 40px 20px; gap: 16px; }
-      .verify-ins { padding: 28px 20px; flex-direction: column; align-items: flex-start; gap: 20px; }
-      .verify-ins-confirmed { padding: 28px 20px; }
+      .verify-ins { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
+      .verify-ins-confirmed { padding: 24px 20px; }
       .verify-ins-actions { width: 100%; }
       .btn-verify-confirm { flex: 1; text-align: center; }
       .btn-verify-update { flex: 1; justify-content: center; }
@@ -964,7 +964,7 @@
         </div>
         <div class="verify-ins-text">
           <h3>Is your insurance still current?</h3>
-          <p>Last updated <strong>Mar 15, 2026</strong> — please confirm it's still accurate so your care team has the right information.</p>
+          <p>Last updated <strong>Mar 15, 2026</strong></p>
         </div>
         <div class="verify-ins-actions">
           <button class="btn-verify-confirm" onclick="confirmInsurance()">Still current</button>

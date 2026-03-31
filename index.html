@@ -955,7 +955,7 @@
         <i class="ti ti-shield-check" style="font-size:20px;color:var(--green);"></i>
       </div>
       <div class="verify-ins-label">
-        <strong id="verifyInsQuestion">Still with Blue Cross Blue Shield?</strong>
+        <strong id="verifyInsQuestion">Is your insurance still Blue Cross Blue Shield?</strong>
       </div>
       <div class="verify-ins-actions">
         <a href="edit-insurance.html" class="btn-verify-update">Update</a>
@@ -1193,8 +1193,8 @@
       const providers = JSON.parse(stored).filter(Boolean);
       if (!providers.length) return;
       const label = providers.length === 2
-        ? `Still with ${providers[0]} and ${providers[1]}?`
-        : `Still with ${providers[0]}?`;
+        ? `Is your insurance still ${providers[0]} and ${providers[1]}?`
+        : `Is your insurance still ${providers[0]}?`;
       document.getElementById('verifyInsQuestion').textContent = label;
     })();
 

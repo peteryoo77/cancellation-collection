@@ -461,13 +461,11 @@
     .verify-ins-content { display: flex; flex-direction: column; gap: 16px; flex: 1; min-width: 0; }
     .verify-ins-text h3 { font-size: var(--text-base); font-weight: 700; color: var(--text-dark); }
     .verify-ins-text p { font-size: var(--text-sm); color: var(--text-muted); margin-top: 4px; max-width: 60ch; }
-    .verify-ins-toggle {
-      display: flex; align-items: center; gap: 6px; background: none; border: none;
-      color: var(--green); font-family: 'Poppins', sans-serif; font-size: var(--text-sm);
-      font-weight: 600; cursor: pointer; padding: 0; width: fit-content;
+    .verify-ins-images { display: flex; gap: 16px; }
+    .verify-ins-images img {
+      flex: 1; min-width: 0; border-radius: 10px; border: 1.5px solid var(--border);
+      object-fit: cover; max-height: 180px; width: 100%;
     }
-    .verify-ins-toggle:hover { color: var(--green-hover); }
-    .verify-ins-files { display: flex; flex-direction: column; gap: 8px; }
     .verify-ins-actions { display: flex; gap: 10px; }
     .btn-verify-confirm {
       padding: 10px 20px; background: var(--green); border: none; border-radius: 10px;
@@ -744,6 +742,8 @@
       .upload-area { padding: 40px 20px; gap: 16px; }
       .verify-ins { padding: 24px 20px; gap: 16px; }
       .verify-ins-confirmed { padding: 24px 20px; }
+      .verify-ins-images { flex-direction: column; }
+      .verify-ins-images img { max-height: 160px; }
       .verify-ins-actions { width: 100%; }
       .btn-verify-confirm { flex: 1; text-align: center; }
       .btn-verify-update { flex: 1; justify-content: center; }
@@ -972,29 +972,9 @@
             <h3>Is your insurance still current?</h3>
             <p>Last updated <strong>Mar 15, 2026</strong>. Please confirm your insurance is still current.</p>
           </div>
-          <button class="verify-ins-toggle" onclick="toggleVerifyFiles()" id="verifyToggleBtn">
-            <i class="ti ti-chevron-down" id="verifyToggleIcon" style="font-size:16px;transition:transform 0.2s;"></i>
-            View uploaded files
-          </button>
-          <div class="verify-ins-files" id="verifyFiles" style="display:none;">
-            <div class="ins-doc-item">
-              <div class="ins-doc-left">
-                <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:32px;color:var(--green);"></i></div>
-                <div class="ins-doc-text">
-                  <div class="ins-doc-name">Insurance_Card_Front.jpg</div>
-                  <div class="ins-doc-meta">Mar 15, 2026</div>
-                </div>
-              </div>
-            </div>
-            <div class="ins-doc-item">
-              <div class="ins-doc-left">
-                <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:32px;color:var(--green);"></i></div>
-                <div class="ins-doc-text">
-                  <div class="ins-doc-name">Insurance_Card_Back.jpg</div>
-                  <div class="ins-doc-meta">Mar 15, 2026</div>
-                </div>
-              </div>
-            </div>
+          <div class="verify-ins-images">
+            <img src="Insurance_Card_Front.jpg" alt="Insurance Card Front" />
+            <img src="Insurance_Card_Back.jpg" alt="Insurance Card Back" />
           </div>
           <div class="verify-ins-actions">
             <button class="btn-verify-confirm" onclick="confirmInsurance()">Still current</button>
@@ -1235,13 +1215,6 @@
       document.getElementById('verifyInsConfirmed').style.display = 'flex';
     }
 
-    function toggleVerifyFiles() {
-      const files = document.getElementById('verifyFiles');
-      const icon = document.getElementById('verifyToggleIcon');
-      const open = files.style.display === 'flex';
-      files.style.display = open ? 'none' : 'flex';
-      icon.style.transform = open ? '' : 'rotate(180deg)';
-    }
 
     function toggleDropdown() {
       document.getElementById('notifDropdown').classList.remove('open');

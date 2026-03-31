@@ -1079,7 +1079,7 @@
     const MAX_FILES = 10;
     const ALLOWED = ['image/jpeg', 'image/png', 'application/pdf'];
 
-    function truncateName(name, maxLen = 30) {
+    function truncateName(name, maxLen = 22) {
       const dot = name.lastIndexOf('.');
       if (name.length <= maxLen || dot === -1) return name;
       const ext = name.slice(dot);

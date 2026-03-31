@@ -402,7 +402,7 @@
           <div class="ins-doc-text">
             <div class="ins-doc-name" title="${name}">${truncateName(name)}</div>
             <div class="ins-doc-meta ins-doc-meta--full">${size > 0 ? formatSize(size) : ''}${uploadedDate ? ' · ' + uploadedDate : ''}</div>
-            <div class="ins-doc-meta ins-doc-meta--mobile">${uploadedDate ? uploadedDate : (size > 0 ? formatSize(size) : '')}</div>
+            <div class="ins-doc-meta ins-doc-meta--mobile">${[size > 0 ? formatSize(size) : '', uploadedDate || ''].filter(Boolean).join(' · ')}</div>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:4px;">

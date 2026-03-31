@@ -489,6 +489,12 @@
       if (!e.target.closest('.profile-wrapper'))
         document.getElementById('profileDropdown').classList.remove('open');
     });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.ins-doc-item.confirming').forEach(item => item.classList.remove('confirming'));
+      }
+    });
   </script>
 
 </body>

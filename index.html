@@ -798,53 +798,42 @@
     .btn-ins-save.saved { background: var(--green-dark, #0e9e78); }
 
     /* ══ INSURANCE MANUAL CARD ══ */
-    .ins-manual-header {
-      display: flex; align-items: center; gap: 10px;
-      padding: 20px 48px; border-bottom: 1px solid var(--border);
-      font-size: var(--text-base); font-weight: 700; color: var(--text-dark);
-    }
     .ins-manual-body {
-      display: flex; flex-direction: column;
-      padding: 0 48px 48px;
+      padding: 48px 64px;
+      display: flex; flex-direction: column; gap: 40px;
     }
-    .ins-manual-section { padding: 32px 0; }
+    .ins-manual-section { display: flex; flex-direction: column; gap: 24px; }
     .ins-manual-divider { height: 1px; background: var(--border); }
     .ins-manual-section-title {
-      display: flex; align-items: center; gap: 10px; margin-bottom: 24px;
-      font-size: var(--text-base); color: var(--text-dark);
+      display: flex; align-items: center; gap: 12px;
+      font-size: var(--text-lg); font-weight: 700; color: var(--text-dark);
     }
     .ins-manual-badge {
-      width: 26px; height: 26px; border-radius: 50%;
-      background: #EFF6FF; color: #3B82F6;
-      font-size: var(--text-xs); font-weight: 700;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--green-light); color: var(--green);
+      font-size: var(--text-sm); font-weight: 700;
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .ins-manual-badge--secondary { background: #F3F4F6; color: #6B7280; }
-    .ins-manual-optional { font-size: var(--text-xs); color: #9CA3AF; font-weight: 400; }
+    .ins-manual-badge--secondary { background: var(--bg); color: var(--text-muted); }
+    .ins-manual-optional { font-size: var(--text-sm); color: var(--text-muted); font-weight: 400; }
     .ins-manual-label {
-      font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.05em;
-      color: var(--text-sub); text-transform: uppercase;
+      font-size: var(--text-sm); font-weight: 600; color: var(--text-dark);
     }
     .ins-required { color: #EF4444; }
     .ins-manual-grid {
       display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;
     }
-    .ins-manual-save-row {
-      display: flex; justify-content: flex-end; padding-top: 8px;
-    }
+    .ins-manual-save-row { display: flex; justify-content: center; }
     @media (max-width: 1000px) {
-      .ins-manual-header { padding: 20px 32px; }
-      .ins-manual-body { padding: 0 32px 40px; }
+      .ins-manual-body { padding: 40px 48px; }
     }
     @media (max-width: 768px) {
       .ins-manual-grid { grid-template-columns: 1fr 1fr; }
-      .ins-manual-header { padding: 16px 20px; }
-      .ins-manual-body { padding: 0 20px 28px; }
+      .ins-manual-body { padding: 32px 24px; gap: 32px; }
     }
     @media (max-width: 520px) {
       .ins-manual-grid { grid-template-columns: 1fr; }
       .btn-ins-save { width: 100%; }
-      .ins-manual-save-row { justify-content: stretch; }
     }
   </style>
 </head>
@@ -1019,13 +1008,13 @@
     </div>
 
     <!-- Insurance Information (Manual Entry) -->
-    <div class="card ins-manual-card">
-      <div class="ins-manual-header">
-        <i class="ti ti-shield" style="font-size:20px;color:var(--green);"></i>
-        <span>Insurance</span>
-      </div>
-
+    <div class="card">
       <div class="ins-manual-body">
+        <div class="section-heading">
+          <h2>Insurance Details</h2>
+          <p>Enter your insurance information manually.</p>
+        </div>
+
         <!-- Primary Insurance -->
         <div class="ins-manual-section">
           <div class="ins-manual-section-title">
@@ -1034,15 +1023,15 @@
           </div>
           <div class="ins-manual-grid">
             <div class="ins-form-group">
-              <label class="ins-manual-label">INSURANCE NAME <span class="ins-required">*</span></label>
+              <label class="ins-manual-label">Insurance Name <span class="ins-required">*</span></label>
               <input type="text" class="ins-form-input" id="primaryProvider" placeholder="e.g. Aetna, UnitedHealthcare" />
             </div>
             <div class="ins-form-group">
-              <label class="ins-manual-label">MEMBER ID <span class="ins-required">*</span></label>
+              <label class="ins-manual-label">Member ID <span class="ins-required">*</span></label>
               <input type="text" class="ins-form-input" id="primaryMemberId" placeholder="Member / subscriber ID" />
             </div>
             <div class="ins-form-group">
-              <label class="ins-manual-label">GROUP NUMBER</label>
+              <label class="ins-manual-label">Group Number</label>
               <input type="text" class="ins-form-input" id="primaryGroupNumber" placeholder="Group #" />
             </div>
           </div>
@@ -1059,15 +1048,15 @@
           </div>
           <div class="ins-manual-grid">
             <div class="ins-form-group">
-              <label class="ins-manual-label">INSURANCE NAME</label>
+              <label class="ins-manual-label">Insurance Name</label>
               <input type="text" class="ins-form-input" id="secondaryProvider" placeholder="e.g. Medicaid, Medicare" />
             </div>
             <div class="ins-form-group">
-              <label class="ins-manual-label">MEMBER ID</label>
+              <label class="ins-manual-label">Member ID</label>
               <input type="text" class="ins-form-input" id="secondaryMemberId" placeholder="Member / subscriber ID" />
             </div>
             <div class="ins-form-group">
-              <label class="ins-manual-label">GROUP NUMBER</label>
+              <label class="ins-manual-label">Group Number</label>
               <input type="text" class="ins-form-input" id="secondaryGroupNumber" placeholder="Group #" />
             </div>
           </div>

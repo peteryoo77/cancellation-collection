@@ -775,44 +775,19 @@
     }
 
     /* ══ INSURANCE FORM ══ */
-    .ins-form-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-    }
     .ins-form-group { display: flex; flex-direction: column; gap: 8px; }
-    .ins-form-group.full { grid-column: 1 / -1; }
-    .ins-form-label { font-size: var(--text-sm); font-weight: 600; color: var(--text-dark); }
-    .ins-form-input, .ins-form-select {
-      width: 100%; padding: 14px 16px;
-      border: 1.5px solid var(--border); border-radius: 10px;
+    .ins-form-input {
+      width: 100%; padding: 12px 14px;
+      border: 1.5px solid var(--border); border-radius: 8px;
       font-family: 'Poppins', sans-serif; font-size: var(--text-base);
       color: var(--text-dark); background: var(--white);
       outline: none; transition: border-color 0.18s, box-shadow 0.18s;
-      appearance: none; -webkit-appearance: none; box-sizing: border-box;
+      box-sizing: border-box;
     }
-    .ins-form-input:focus, .ins-form-select:focus {
+    .ins-form-input:focus {
       border-color: var(--green); box-shadow: 0 0 0 3px rgba(21,195,147,0.12);
     }
-    .ins-form-input::placeholder { color: var(--text-placeholder, #9CA3AF); }
-    .ins-form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; }
-    .ins-entry-divider { height: 1px; background: var(--border); margin: 28px 0; }
-    .ins-entry-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-    .ins-entry-title { font-size: var(--text-base); font-weight: 700; color: var(--text-dark); }
-    .btn-remove-entry {
-      display: flex; align-items: center; gap: 6px;
-      padding: 8px 12px; border: none; background: transparent;
-      color: #EF4444; font-family: 'Poppins', sans-serif; font-size: var(--text-sm);
-      font-weight: 500; cursor: pointer; border-radius: 8px; transition: background 0.15s;
-    }
-    .btn-remove-entry:hover { background: #FEF2F2; }
-    .btn-add-insurance {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%; padding: 14px 20px;
-      border: 1.5px dashed var(--border); border-radius: 10px;
-      background: transparent; color: var(--text-sub);
-      font-family: 'Poppins', sans-serif; font-size: var(--text-sm);
-      font-weight: 500; cursor: pointer; transition: border-color 0.18s, color 0.18s;
-    }
-    .btn-add-insurance:hover { border-color: var(--green); color: var(--green); }
+    .ins-form-input::placeholder { color: #9CA3AF; }
     .btn-ins-save {
       padding: 14px 36px; background: var(--green); border: none; border-radius: 10px;
       color: #fff; font-family: 'Poppins', sans-serif; font-size: var(--text-sm);
@@ -821,9 +796,44 @@
     .btn-ins-save:hover { background: var(--green-hover, #12b386); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(21,195,147,0.32); }
     .btn-ins-save:active { transform: translateY(0); }
     .btn-ins-save.saved { background: var(--green-dark, #0e9e78); }
-    @media (max-width: 768px) {
-      .ins-form-grid { grid-template-columns: 1fr; }
-      .ins-form-group.full { grid-column: 1; }
+
+    /* ══ INSURANCE MANUAL CARD ══ */
+    .ins-manual-card { padding: 0; overflow: hidden; }
+    .ins-manual-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 18px 24px; border-bottom: 1px solid var(--border);
+      font-size: var(--text-base); font-weight: 700; color: var(--text-dark);
+    }
+    .ins-manual-body { display: flex; flex-direction: column; gap: 0; padding: 0 24px 28px; }
+    .ins-manual-section { padding: 24px 0; }
+    .ins-manual-divider { height: 1px; background: var(--border); }
+    .ins-manual-section-title {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+      font-size: var(--text-base); color: var(--text-dark);
+    }
+    .ins-manual-badge {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: #EFF6FF; color: #3B82F6;
+      font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .ins-manual-badge--secondary { background: #F3F4F6; color: #6B7280; }
+    .ins-manual-optional { font-size: var(--text-sm); color: #9CA3AF; font-weight: 400; }
+    .ins-manual-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      color: #6B7280; text-transform: uppercase;
+    }
+    .ins-required { color: #EF4444; }
+    .ins-manual-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+    }
+    @media (max-width: 900px) {
+      .ins-manual-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .ins-manual-grid { grid-template-columns: 1fr; }
+      .ins-manual-body { padding: 0 16px 24px; }
+      .ins-manual-header { padding: 16px; }
       .btn-ins-save { width: 100%; }
     }
   </style>
@@ -999,53 +1009,62 @@
     </div>
 
     <!-- Insurance Information (Manual Entry) -->
-    <div class="card">
-      <div class="card-body">
-        <div class="section-heading" style="align-self:center;width:100%;max-width:880px;">
-          <h2>Insurance Details</h2>
-          <p>Enter your insurance information manually below.</p>
-        </div>
+    <div class="card ins-manual-card">
+      <div class="ins-manual-header">
+        <i class="ti ti-shield" style="font-size:20px;color:var(--green);"></i>
+        <span>Insurance</span>
+      </div>
 
-        <div id="insuranceEntries" style="display:flex;flex-direction:column;gap:0;width:100%;max-width:880px;align-self:center;">
-          <div class="ins-entry" id="insEntry1">
-            <div class="ins-entry-header" id="insEntry1Header" style="display:none;">
-              <span class="ins-entry-title">Insurance 1</span>
+      <div class="ins-manual-body">
+        <!-- Primary Insurance -->
+        <div class="ins-manual-section">
+          <div class="ins-manual-section-title">
+            <span class="ins-manual-badge">1</span>
+            <strong>Primary Insurance</strong>
+          </div>
+          <div class="ins-manual-grid">
+            <div class="ins-form-group">
+              <label class="ins-manual-label">INSURANCE NAME <span class="ins-required">*</span></label>
+              <input type="text" class="ins-form-input" id="primaryProvider" placeholder="e.g. Aetna, UnitedHealthcare" />
             </div>
-            <div class="ins-form-grid">
-              <div class="ins-form-group full">
-                <label class="ins-form-label">Insurance Provider</label>
-                <input type="text" class="ins-form-input" data-field="provider" placeholder="e.g. Blue Cross Blue Shield, Aetna" />
-              </div>
-              <div class="ins-form-group">
-                <label class="ins-form-label">Member ID</label>
-                <input type="text" class="ins-form-input" data-field="memberId" placeholder="e.g. XYZ123456789" />
-              </div>
-              <div class="ins-form-group">
-                <label class="ins-form-label">Group Number</label>
-                <input type="text" class="ins-form-input" data-field="groupNumber" placeholder="e.g. 12345" />
-              </div>
-              <div class="ins-form-group">
-                <label class="ins-form-label">Plan Name</label>
-                <input type="text" class="ins-form-input" data-field="planName" placeholder="e.g. PPO, HMO, Medicare Advantage" />
-              </div>
-              <div class="ins-form-group">
-                <label class="ins-form-label">Plan Type</label>
-                <select class="ins-form-select" data-field="planType">
-                  <option value="primary">Primary</option>
-                  <option value="secondary">Secondary</option>
-                </select>
-              </div>
+            <div class="ins-form-group">
+              <label class="ins-manual-label">MEMBER ID <span class="ins-required">*</span></label>
+              <input type="text" class="ins-form-input" id="primaryMemberId" placeholder="Member / subscriber ID" />
+            </div>
+            <div class="ins-form-group">
+              <label class="ins-manual-label">GROUP NUMBER</label>
+              <input type="text" class="ins-form-input" id="primaryGroupNumber" placeholder="Group #" />
             </div>
           </div>
         </div>
 
-        <div style="width:100%;max-width:880px;align-self:center;display:flex;flex-direction:column;gap:16px;">
-          <button class="btn-add-insurance" id="addInsuranceBtn" onclick="addInsuranceEntry()">
-            <i class="ti ti-plus" style="font-size:18px;"></i> Add Another Insurance
-          </button>
-          <div class="form-actions">
-            <button class="btn-ins-save" id="insFormSaveBtn" onclick="saveInsuranceForm()">Save</button>
+        <div class="ins-manual-divider"></div>
+
+        <!-- Secondary Insurance -->
+        <div class="ins-manual-section">
+          <div class="ins-manual-section-title">
+            <span class="ins-manual-badge ins-manual-badge--secondary">2</span>
+            <strong>Secondary Insurance</strong>
+            <span class="ins-manual-optional">(if applicable)</span>
           </div>
+          <div class="ins-manual-grid">
+            <div class="ins-form-group">
+              <label class="ins-manual-label">INSURANCE NAME</label>
+              <input type="text" class="ins-form-input" id="secondaryProvider" placeholder="e.g. Medicaid, Medicare" />
+            </div>
+            <div class="ins-form-group">
+              <label class="ins-manual-label">MEMBER ID</label>
+              <input type="text" class="ins-form-input" id="secondaryMemberId" placeholder="Member / subscriber ID" />
+            </div>
+            <div class="ins-form-group">
+              <label class="ins-manual-label">GROUP NUMBER</label>
+              <input type="text" class="ins-form-input" id="secondaryGroupNumber" placeholder="Group #" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions" style="padding-top:8px;">
+          <button class="btn-ins-save" id="insFormSaveBtn" onclick="saveInsuranceForm()">Save</button>
         </div>
       </div>
     </div>
@@ -1281,84 +1300,19 @@
     }
 
     // ── Insurance Details Form ──
-    let insEntryCount = 1;
-
-    function addInsuranceEntry() {
-      if (insEntryCount >= 2) return;
-      insEntryCount++;
-      document.getElementById('insEntry1Header').style.display = 'flex';
-      const container = document.getElementById('insuranceEntries');
-      const divider = document.createElement('div');
-      divider.className = 'ins-entry-divider';
-      container.appendChild(divider);
-      const entry = document.createElement('div');
-      entry.className = 'ins-entry';
-      entry.id = 'insEntry2';
-      entry.innerHTML = `
-        <div class="ins-entry-header">
-          <span class="ins-entry-title">Insurance 2</span>
-          <button class="btn-remove-entry" onclick="removeInsuranceEntry()">
-            <i class="ti ti-trash" style="font-size:16px;"></i> Remove
-          </button>
-        </div>
-        <div class="ins-form-grid">
-          <div class="ins-form-group full">
-            <label class="ins-form-label">Insurance Provider</label>
-            <input type="text" class="ins-form-input" data-field="provider" placeholder="e.g. Blue Cross Blue Shield, Aetna" />
-          </div>
-          <div class="ins-form-group">
-            <label class="ins-form-label">Member ID</label>
-            <input type="text" class="ins-form-input" data-field="memberId" placeholder="e.g. XYZ123456789" />
-          </div>
-          <div class="ins-form-group">
-            <label class="ins-form-label">Group Number</label>
-            <input type="text" class="ins-form-input" data-field="groupNumber" placeholder="e.g. 12345" />
-          </div>
-          <div class="ins-form-group">
-            <label class="ins-form-label">Plan Name</label>
-            <input type="text" class="ins-form-input" data-field="planName" placeholder="e.g. PPO, HMO, Medicare Advantage" />
-          </div>
-          <div class="ins-form-group">
-            <label class="ins-form-label">Plan Type</label>
-            <select class="ins-form-select" data-field="planType">
-              <option value="primary">Primary</option>
-              <option value="secondary">Secondary</option>
-            </select>
-          </div>
-        </div>`;
-      container.appendChild(entry);
-      document.getElementById('addInsuranceBtn').style.display = 'none';
-    }
-
-    function removeInsuranceEntry() {
-      document.getElementById('insEntry2')?.remove();
-      document.querySelector('.ins-entry-divider')?.remove();
-      insEntryCount--;
-      document.getElementById('insEntry1Header').style.display = 'none';
-      document.getElementById('addInsuranceBtn').style.display = 'flex';
-    }
-
-    function getEntryData(entry) {
-      return {
-        provider:    entry.querySelector('[data-field="provider"]').value.trim(),
-        memberId:    entry.querySelector('[data-field="memberId"]').value.trim(),
-        groupNumber: entry.querySelector('[data-field="groupNumber"]').value.trim(),
-        planName:    entry.querySelector('[data-field="planName"]').value.trim(),
-        planType:    entry.querySelector('[data-field="planType"]').value,
-      };
-    }
-
-    function fillEntry(entry, data) {
-      entry.querySelector('[data-field="provider"]').value    = data.provider    || '';
-      entry.querySelector('[data-field="memberId"]').value    = data.memberId    || '';
-      entry.querySelector('[data-field="groupNumber"]').value = data.groupNumber || '';
-      entry.querySelector('[data-field="planName"]').value    = data.planName    || '';
-      entry.querySelector('[data-field="planType"]').value    = data.planType    || 'primary';
-    }
-
     function saveInsuranceForm() {
-      const entries = document.querySelectorAll('.ins-entry');
-      const data = Array.from(entries).map(getEntryData);
+      const data = [
+        {
+          provider:    document.getElementById('primaryProvider').value.trim(),
+          memberId:    document.getElementById('primaryMemberId').value.trim(),
+          groupNumber: document.getElementById('primaryGroupNumber').value.trim(),
+        },
+        {
+          provider:    document.getElementById('secondaryProvider').value.trim(),
+          memberId:    document.getElementById('secondaryMemberId').value.trim(),
+          groupNumber: document.getElementById('secondaryGroupNumber').value.trim(),
+        }
+      ];
       localStorage.setItem('igschedule_insurance_info', JSON.stringify(data));
       const providers = data.map(d => d.provider).filter(Boolean);
       localStorage.setItem('igschedule_providers', JSON.stringify(providers));
@@ -1372,12 +1326,15 @@
       const stored = localStorage.getItem('igschedule_insurance_info');
       if (!stored) return;
       const data = JSON.parse(stored);
-      if (!data.length) return;
-      const entries = document.querySelectorAll('.ins-entry');
-      if (data[0]) fillEntry(entries[0], data[0]);
+      if (data[0]) {
+        document.getElementById('primaryProvider').value    = data[0].provider    || '';
+        document.getElementById('primaryMemberId').value    = data[0].memberId    || '';
+        document.getElementById('primaryGroupNumber').value = data[0].groupNumber || '';
+      }
       if (data[1]) {
-        addInsuranceEntry();
-        fillEntry(document.getElementById('insEntry2'), data[1]);
+        document.getElementById('secondaryProvider').value    = data[1].provider    || '';
+        document.getElementById('secondaryMemberId').value    = data[1].memberId    || '';
+        document.getElementById('secondaryGroupNumber').value = data[1].groupNumber || '';
       }
     })();
 

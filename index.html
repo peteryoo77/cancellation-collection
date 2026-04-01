@@ -945,6 +945,69 @@
       </div>
     </div>
 
+    <!-- Insurance Information 2 -->
+    <div class="card">
+      <div class="ins-action-banner" id="insActionBanner2">
+        <i class="ti ti-alert-circle" style="font-size:20px;flex-shrink:0;"></i>
+        <span>Missing Information</span>
+      </div>
+      <div class="insurance">
+
+        <!-- Upload state -->
+        <div id="insUploadState2" style="display:flex;flex-direction:column;align-items:center;gap:48px;width:100%;">
+          <div class="section-heading">
+            <h2>Insurance Information</h2>
+            <p>Please share your insurance information with the care team.<br>Adding it only takes a moment.</p>
+          </div>
+          <div id="insuranceFileList2" style="display:none;width:100%;max-width:880px;flex-direction:column;gap:8px;max-height:432px;overflow-y:auto;"></div>
+          <div style="width:100%;max-width:880px;display:flex;flex-direction:column;gap:16px;">
+            <div id="uploadError2" style="display:none;padding:24px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
+              <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
+              <span style="color:#A83836;font-size:var(--text-sm);font-weight:500;">You can only upload up to 10 files.</span>
+            </div>
+            <div id="typeError2" style="display:none;padding:24px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
+              <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
+              <span style="color:#A83836;font-size:var(--text-sm);font-weight:500;">Only PDF, JPG, or PNG files are allowed.</span>
+            </div>
+            <div id="genericError2" style="display:none;padding:24px 16px;background:rgba(250,116,111,0.10);border-radius:8px;outline:1px solid rgba(168,56,54,0.20);align-items:center;gap:12px;">
+              <i class="ti ti-alert-circle" style="font-size:20px;color:#A83836;flex-shrink:0;"></i>
+              <span style="color:#A83836;font-size:var(--text-sm);font-weight:500;">We were unable to accept this file. Please try again.</span>
+            </div>
+            <div class="upload-area" id="insuranceUploadArea2" onclick="document.getElementById('fileInput2').click()">
+              <i class="ti ti-cloud-upload" style="font-size:52px;color:var(--green);"></i>
+              <div class="upload-text">
+                <p>Drag &amp; drop or select a file</p>
+                <span>PDF, JPG, or PNG — up to 10MB</span>
+              </div>
+              <input id="fileInput2" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="handleInsuranceFiles2(this.files)" />
+            </div>
+          </div>
+          <button id="completeUploadBtn2" class="btn-disabled" disabled onclick="completeUpload2()">Submit</button>
+        </div>
+
+        <!-- Success state -->
+        <div class="ins-success" id="insSuccessState2">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:24px;">
+            <div class="ins-success-icon">
+              <i class="ti ti-check" style="font-size:40px;color:var(--green);"></i>
+            </div>
+            <p class="ins-success-title">Upload Successful</p>
+          </div>
+          <div class="ins-success-body">
+            <div class="ins-info-banner">
+              <i class="ti ti-info-circle" style="font-size:22px;color:var(--green);flex-shrink:0;"></i>
+              <span>Need to make a change? Update your insurance details in <a href="edit-insurance.html">Edit Insurance</a>.</span>
+            </div>
+            <div class="ins-doc-list">
+              <p class="ins-doc-label" id="insDocLabel2">Received Documents</p>
+              <div id="insDocItems2" style="display:flex;flex-direction:column;gap:8px;max-height:432px;overflow-y:auto;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- Verify Insurance -->
     <div class="card verify-ins-card">
       <div class="verify-ins-body">
@@ -1173,6 +1236,103 @@
 
       insFileList.appendChild(item);
       updateCompleteBtn();
+    }
+
+    // ── Insurance upload 2 ──
+    const insFileList2 = document.getElementById('insuranceFileList2');
+    const insUpload2 = document.getElementById('insuranceUploadArea2');
+
+    insUpload2.addEventListener('dragover', e => { e.preventDefault(); insUpload2.style.borderColor = 'var(--green)'; });
+    insUpload2.addEventListener('dragleave', () => { insUpload2.style.borderColor = ''; });
+    insUpload2.addEventListener('drop', e => { e.preventDefault(); insUpload2.style.borderColor = ''; handleInsuranceFiles2(e.dataTransfer.files); });
+
+    const uploadError2 = document.getElementById('uploadError2');
+    const completeBtn2 = document.getElementById('completeUploadBtn2');
+    const uploadedFiles2 = [];
+
+    function updateCompleteBtn2() {
+      const hasFiles = uploadedFiles2.length > 0;
+      completeBtn2.disabled = !hasFiles;
+      completeBtn2.classList.toggle('active', hasFiles);
+    }
+
+    function completeUpload2() {
+      const docItems = document.getElementById('insDocItems2');
+      const docLabel = document.getElementById('insDocLabel2');
+      docItems.innerHTML = '';
+      docLabel.textContent = 'Received Documents (' + uploadedFiles2.length + ')';
+      const date = formatUploadDate();
+      uploadedFiles2.forEach(f => {
+        const row = document.createElement('div');
+        row.className = 'ins-doc-item';
+        row.innerHTML = `
+          <div class="ins-doc-left">
+            <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:32px;color:var(--green);"></i></div>
+            <div class="ins-doc-text">
+              <div class="ins-doc-name">${truncateName(f.name)}</div>
+              <div class="ins-doc-meta ins-doc-meta--full">${date}</div>
+              <div class="ins-doc-meta ins-doc-meta--mobile">${date}</div>
+            </div>
+          </div>`;
+        docItems.appendChild(row);
+      });
+      document.getElementById('insUploadState2').style.display = 'none';
+      document.getElementById('insSuccessState2').classList.add('show');
+      document.getElementById('insActionBanner2').style.display = 'none';
+    }
+
+    const typeError2 = document.getElementById('typeError2');
+    const genericError2 = document.getElementById('genericError2');
+
+    function handleInsuranceFiles2(files) {
+      const fileArr = Array.from(files);
+      const invalid = fileArr.some(f => !ALLOWED.includes(f.type));
+      if (invalid) { typeError2.style.display = 'flex'; return; }
+      typeError2.style.display = 'none';
+      const remaining = MAX_FILES - uploadedFiles2.length;
+      if (remaining <= 0 || fileArr.length > remaining) {
+        uploadError2.style.display = 'flex';
+        return;
+      }
+      uploadError2.style.display = 'none';
+      fileArr.slice(0, remaining).forEach(file => {
+        try { addInsuranceFile2(file); }
+        catch(e) { genericError2.style.display = 'flex'; }
+      });
+    }
+
+    function addInsuranceFile2(file) {
+      const fileObj = { name: file.name, size: file.size };
+      uploadedFiles2.push(fileObj);
+      insFileList2.style.display = 'flex';
+      genericError2.style.display = 'none';
+      const date = formatUploadDate();
+      const sizeStr = formatSize(file.size);
+
+      const item = document.createElement('div');
+      item.className = 'ins-doc-item';
+      item.innerHTML = `
+        <div class="ins-doc-left">
+          <div class="ins-doc-icon"><i class="ti ti-file-description" style="font-size:32px;color:var(--green);"></i></div>
+          <div class="ins-doc-text">
+            <div class="ins-doc-name">${truncateName(file.name)}</div>
+            <div class="ins-doc-meta ins-doc-meta--full">${date}</div>
+            <div class="ins-doc-meta ins-doc-meta--mobile">${date}</div>
+          </div>
+        </div>
+        <button class="ins-doc-del" title="Remove"><i class="ti ti-trash" style="font-size:24px;"></i></button>`;
+
+      item.querySelector('.ins-doc-del').onclick = () => {
+        const idx = uploadedFiles2.findIndex(f => f.name === file.name && f.size === file.size);
+        if (idx !== -1) uploadedFiles2.splice(idx, 1);
+        item.remove();
+        if (uploadedFiles2.length === 0) insFileList2.style.display = 'none';
+        if (uploadedFiles2.length < MAX_FILES) uploadError2.style.display = 'none';
+        updateCompleteBtn2();
+      };
+
+      insFileList2.appendChild(item);
+      updateCompleteBtn2();
     }
 
     function selectRating(el) {

@@ -851,7 +851,7 @@
       .feedback-module { gap: 14px; padding-top: 20px; }
       .feedback-label { font-size: 15px; }
       .feedback-sub { font-size: 13px; }
-      .chip { font-size: 13px; padding: 8px 14px; }
+      .reason-card { font-size: 15px; min-height: 54px; padding: 12px 16px; }
       .btn-submit-other { width: 100%; align-self: unset; }
 
       .insurance { padding: 32px 20px; gap: 28px; }
@@ -922,7 +922,9 @@
       /* Cancel modal — small mobile */
       .modal { padding: 22px 16px 20px; }
       .modal-step-title { font-size: 17px; }
-      .chip { font-size: 12px; padding: 7px 12px; }
+      .reason-card { font-size: 14px; min-height: 50px; padding: 11px 14px; gap: 12px; }
+      .reason-radio { width: 20px; height: 20px; }
+      .reason-radio-fill { width: 10px; height: 10px; }
     }
 
     /* ══ INSURANCE FORM ══ */
@@ -1149,37 +1151,74 @@
     }
     .feedback-skip:hover { color: var(--text-dark); }
 
-    .chip-grid {
+    /* ── Reason cards (replaces chips) ── */
+    .reason-list {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .chip {
-      padding: 9px 16px;
-      border: 1.5px solid #D1D5DB;
-      border-radius: 9999px;
+    .reason-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      min-height: 60px;
+      padding: 14px 18px;
       background: #fff;
+      border: 2px solid #E2E8F0;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: left;
       font-family: 'Poppins', sans-serif;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 500;
       color: var(--text-dark);
-      cursor: pointer;
-      transition: border-color 0.15s, background 0.15s, color 0.15s;
-      line-height: 1;
+      transition: border-color 0.15s, background 0.15s;
+      box-sizing: border-box;
     }
-    .chip:hover { border-color: var(--green); color: var(--green); }
-    .chip.selected {
-      background: var(--green);
+    .reason-card:hover {
       border-color: var(--green);
-      color: #fff;
+      background: var(--green-light);
     }
-    .chip.submitting {
-      background: var(--green-dark);
+    .reason-card.selected {
+      border-color: var(--green);
+      background: var(--green-light);
+    }
+    .reason-card.submitting {
       border-color: var(--green-dark);
-      color: #fff;
+      background: var(--green-light);
       pointer-events: none;
+      opacity: 0.8;
     }
+
+    /* Radio dot */
+    .reason-radio {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #CBD5E1;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s;
+    }
+    .reason-card:hover .reason-radio,
+    .reason-card.selected .reason-radio,
+    .reason-card.submitting .reason-radio {
+      border-color: var(--green);
+    }
+    .reason-radio-fill {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--green);
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .reason-card.selected .reason-radio-fill,
+    .reason-card.submitting .reason-radio-fill { opacity: 1; }
 
     .other-input-wrap {
       display: none;
@@ -1762,12 +1801,27 @@
             </div>
             <button class="feedback-skip" onclick="exitFlow()">Skip</button>
           </div>
-          <div class="chip-grid">
-            <button class="chip" onclick="selectChip(this,'Schedule conflict')">Schedule conflict</button>
-            <button class="chip" onclick="selectChip(this,'Rescheduled elsewhere')">Rescheduled elsewhere</button>
-            <button class="chip" onclick="selectChip(this,'Feeling better')">Feeling better</button>
-            <button class="chip" onclick="selectChip(this,'Wait time too long')">Wait time too long</button>
-            <button class="chip" onclick="selectChip(this,'Other')">Other</button>
+          <div class="reason-list">
+            <button class="reason-card" onclick="selectReason(this,'Schedule conflict')">
+              <span class="reason-radio"><span class="reason-radio-fill"></span></span>
+              Schedule conflict
+            </button>
+            <button class="reason-card" onclick="selectReason(this,'Rescheduled elsewhere')">
+              <span class="reason-radio"><span class="reason-radio-fill"></span></span>
+              Rescheduled elsewhere
+            </button>
+            <button class="reason-card" onclick="selectReason(this,'Feeling better')">
+              <span class="reason-radio"><span class="reason-radio-fill"></span></span>
+              Feeling better
+            </button>
+            <button class="reason-card" onclick="selectReason(this,'Wait time too long')">
+              <span class="reason-radio"><span class="reason-radio-fill"></span></span>
+              Wait time too long
+            </button>
+            <button class="reason-card" onclick="selectReason(this,'Other')">
+              <span class="reason-radio"><span class="reason-radio-fill"></span></span>
+              Other
+            </button>
           </div>
           <div class="other-input-wrap" id="otherInputWrap">
             <textarea class="other-textarea" id="otherText" placeholder="Tell us more (optional)..."></textarea>
@@ -1790,7 +1844,7 @@
     function closeCancelModal() {
       document.getElementById('cancelModal').classList.remove('open');
       // reset feedback state
-      document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected', 'submitting'));
+      document.querySelectorAll('.reason-card').forEach(c => c.classList.remove('selected', 'submitting'));
       document.getElementById('otherInputWrap').classList.remove('visible');
       document.getElementById('otherText').value = '';
     }
@@ -1806,17 +1860,18 @@
       document.getElementById('cancelStep2').style.display = 'flex';
     }
 
-    function selectChip(el, reason) {
-      document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+    function selectReason(el, reason) {
+      document.querySelectorAll('.reason-card').forEach(c => c.classList.remove('selected', 'submitting'));
       el.classList.add('selected');
 
       if (reason === 'Other') {
         document.getElementById('otherInputWrap').classList.add('visible');
+        document.getElementById('otherText').focus();
       } else {
         document.getElementById('otherInputWrap').classList.remove('visible');
-        // Immediate submit — brief visual confirmation then exit
+        // Brief visual confirmation then exit
         el.classList.add('submitting');
-        setTimeout(() => exitFlow(), 500);
+        setTimeout(() => exitFlow(), 600);
       }
     }
 

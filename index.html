@@ -852,7 +852,7 @@
       .feedback-label { font-size: 15px; }
       .feedback-sub { font-size: 13px; }
       .reason-card { font-size: 15px; min-height: 54px; padding: 12px 16px; }
-      .btn-submit-other { width: 100%; align-self: unset; }
+      .btn-feedback-submit { height: 52px; font-size: 15px; }
 
       .insurance { padding: 32px 20px; gap: 28px; }
       .ins-action-banner { padding: 10px 20px; font-size: var(--text-sm); text-align: center; }
@@ -1247,21 +1247,23 @@
     }
     .other-textarea::placeholder { color: #9CA3AF; }
 
-    .btn-submit-other {
-      align-self: flex-end;
-      height: 44px;
-      padding: 0 24px;
+    .btn-feedback-submit {
+      display: none;
+      width: 100%;
+      height: 56px;
       background: #1B4332;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       font-family: 'Poppins', sans-serif;
-      font-size: var(--text-sm);
+      font-size: 16px;
       font-weight: 600;
       color: #fff;
       cursor: pointer;
       transition: background 0.18s;
+      margin-top: 4px;
     }
-    .btn-submit-other:hover { background: #143326; }
+    .btn-feedback-submit.visible { display: block; }
+    .btn-feedback-submit:hover { background: #143326; }
 
     /* ── Cancelled state on appointment card ── */
     .appt-card.cancelled .appt-confirmed-badge {
@@ -1825,8 +1827,8 @@
           </div>
           <div class="other-input-wrap" id="otherInputWrap">
             <textarea class="other-textarea" id="otherText" placeholder="Tell us more (optional)..."></textarea>
-            <button class="btn-submit-other" onclick="submitOther()">Submit</button>
           </div>
+          <button class="btn-feedback-submit" id="feedbackSubmitBtn" onclick="submitFeedback()">Submit</button>
         </div>
 
       </div>
@@ -1843,9 +1845,9 @@
 
     function closeCancelModal() {
       document.getElementById('cancelModal').classList.remove('open');
-      // reset feedback state
       document.querySelectorAll('.reason-card').forEach(c => c.classList.remove('selected', 'submitting'));
       document.getElementById('otherInputWrap').classList.remove('visible');
+      document.getElementById('feedbackSubmitBtn').classList.remove('visible');
       document.getElementById('otherText').value = '';
     }
 
@@ -1861,7 +1863,7 @@
     }
 
     function selectReason(el, reason) {
-      document.querySelectorAll('.reason-card').forEach(c => c.classList.remove('selected', 'submitting'));
+      document.querySelectorAll('.reason-card').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
 
       if (reason === 'Other') {
@@ -1869,14 +1871,15 @@
         document.getElementById('otherText').focus();
       } else {
         document.getElementById('otherInputWrap').classList.remove('visible');
-        // Brief visual confirmation then exit
-        el.classList.add('submitting');
-        setTimeout(() => exitFlow(), 600);
       }
+
+      document.getElementById('feedbackSubmitBtn').classList.add('visible');
     }
 
-    function submitOther() {
-      exitFlow();
+    function submitFeedback() {
+      const selected = document.querySelector('.reason-card.selected');
+      if (selected) selected.classList.add('submitting');
+      closeCancelModal();
     }
 
     function exitFlow() {

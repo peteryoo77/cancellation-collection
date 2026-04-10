@@ -11,7 +11,7 @@
 
     /* ══ NAV ══ */
     nav {
-      background: var(--green-light);
+      background: #fff;
       padding: 0 160px;
       height: 72px;
       display: flex;
@@ -218,44 +218,152 @@
       border: 2px solid var(--green-light);
     }
 
-    /* ══ HERO ══ */
+    /* ══ HERO (Appointment Card) ══ */
     .hero {
-      background: var(--green-light);
-      padding: 80px 160px;
+      background: #EEEEED;
+      padding: 64px 40px 80px;
       display: flex;
       justify-content: center;
       align-items: flex-start;
     }
 
-    .hero-inner {
-      width: 1120px;
-      display: inline-flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 29px;
+    .appt-card {
+      width: 100%;
+      max-width: 920px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      display: flex;
+      overflow: hidden;
     }
 
-    .hero-left {
-      width: 563px;
+    .appt-illustration {
+      width: 37%;
       flex-shrink: 0;
-      display: inline-flex;
+      background: #7DC4AB;
+      position: relative;
+      overflow: hidden;
+      min-height: 320px;
+    }
+
+    .appt-illustration svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .appt-details {
+      flex: 1;
+      padding: 40px 44px 36px;
+      display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      gap: 26px;
+    }
+
+    .appt-header-row {
+      display: flex;
       align-items: flex-start;
-      gap: 52px;
+      justify-content: space-between;
+      gap: 16px;
     }
 
-    .hero-text { width: 483px; display: flex; flex-direction: column; gap: 16px; }
-    .hero-text h1 { font-size: 40px; font-weight: 700; color: #000; line-height: 1.2; }
-    .hero-text p  { font-size: 20px; font-weight: 400; color: #333333; line-height: 1.5; }
+    .appt-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.3;
+      margin: 0;
+    }
 
-    .hero-img {
-      width: 528px;
-      height: 360px;
+    .appt-confirmed-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--green-light);
+      border-radius: 9999px;
+      color: var(--green-dark);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      white-space: nowrap;
       flex-shrink: 0;
-      border-radius: 20px;
-      object-fit: cover;
     }
+
+    .appt-info-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .appt-icon-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .appt-icon--calendar { background: var(--green); }
+    .appt-icon--phone    { background: var(--green-light); }
+
+    .appt-date {
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .appt-time {
+      font-size: var(--text-sm);
+      color: var(--green);
+      font-weight: 500;
+      margin-top: 3px;
+    }
+
+    .appt-type {
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .appt-actions {
+      display: flex;
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .appt-action-btn {
+      flex: 1;
+      height: 54px;
+      background: #fff;
+      border: 1.5px solid #D1D5DB;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: border-color 0.18s, color 0.18s;
+    }
+
+    .appt-action-btn:hover { border-color: var(--green); color: var(--green); }
+
+    /* Sign Out button */
+    .btn-signout {
+      height: 40px;
+      padding: 0 20px;
+      background: #fff;
+      border: 1.5px solid #D1D5DB;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: border-color 0.18s, color 0.18s;
+    }
+    .btn-signout:hover { border-color: var(--green); color: var(--green); }
 
     /* ══ BUTTONS ══ */
     .btn-primary {
@@ -842,102 +950,220 @@
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
-      <div class="nav-logo"><span>IGSchedule</span></div>
+      <div class="nav-logo" style="display:flex;align-items:center;gap:8px;">
+        <svg width="24" height="34" viewBox="0 0 24 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 3C18 3 6 7.5 6 14C6 17.5 9.5 19.5 13 19.5C16.5 19.5 20 21.5 20 25C20 29 13 31.5 5 29" stroke="#15C393" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        </svg>
+        <div style="display:flex;flex-direction:column;line-height:1.1;">
+          <span style="font-size:10px;font-weight:700;color:#15C393;letter-spacing:1.5px;">INTEGRAL</span>
+          <span style="font-size:15px;font-weight:800;color:#1C2B28;letter-spacing:0.3px;">HEALTH</span>
+        </div>
+      </div>
       <div class="nav-right">
         <div class="nav-lang" title="Language">
-          <i class="ti ti-world" style="font-size:20px;"></i>
-          <span>EN</span>
-          <i class="ti ti-chevron-down" style="font-size:var(--text-sm);"></i>
+          <i class="ti ti-world" style="font-size:18px;"></i>
+          <span>English</span>
+          <i class="ti ti-chevron-down" style="font-size:13px;"></i>
         </div>
-        <div class="notif-wrapper">
-          <div class="bell-wrapper nav-icon" onclick="toggleNotif()" title="Notifications">
-            <i class="ti ti-bell" style="font-size:24px;"></i>
-            <div class="notif-badge" id="notifBadge"></div>
-          </div>
-          <div class="notif-dropdown" id="notifDropdown">
-            <div class="notif-header">
-              <h3>Notifications</h3>
-              <button class="notif-mark-all" onclick="markAllRead()">Mark all as read</button>
-            </div>
-            <div class="notif-list" id="notifList">
-              <div class="notif-item unread" onclick="readNotif(this)">
-                <div class="notif-icon-wrap" style="background:#E8F9F4;">
-                  <i class="ti ti-calendar-check" style="font-size:20px;color:var(--green);"></i>
-                </div>
-                <div class="notif-content">
-                  <p>Your session has been scheduled for <strong>April 3 at 2:00 PM</strong>.</p>
-                  <span>Just now</span>
-                </div>
-                <div class="notif-dot"></div>
-              </div>
-              <div class="notif-item unread" onclick="readNotif(this)">
-                <div class="notif-icon-wrap" style="background:#E8F9F4;">
-                  <i class="ti ti-clock" style="font-size:20px;color:var(--green);"></i>
-                </div>
-                <div class="notif-content">
-                  <p>Upcoming session with <strong>Sofia Skinner</strong> tomorrow at 10:00 AM.</p>
-                  <span>2 hours ago</span>
-                </div>
-                <div class="notif-dot"></div>
-              </div>
-              <div class="notif-item unread" onclick="readNotif(this)">
-                <div class="notif-icon-wrap" style="background:#E8F9F4;">
-                  <i class="ti ti-clipboard-list" style="font-size:20px;color:var(--green);"></i>
-                </div>
-                <div class="notif-content">
-                  <p>A new assessment has been added to your profile. Please complete it before your next session.</p>
-                  <span>Yesterday</span>
-                </div>
-                <div class="notif-dot"></div>
-              </div>
-              <div class="notif-item" onclick="readNotif(this)">
-                <div class="notif-icon-wrap" style="background:#E8F9F4;">
-                  <i class="ti ti-shield-check" style="font-size:20px;color:var(--green);"></i>
-                </div>
-                <div class="notif-content">
-                  <p>Your insurance information has been <strong>confirmed</strong> by the care team.</p>
-                  <span>3 days ago</span>
-                </div>
-              </div>
-              <div class="notif-item" onclick="readNotif(this)">
-                <div class="notif-icon-wrap" style="background:#E8F9F4;">
-                  <i class="ti ti-calendar-plus" style="font-size:20px;color:var(--green);"></i>
-                </div>
-                <div class="notif-content">
-                  <p>Your follow-up session has been scheduled for <strong>April 10 at 3:30 PM</strong>.</p>
-                  <span>5 days ago</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="profile-wrapper">
-          <div class="nav-profile" onclick="toggleDropdown()" title="Profile">
-            <div style="width:32px;height:32px;border-radius:9999px;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ti ti-user" style="font-size:18px;color:#fff;"></i></div>
-            <span>Profile</span>
-            <i class="ti ti-chevron-down" style="font-size:var(--text-sm);color:#94A3B8;margin-left:2px;"></i>
-          </div>
-          <div class="dropdown" id="profileDropdown">
-            <a href="edit-insurance.html"><i class="ti ti-shield" style="font-size:16px;"></i> Edit Insurance</a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="danger"><i class="ti ti-logout" style="font-size:16px;"></i> Sign Out</a>
-          </div>
-        </div>
+        <button class="btn-signout">Sign Out</button>
       </div>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO (Appointment Confirmation Card) -->
   <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-left">
-        <div class="hero-text">
-          <h1>Schedule Your Session</h1>
-          <p>Book your session whenever it feels right and we'll be here waiting for you.</p>
-        </div>
-        <button class="btn-primary">Schedule Appointment</button>
+    <div class="appt-card">
+
+      <!-- Left: Illustrated panel -->
+      <div class="appt-illustration">
+        <svg viewBox="0 0 340 460" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <!-- Background -->
+          <rect width="340" height="460" fill="#7DC4AB"/>
+
+          <!-- Background large leaves -->
+          <ellipse cx="30" cy="210" rx="38" ry="68" fill="#5BA88A" opacity="0.55" transform="rotate(-25 30 210)"/>
+          <ellipse cx="310" cy="190" rx="44" ry="80" fill="#5BA88A" opacity="0.45" transform="rotate(18 310 190)"/>
+          <path d="M 0 320 Q 30 280 55 320 Q 30 310 0 320 Z" fill="#4A9070" opacity="0.6"/>
+          <path d="M 295 350 Q 330 310 340 355" fill="#4A9070" opacity="0.5"/>
+
+          <!-- Top-left branch + leaf -->
+          <path d="M 20 60 Q 55 35 70 65" stroke="#4A9070" stroke-width="2.5" fill="none"/>
+          <ellipse cx="72" cy="57" rx="18" ry="32" fill="#5BA88A" opacity="0.75" transform="rotate(20 72 57)"/>
+          <path d="M 20 60 Q 40 40 52 55" stroke="#4A9070" stroke-width="2" fill="none"/>
+
+          <!-- Top-right sprigs -->
+          <path d="M 290 50 Q 320 28 330 55" stroke="#4A9070" stroke-width="2" fill="none"/>
+          <ellipse cx="330" cy="47" rx="16" ry="28" fill="#5BA88A" opacity="0.65" transform="rotate(-15 330 47)"/>
+
+          <!-- Hair (dark, large) -->
+          <path d="M 128 158 Q 112 108 140 82 Q 163 62 195 64 Q 230 66 248 90 Q 268 118 260 158 Q 252 178 250 210 L 255 300 Q 248 318 240 325 L 148 325 Q 140 318 132 300 L 136 210 Q 126 178 128 158 Z" fill="#2A2A44"/>
+
+          <!-- Hair left flyaway -->
+          <path d="M 133 115 Q 108 92 118 72 Q 122 90 133 115 Z" fill="#2A2A44"/>
+          <!-- Hair right flyaway -->
+          <path d="M 255 112 Q 278 89 268 68 Q 265 88 255 112 Z" fill="#2A2A44"/>
+
+          <!-- Flowers in hair (left side) -->
+          <circle cx="148" cy="80" r="7" fill="#F48FB1"/>
+          <circle cx="148" cy="80" r="3.5" fill="#E91E8C"/>
+          <circle cx="135" cy="95" r="5" fill="#F06292"/>
+          <circle cx="135" cy="95" r="2.5" fill="#C2185B"/>
+
+          <!-- Flowers in hair (right side) -->
+          <circle cx="250" cy="78" r="6" fill="#EF9A9A"/>
+          <circle cx="250" cy="78" r="3" fill="#E53935"/>
+          <circle cx="265" cy="94" r="4.5" fill="#FFCCBC"/>
+          <circle cx="265" cy="94" r="2" fill="#FF7043"/>
+
+          <!-- Leaf branch from left hair -->
+          <path d="M 143 120 Q 110 100 98 78" stroke="#4A9070" stroke-width="2" fill="none"/>
+          <ellipse cx="98" cy="76" rx="16" ry="28" fill="#5BA88A" transform="rotate(-35 98 76)"/>
+          <path d="M 143 120 Q 118 102 115 82" stroke="#4A9070" stroke-width="1.5" fill="none"/>
+          <ellipse cx="113" cy="78" rx="12" ry="22" fill="#6CC8A0" transform="rotate(-20 113 78)"/>
+
+          <!-- Leaf branch from right hair -->
+          <path d="M 246 116 Q 278 97 290 76" stroke="#4A9070" stroke-width="2" fill="none"/>
+          <ellipse cx="292" cy="73" rx="16" ry="27" fill="#5BA88A" transform="rotate(30 292 73)"/>
+
+          <!-- Face -->
+          <circle cx="193" cy="168" r="40" fill="#F5C5A3"/>
+
+          <!-- Eyes -->
+          <ellipse cx="180" cy="162" rx="4" ry="5" fill="#3D2B1F"/>
+          <ellipse cx="206" cy="162" rx="4" ry="5" fill="#3D2B1F"/>
+          <circle cx="182" cy="160" r="1.5" fill="white"/>
+          <circle cx="208" cy="160" r="1.5" fill="white"/>
+
+          <!-- Eyebrows -->
+          <path d="M 174 153 Q 180 149 186 152" stroke="#3D2B1F" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M 200 152 Q 206 149 212 153" stroke="#3D2B1F" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+          <!-- Smile -->
+          <path d="M 184 178 Q 193 187 202 178" stroke="#C97B5A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+          <!-- Cheek blush -->
+          <ellipse cx="172" cy="174" rx="9" ry="6" fill="#F4A7A7" opacity="0.45"/>
+          <ellipse cx="214" cy="174" rx="9" ry="6" fill="#F4A7A7" opacity="0.45"/>
+
+          <!-- Neck -->
+          <rect x="186" y="205" width="15" height="22" fill="#F5C5A3"/>
+
+          <!-- White shirt -->
+          <path d="M 148 228 Q 136 238 130 268 L 128 355 L 258 355 L 256 268 Q 250 238 238 228 Q 218 222 193 222 Q 168 222 148 228 Z" fill="#FAFAFA"/>
+
+          <!-- Collar V-neck -->
+          <path d="M 163 228 Q 193 248 223 228" stroke="#E8E8E8" stroke-width="1.5" fill="none"/>
+
+          <!-- Pink heart on shirt -->
+          <path d="M 193 285 Q 174 272 174 259 Q 174 248 183 248 Q 188 248 193 255 Q 198 248 203 248 Q 212 248 212 259 Q 212 272 193 285 Z" fill="#E91E63" opacity="0.9"/>
+
+          <!-- Olive/brown lower body -->
+          <path d="M 134 350 L 130 440 L 165 440 L 178 375 L 208 375 L 221 440 L 256 440 L 252 350 Z" fill="#8B8C4E"/>
+
+          <!-- Left arm (relaxed at side, slightly forward) -->
+          <path d="M 142 232 Q 100 258 88 316 L 103 320 Q 116 270 150 248 Z" fill="#F5C5A3"/>
+          <ellipse cx="97" cy="322" rx="11" ry="9" fill="#F5C5A3"/>
+
+          <!-- Right arm (extended, holding calendar edge) -->
+          <path d="M 244 232 Q 286 258 298 316 L 283 320 Q 270 270 236 248 Z" fill="#F5C5A3"/>
+          <ellipse cx="289" cy="322" rx="11" ry="9" fill="#F5C5A3"/>
+
+          <!-- Calendar (white, held in front) -->
+          <rect x="100" y="308" width="186" height="132" rx="9" fill="white" filter="url(#calshadow)"/>
+
+          <!-- Calendar shadow filter -->
+          <defs>
+            <filter id="calshadow" x="-5%" y="-5%" width="110%" height="115%">
+              <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000022"/>
+            </filter>
+          </defs>
+
+          <!-- Day headers -->
+          <text x="107" y="325" font-family="sans-serif" font-size="6.5" fill="#7DC4AB" font-weight="700">SUN</text>
+          <text x="130" y="325" font-family="sans-serif" font-size="6.5" fill="#7DC4AB" font-weight="700">MON</text>
+          <text x="154" y="325" font-family="sans-serif" font-size="6.5" fill="#7DC4AB" font-weight="700">TUE</text>
+          <text x="178" y="325" font-family="sans-serif" font-size="6.5" fill="#7DC4AB" font-weight="700">WED</text>
+          <text x="202" y="325" font-family="sans-serif" font-size="6.5" fill="#7DC4AB" font-weight="700">THU</text>
+          <text x="227" y="325" font-family="sans-serif" font-size="6.5" fill="#7DC4AB" font-weight="700">FRI</text>
+          <text x="251" y="325" font-family="sans-serif" font-size="6.5" fill="#7DC4AB" font-weight="700">SAT</text>
+          <!-- Divider line -->
+          <line x1="100" y1="329" x2="286" y2="329" stroke="#E8F9F4" stroke-width="1"/>
+
+          <!-- Calendar grid rows -->
+          <!-- Row 1 -->
+          <rect x="104" y="333" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="130" y="333" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="156" y="333" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="182" y="333" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="208" y="333" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="234" y="333" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="260" y="333" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <!-- Row 2 -->
+          <rect x="104" y="352" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="130" y="352" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="156" y="352" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="182" y="352" width="22" height="14" rx="3" fill="#7DC4AB"/>
+          <rect x="208" y="352" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="234" y="352" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="260" y="352" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <!-- Row 3 -->
+          <rect x="104" y="371" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="130" y="371" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="156" y="371" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="182" y="371" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="208" y="371" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="234" y="371" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="260" y="371" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <!-- Row 4 -->
+          <rect x="104" y="390" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="130" y="390" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="156" y="390" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="182" y="390" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="208" y="390" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="234" y="390" width="22" height="14" rx="3" fill="#D4EDE7"/>
+          <rect x="260" y="390" width="22" height="14" rx="3" fill="#D4EDE7"/>
+
+          <!-- Small potted plant bottom right -->
+          <rect x="264" y="388" width="22" height="15" rx="3" fill="#A07850"/>
+          <path d="M 275 388 Q 275 368 288 358 Q 282 372 275 388 Z" fill="#5BA88A"/>
+          <path d="M 275 388 Q 268 370 258 363 Q 265 375 275 388 Z" fill="#4A9070"/>
+          <path d="M 275 388 Q 280 371 292 368 Q 285 378 275 388 Z" fill="#6CC8A0"/>
+        </svg>
       </div>
-      <img class="hero-img" src="https://placehold.co/528x360/cce9e2/096249" alt="Session preview" />
+
+      <!-- Right: Meeting details -->
+      <div class="appt-details">
+        <div class="appt-header-row">
+          <h2 class="appt-title">Your Meeting with Vladimir Shin</h2>
+          <div class="appt-confirmed-badge">
+            <i class="ti ti-circle-check" style="font-size:16px;color:var(--green);"></i>
+            <span>Confirmed</span>
+          </div>
+        </div>
+
+        <div class="appt-info-row">
+          <div class="appt-icon-box appt-icon--calendar">
+            <i class="ti ti-calendar" style="font-size:22px;color:#fff;"></i>
+          </div>
+          <div>
+            <div class="appt-date">Saturday, April 11, 2026</div>
+            <div class="appt-time">01:30 AM – 02:15 AM GMT+9</div>
+          </div>
+        </div>
+
+        <div class="appt-info-row">
+          <div class="appt-icon-box appt-icon--phone">
+            <i class="ti ti-phone" style="font-size:22px;color:var(--green);"></i>
+          </div>
+          <div class="appt-type">Phone Call</div>
+        </div>
+
+        <div class="appt-actions">
+          <button class="appt-action-btn">Reschedule</button>
+          <button class="appt-action-btn">Cancel</button>
+        </div>
+      </div>
+
     </div>
   </section>
 

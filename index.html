@@ -221,7 +221,7 @@
     /* ══ HERO (Appointment Card) ══ */
     .hero {
       background: #EEEEED;
-      padding: 64px 40px 80px;
+      padding: 64px 160px 80px;
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -229,7 +229,7 @@
 
     .appt-card {
       width: 100%;
-      max-width: 920px;
+      max-width: 100%;
       background: #fff;
       border-radius: 16px;
       box-shadow: 0 2px 20px rgba(0,0,0,0.08);
@@ -974,162 +974,8 @@
   <section class="hero">
     <div class="appt-card">
 
-      <!-- Left: Illustrated panel -->
-      <div class="appt-illustration">
-        <svg viewBox="0 0 340 460" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <!-- Background -->
-          <rect width="340" height="460" fill="#7DC4AB"/>
-
-          <!-- Background large leaves -->
-          <ellipse cx="30" cy="210" rx="38" ry="68" fill="#5BA88A" opacity="0.55" transform="rotate(-25 30 210)"/>
-          <ellipse cx="310" cy="190" rx="44" ry="80" fill="#5BA88A" opacity="0.45" transform="rotate(18 310 190)"/>
-          <path d="M 0 320 Q 30 280 55 320 Q 30 310 0 320 Z" fill="#4A9070" opacity="0.6"/>
-          <path d="M 295 350 Q 330 310 340 355" fill="#4A9070" opacity="0.5"/>
-
-          <!-- Top-left branch + leaf -->
-          <path d="M 20 60 Q 55 35 70 65" stroke="#4A9070" stroke-width="2.5" fill="none"/>
-          <ellipse cx="72" cy="57" rx="18" ry="32" fill="#5BA88A" opacity="0.75" transform="rotate(20 72 57)"/>
-          <path d="M 20 60 Q 40 40 52 55" stroke="#4A9070" stroke-width="2" fill="none"/>
-
-          <!-- Top-right sprigs -->
-          <path d="M 290 50 Q 320 28 330 55" stroke="#4A9070" stroke-width="2" fill="none"/>
-          <ellipse cx="330" cy="47" rx="16" ry="28" fill="#5BA88A" opacity="0.65" transform="rotate(-15 330 47)"/>
-
-          <!-- Hair (dark, large) -->
-          <path d="M 128 158 Q 112 108 140 82 Q 163 62 195 64 Q 230 66 248 90 Q 268 118 260 158 Q 252 178 250 210 L 255 300 Q 248 318 240 325 L 148 325 Q 140 318 132 300 L 136 210 Q 126 178 128 158 Z" fill="#2A2A44"/>
-
-          <!-- Hair left flyaway -->
-          <path d="M 133 115 Q 108 92 118 72 Q 122 90 133 115 Z" fill="#2A2A44"/>
-          <!-- Hair right flyaway -->
-          <path d="M 255 112 Q 278 89 268 68 Q 265 88 255 112 Z" fill="#2A2A44"/>
-
-          <!-- Flowers in hair (left side) -->
-          <circle cx="148" cy="80" r="7" fill="#F48FB1"/>
-          <circle cx="148" cy="80" r="3.5" fill="#E91E8C"/>
-          <circle cx="135" cy="95" r="5" fill="#F06292"/>
-          <circle cx="135" cy="95" r="2.5" fill="#C2185B"/>
-
-          <!-- Flowers in hair (right side) -->
-          <circle cx="250" cy="78" r="6" fill="#EF9A9A"/>
-          <circle cx="250" cy="78" r="3" fill="#E53935"/>
-          <circle cx="265" cy="94" r="4.5" fill="#FFCCBC"/>
-          <circle cx="265" cy="94" r="2" fill="#FF7043"/>
-
-          <!-- Leaf branch from left hair -->
-          <path d="M 143 120 Q 110 100 98 78" stroke="#4A9070" stroke-width="2" fill="none"/>
-          <ellipse cx="98" cy="76" rx="16" ry="28" fill="#5BA88A" transform="rotate(-35 98 76)"/>
-          <path d="M 143 120 Q 118 102 115 82" stroke="#4A9070" stroke-width="1.5" fill="none"/>
-          <ellipse cx="113" cy="78" rx="12" ry="22" fill="#6CC8A0" transform="rotate(-20 113 78)"/>
-
-          <!-- Leaf branch from right hair -->
-          <path d="M 246 116 Q 278 97 290 76" stroke="#4A9070" stroke-width="2" fill="none"/>
-          <ellipse cx="292" cy="73" rx="16" ry="27" fill="#5BA88A" transform="rotate(30 292 73)"/>
-
-          <!-- Face -->
-          <circle cx="193" cy="168" r="40" fill="#F5C5A3"/>
-
-          <!-- Eyes -->
-          <ellipse cx="180" cy="162" rx="4" ry="5" fill="#3D2B1F"/>
-          <ellipse cx="206" cy="162" rx="4" ry="5" fill="#3D2B1F"/>
-          <circle cx="182" cy="160" r="1.5" fill="white"/>
-          <circle cx="208" cy="160" r="1.5" fill="white"/>
-
-          <!-- Eyebrows -->
-          <path d="M 174 153 Q 180 149 186 152" stroke="#3D2B1F" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <path d="M 200 152 Q 206 149 212 153" stroke="#3D2B1F" stroke-width="2" fill="none" stroke-linecap="round"/>
-
-          <!-- Smile -->
-          <path d="M 184 178 Q 193 187 202 178" stroke="#C97B5A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-
-          <!-- Cheek blush -->
-          <ellipse cx="172" cy="174" rx="9" ry="6" fill="#F4A7A7" opacity="0.45"/>
-          <ellipse cx="214" cy="174" rx="9" ry="6" fill="#F4A7A7" opacity="0.45"/>
-
-          <!-- Neck -->
-          <rect x="186" y="205" width="15" height="22" fill="#F5C5A3"/>
-
-          <!-- White shirt -->
-          <path d="M 148 228 Q 136 238 130 268 L 128 355 L 258 355 L 256 268 Q 250 238 238 228 Q 218 222 193 222 Q 168 222 148 228 Z" fill="#FAFAFA"/>
-
-          <!-- Collar V-neck -->
-          <path d="M 163 228 Q 193 248 223 228" stroke="#E8E8E8" stroke-width="1.5" fill="none"/>
-
-          <!-- Pink heart on shirt -->
-          <path d="M 193 285 Q 174 272 174 259 Q 174 248 183 248 Q 188 248 193 255 Q 198 248 203 248 Q 212 248 212 259 Q 212 272 193 285 Z" fill="#E91E63" opacity="0.9"/>
-
-          <!-- Olive/brown lower body -->
-          <path d="M 134 350 L 130 440 L 165 440 L 178 375 L 208 375 L 221 440 L 256 440 L 252 350 Z" fill="#8B8C4E"/>
-
-          <!-- Left arm (relaxed at side, slightly forward) -->
-          <path d="M 142 232 Q 100 258 88 316 L 103 320 Q 116 270 150 248 Z" fill="#F5C5A3"/>
-          <ellipse cx="97" cy="322" rx="11" ry="9" fill="#F5C5A3"/>
-
-          <!-- Right arm (extended, holding calendar edge) -->
-          <path d="M 244 232 Q 286 258 298 316 L 283 320 Q 270 270 236 248 Z" fill="#F5C5A3"/>
-          <ellipse cx="289" cy="322" rx="11" ry="9" fill="#F5C5A3"/>
-
-          <!-- Calendar (white, held in front) -->
-          <rect x="100" y="308" width="186" height="132" rx="9" fill="white" filter="url(#calshadow)"/>
-
-          <!-- Calendar shadow filter -->
-          <defs>
-            <filter id="calshadow" x="-5%" y="-5%" width="110%" height="115%">
-              <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000022"/>
-            </filter>
-          </defs>
-
-          <!-- Day headers -->
-          <text x="107" y="325" font-family="sans-serif" font-size="6.5" fill="#7DC4AB" font-weight="700">SUN</text>
-          <text x="130" y="325" font-family="sans-serif" font-size="6.5" fill="#7DC4AB" font-weight="700">MON</text>
-          <text x="154" y="325" font-family="sans-serif" font-size="6.5" fill="#7DC4AB" font-weight="700">TUE</text>
-          <text x="178" y="325" font-family="sans-serif" font-size="6.5" fill="#7DC4AB" font-weight="700">WED</text>
-          <text x="202" y="325" font-family="sans-serif" font-size="6.5" fill="#7DC4AB" font-weight="700">THU</text>
-          <text x="227" y="325" font-family="sans-serif" font-size="6.5" fill="#7DC4AB" font-weight="700">FRI</text>
-          <text x="251" y="325" font-family="sans-serif" font-size="6.5" fill="#7DC4AB" font-weight="700">SAT</text>
-          <!-- Divider line -->
-          <line x1="100" y1="329" x2="286" y2="329" stroke="#E8F9F4" stroke-width="1"/>
-
-          <!-- Calendar grid rows -->
-          <!-- Row 1 -->
-          <rect x="104" y="333" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="130" y="333" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="156" y="333" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="182" y="333" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="208" y="333" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="234" y="333" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="260" y="333" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <!-- Row 2 -->
-          <rect x="104" y="352" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="130" y="352" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="156" y="352" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="182" y="352" width="22" height="14" rx="3" fill="#7DC4AB"/>
-          <rect x="208" y="352" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="234" y="352" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="260" y="352" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <!-- Row 3 -->
-          <rect x="104" y="371" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="130" y="371" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="156" y="371" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="182" y="371" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="208" y="371" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="234" y="371" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="260" y="371" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <!-- Row 4 -->
-          <rect x="104" y="390" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="130" y="390" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="156" y="390" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="182" y="390" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="208" y="390" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="234" y="390" width="22" height="14" rx="3" fill="#D4EDE7"/>
-          <rect x="260" y="390" width="22" height="14" rx="3" fill="#D4EDE7"/>
-
-          <!-- Small potted plant bottom right -->
-          <rect x="264" y="388" width="22" height="15" rx="3" fill="#A07850"/>
-          <path d="M 275 388 Q 275 368 288 358 Q 282 372 275 388 Z" fill="#5BA88A"/>
-          <path d="M 275 388 Q 268 370 258 363 Q 265 375 275 388 Z" fill="#4A9070"/>
-          <path d="M 275 388 Q 280 371 292 368 Q 285 378 275 388 Z" fill="#6CC8A0"/>
-        </svg>
-      </div>
+      <!-- Left: Blank illustrated panel -->
+      <div class="appt-illustration"></div>
 
       <!-- Right: Meeting details -->
       <div class="appt-details">

@@ -221,15 +221,16 @@
     /* ══ HERO (Appointment Card) ══ */
     .hero {
       background: #EEEEED;
+    }
+
+    .hero-wrapper {
+      max-width: 1440px;
+      margin: 0 auto;
       padding: 64px 160px 80px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
     }
 
     .appt-card {
       width: 100%;
-      max-width: 100%;
       background: #fff;
       border-radius: 16px;
       box-shadow: 0 2px 20px rgba(0,0,0,0.08);
@@ -238,7 +239,7 @@
     }
 
     .appt-illustration {
-      width: 37%;
+      width: 320px;
       flex-shrink: 0;
       background: #7DC4AB;
       position: relative;
@@ -784,7 +785,7 @@
     /* ══ RESPONSIVE — TABLET (≤1200px) ══ */
     @media (max-width: 1200px) {
       nav { padding: 0 40px; }
-      .hero { padding: 64px 40px 80px; }
+      .hero-wrapper { padding: 64px 40px 80px; }
       .sections { padding: 48px 40px 80px; }
 
       .hero-inner { flex-direction: column; align-items: flex-start; gap: 36px; width: 100%; }
@@ -814,7 +815,7 @@
       .nav-right { gap: 4px; }
       .nav-profile { margin-left: 4px; }
 
-      .hero { padding: 40px 20px 56px; }
+      .hero-wrapper { padding: 40px 20px 56px; }
       .sections { padding: 32px 20px 64px; gap: 28px; }
 
       .hero-inner { gap: 28px; width: 100%; }
@@ -972,6 +973,7 @@
 
   <!-- HERO (Appointment Confirmation Card) -->
   <section class="hero">
+    <div class="hero-wrapper">
     <div class="appt-card">
 
       <!-- Left: Illustrated panel -->
@@ -1013,6 +1015,7 @@
       </div>
 
     </div>
+    </div><!-- /hero-wrapper -->
   </section>
 
   <!-- SECTIONS -->

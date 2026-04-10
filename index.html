@@ -840,11 +840,15 @@
       .appt-action-btn { height: 48px; }
 
       /* Cancel modal — mobile */
-      .modal-overlay { padding: 16px; align-items: flex-end; }
+      .modal-overlay {
+        padding: 16px;
+        align-items: center;
+        padding-bottom: calc(16px + env(safe-area-inset-bottom));
+      }
       .modal {
         padding: 24px 16px 20px;
-        border-radius: 20px 20px 16px 16px;
-        max-height: 90vh;
+        border-radius: 16px;
+        max-height: calc(90vh - env(safe-area-inset-bottom));
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
       }

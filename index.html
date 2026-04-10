@@ -839,32 +839,7 @@
       .appt-actions { flex-direction: column; gap: 10px; }
       .appt-action-btn { height: 48px; }
 
-      /* Cancel modal — mobile */
-      .modal-overlay {
-        padding: 16px;
-        align-items: center;
-        padding-bottom: calc(16px + env(safe-area-inset-bottom));
-      }
-      .modal {
-        padding: 24px 16px 20px;
-        border-radius: 16px;
-        max-height: calc(90vh - env(safe-area-inset-bottom));
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-      .modal-step-title { font-size: 19px; margin-bottom: 18px; }
-      .modal-appt-summary { padding: 16px 0; margin-bottom: 20px; gap: 12px; }
-      .modal-actions { flex-direction: column-reverse; gap: 10px; }
-      .modal-btn-secondary, .modal-btn-primary { flex: unset; width: 100%; }
-      .cancel-success { gap: 12px; padding-bottom: 20px; }
-      .cancel-success-title { font-size: 18px; }
-      .success-icon-wrap { width: 52px; height: 52px; }
-      .feedback-module { gap: 12px; padding-top: 18px; }
-      .feedback-label { font-size: 15px; }
-      .feedback-sub { font-size: 13px; }
-      .reason-card { font-size: 15px; min-height: 54px; padding: 12px 14px; gap: 12px; }
-      .btn-feedback-submit { height: 52px; font-size: 15px; }
-      .btn-feedback-skip { font-size: 14px; padding: 12px 0; min-height: 44px; }
+      /* Cancel modal responsive overrides moved after base CSS to fix cascade */
 
       .insurance { padding: 32px 20px; gap: 28px; }
       .ins-action-banner { padding: 10px 20px; font-size: var(--text-sm); text-align: center; }
@@ -931,14 +906,7 @@
       .appt-date { font-size: 14px; }
       .appt-time { font-size: 13px; }
 
-      /* Cancel modal — small mobile */
-      .modal { padding: 20px 16px 16px; }
-      .modal-step-title { font-size: 17px; }
-      .reason-card { font-size: 14px; min-height: 50px; padding: 10px 12px; gap: 10px; }
-      .reason-radio { width: 20px; height: 20px; }
-      .reason-radio-fill { width: 10px; height: 10px; }
-      .btn-feedback-submit { height: 50px; }
-      .btn-feedback-skip { font-size: 13px; }
+      /* Cancel modal small mobile overrides moved after base CSS to fix cascade */
     }
 
     /* ══ INSURANCE FORM ══ */
@@ -1284,6 +1252,43 @@
     .appt-card.cancelled .appt-action-btn {
       opacity: 0.4;
       pointer-events: none;
+    }
+
+    /* ══ CANCEL MODAL — RESPONSIVE (after base to fix cascade) ══ */
+    @media (max-width: 768px) {
+      .modal-overlay {
+        padding: 16px;
+        padding-bottom: calc(16px + env(safe-area-inset-bottom));
+      }
+      .modal {
+        padding: 24px 16px 20px;
+        max-height: calc(90vh - env(safe-area-inset-bottom));
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .modal-step-title { font-size: 19px; margin-bottom: 18px; }
+      .modal-appt-summary { padding: 16px 0; margin-bottom: 20px; gap: 12px; }
+      .modal-actions { flex-direction: column-reverse; gap: 10px; }
+      .modal-btn-secondary, .modal-btn-primary { flex: unset; width: 100%; }
+      .cancel-success { gap: 12px; padding-bottom: 20px; }
+      .cancel-success-title { font-size: 18px; }
+      .success-icon-wrap { width: 52px; height: 52px; }
+      .feedback-module { gap: 12px; padding-top: 18px; }
+      .feedback-label { font-size: 15px; }
+      .feedback-sub { font-size: 13px; }
+      .reason-card { font-size: 15px; min-height: 54px; padding: 12px 14px; gap: 12px; }
+      .btn-feedback-submit { height: 52px; font-size: 15px; }
+      .btn-feedback-skip { font-size: 14px; padding: 12px 0; min-height: 44px; }
+    }
+
+    @media (max-width: 400px) {
+      .modal { padding: 20px 16px 16px; }
+      .modal-step-title { font-size: 17px; }
+      .reason-card { font-size: 14px; min-height: 50px; padding: 10px 12px; gap: 10px; }
+      .reason-radio { width: 20px; height: 20px; }
+      .reason-radio-fill { width: 10px; height: 10px; }
+      .btn-feedback-submit { height: 50px; }
+      .btn-feedback-skip { font-size: 13px; }
     }
 
   </style>
